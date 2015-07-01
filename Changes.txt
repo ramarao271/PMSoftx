@@ -165,3 +165,43 @@ java.lang.IllegalArgumentException: Can not set int field org.erp.tarak.balanceS
 	sun.reflect.UnsafeIntegerFieldAccessorImpl.set(Unknown Source)
 	java.lang.reflect.Field.set(Unknown Source)
 
+--------------------------------------------------------------------------------------------------------------------------------
+(no. of items* item cost)/total No. of items
+(100*50+50*45+10*70)/(100+50+10)
+100*50/100=50--last three months
+
+Auto populate Package List
+Remove Product & Customer from Transaction
+New Shipping company option
+Package List in Invoice or bar code
+
+
+Sub Variant
+-----------
+Printing-co
+Embroidary
+
+
+Product1 10 items printing 100 10(new Variant + cost Update)
+
+
+
+100+10=110---->variant wise cost
+
+
+
+
+Select variant to be updated
+Quantity
+Cost
+New Variant Name
+Worker
+--------------------
+New variant with specified qty and cost to be added to product
+Reduce qty in the select variant
+
+
+------------------------
+Add Cost entry to Variants also
+Printing transactions 
+Payments to be generic... can pay to supplier,shipper,worker etc....
