@@ -1,0 +1,15 @@
+package org.erp.tarak.salesPayment;
+
+import java.util.List;
+
+
+public interface SalesPaymentService {
+
+	public void addSalesPayment(SalesPayment salesPayment);
+
+	public List<SalesPayment> listSalesPayments(String finYear);
+
+	public SalesPayment getSalesPayment(long salesPaymentId,String finYear);
+
+	public void deleteSalesPayment(SalesPayment salesPayment);
+}

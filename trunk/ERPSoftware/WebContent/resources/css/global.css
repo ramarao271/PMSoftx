@@ -1,0 +1,49 @@
+@CHARSET "ISO-8859-1";
+body{
+	background: #f3f3f3 url(../img/bg_top_global.jpg) repeat-x;
+	color: #444444;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	margin: 0;
+	font-size: 0.8em;
+}
+table
+{
+	font-size: 1em;
+}
+p{
+	color: #444444;
+	font-size: larger;
+	font-weight: bold;
+}
+.product_quantity
+{
+	width:60px;
+}
+.product_Unit_Rate
+{
+	width:60px;
+}
+.product_Total_Rate
+{
+	width:80px;
+}
+.product_Code
+{
+	width:60px;
+}
+.totalCost
+{
+	width:80px;
+}
+.product_quantityType
+{
+	width:60px;
+}
+.branch
+{
+	width:173px;
+}
+.shipperBranch
+{
+	width:173px;
+}
