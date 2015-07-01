@@ -34,7 +34,7 @@ body {
 <body>
 	<form:form method="POST" action="saveProduct.html"
 		name="purchaseOrderSelection">
-		<h3>Sales Orders List</h3>
+		<h3>Purchase Orders List</h3>
 		<input type="button" value="Select" name="selected" id="selected"
 			onclick="sendSelected()" />
 		<c:if test="${!empty purchaseOrders}">

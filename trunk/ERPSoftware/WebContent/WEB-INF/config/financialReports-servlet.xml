@@ -30,6 +30,8 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<context:component-scan base-package="org.erp.tarak.stage" />
 	<context:component-scan base-package="org.erp.tarak.stageProperties" />
 	<context:component-scan base-package="org.erp.tarak.customer.openingbalance" />
+	<context:component-scan base-package="org.erp.tarak.supplier" />
+	<context:component-scan base-package="org.erp.tarak.supplier.openingbalance" />
 	
 	
 	<mvc:interceptors>
@@ -80,7 +82,8 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 				<value>org.erp.tarak.contactperson.ContactPerson</value>
 				<value>org.erp.tarak.stage.Stage</value>
 				<value>org.erp.tarak.stageProperties.StageProperties</value>
-		
+				<value>org.erp.tarak.supplier.Supplier</value>
+				<value>org.erp.tarak.supplier.openingbalance.SupplierOpeningBalance</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
