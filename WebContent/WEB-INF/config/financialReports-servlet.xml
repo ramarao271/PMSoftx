@@ -15,6 +15,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<context:property-placeholder location="classpath:resources/database.properties" />
 	<context:component-scan base-package="org.erp.tarak.reports" />
 	<context:component-scan base-package="org.erp.tarak.salesinvoice" />
+	<context:component-scan base-package="org.erp.tarak.purchaseinvoice" />
 	<context:component-scan base-package="org.erp.tarak.salesorder" />
 	<context:component-scan base-package="org.erp.tarak.deliverychallan" />
 	<context:component-scan base-package="org.erp.tarak.customer" />
@@ -66,6 +67,8 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 			<list>
 				<value>org.erp.tarak.salesinvoice.SalesInvoice</value>
 				<value>org.erp.tarak.salesinvoice.SalesInvoiceItem</value>
+				<value>org.erp.tarak.purchaseinvoice.PurcchaseInvoice</value>
+				<value>org.erp.tarak.purchaseinvoice.PurchaseInvoiceItem</value>
 				<value>org.erp.tarak.salesorder.SalesOrder</value>
 				<value>org.erp.tarak.salesorder.SalesOrderItem</value>
 				<value>org.erp.tarak.customer.Customer</value>

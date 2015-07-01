@@ -161,7 +161,7 @@ public class PurchaseReturnController {
 			}
 			purchaseReturnService.addPurchaseReturn(purchaseReturn);
 			ProductUtilities.updateProductDetails(purchaseReturnBean
-					,productService,savedPurchaseReturn,ERPConstants.SALES_RETURN,ERPConstants.OP_CREATE);
+					,productService,savedPurchaseReturn,ERPConstants.PURCHASE_RETURN,ERPConstants.OP_CREATE);
 			PurchaseInvoice purchaseInvoice=purchaseInvoiceService.getPurchaseInvoice(purchaseReturn.getPurchaseInvoice().getPurchaseInvoiceId(),user.getFinYear());
 			double rtnAmt=0.0;
 			double savedAmount=0;
@@ -176,7 +176,7 @@ public class PurchaseReturnController {
 				rtnAmt=purchaseInvoice.getTotalCost()-(purchaseInvoice.getReturnAmount()+purchaseReturn.getTotalCost());				
 			}
 			purchaseInvoice.setReturnAmount(rtnAmt);
-			SupplierOpeningBalanceUtilities.updateCob(cobService, savedAmount, purchaseReturn.getTotalCost(), purchaseReturn.getSupplierId().getSupplierId(), purchaseReturn.getFinYear(),ERPConstants.SALES_RETURN);
+			SupplierOpeningBalanceUtilities.updateCob(cobService, savedAmount, purchaseReturn.getTotalCost(), purchaseReturn.getSupplierId().getSupplierId(), purchaseReturn.getFinYear(),ERPConstants.PURCHASE_RETURN);
 			purchaseInvoiceService.addPurchaseInvoice(purchaseInvoice);
 			model.addAttribute("message",
 					"PurchaseReturn details saved successfully!");
@@ -279,13 +279,13 @@ public class PurchaseReturnController {
 		purchaseReturnService.deletePurchaseReturn(purchaseReturn);
 		purchaseReturnItemService.deletePurchaseReturnItems(pois);
 		ProductUtilities.updateProductDetails(purchaseReturnBean
-				,productService,purchaseReturn,ERPConstants.SALES_RETURN,ERPConstants.OP_DELETE);
+				,productService,purchaseReturn,ERPConstants.PURCHASE_RETURN,ERPConstants.OP_DELETE);
 		PurchaseInvoice purchaseInvoice=purchaseInvoiceService.getPurchaseInvoice(purchaseReturn.getPurchaseInvoice().getPurchaseInvoiceId(),user.getFinYear());
 		double rtnAmt=0.0;
 		rtnAmt=-purchaseReturn.getTotalCost()+purchaseInvoice.getReturnAmount();
 		purchaseInvoice.setReturnAmount(rtnAmt);
 		purchaseInvoiceService.addPurchaseInvoice(purchaseInvoice);
-		SupplierOpeningBalanceUtilities.updateCob(cobService,0, -purchaseReturn.getTotalCost(), purchaseReturn.getSupplierId().getSupplierId(), purchaseReturn.getFinYear(),ERPConstants.SALES_RETURN);
+		SupplierOpeningBalanceUtilities.updateCob(cobService,0, -purchaseReturn.getTotalCost(), purchaseReturn.getSupplierId().getSupplierId(), purchaseReturn.getFinYear(),ERPConstants.PURCHASE_RETURN);
 		
 		model.put("purchaseReturn", null);
 		model.put("purchaseReturns", PurchaseReturnUtilities

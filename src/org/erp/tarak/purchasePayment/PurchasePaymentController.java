@@ -158,7 +158,7 @@ public class PurchasePaymentController {
 			}
 			purchasePaymentService.addPurchasePayment(purchasePayment);
 			PurchasePaymentUtilities.updatePurchaseInvoiceAmount(purchasePayment.getPurchasePaymentItems(),savedPurchasePayment, purchaseInvoiceService,ERPConstants.OP_CREATE,user.getFinYear());
-			SupplierOpeningBalanceUtilities.updateCob(cobService, savedAmount, purchasePayment.getTotalCost(), purchasePayment.getSupplierId().getSupplierId(), purchasePayment.getFinYear(),ERPConstants.SALES_PAYMENT);
+			SupplierOpeningBalanceUtilities.updateCob(cobService, savedAmount, purchasePayment.getTotalCost(), purchasePayment.getSupplierId().getSupplierId(), purchasePayment.getFinYear(),ERPConstants.PURCHASE_PAYMENT);
 			if(ERPConstants.PM_CASH.equals(purchasePayment.getPaymentMode()))
 			{
 				CompanyBean companyBean=(CompanyBean)session.getAttribute("company");
@@ -294,7 +294,7 @@ public class PurchasePaymentController {
 		purchasePaymentService.deletePurchasePayment(purchasePayment);
 		purchasePaymentItemService.deletePurchasePaymentItems(pois);
 		PurchasePaymentUtilities.updatePurchaseInvoiceAmount(purchasePayment.getPurchasePaymentItems(),purchasePayment, purchaseInvoiceService,ERPConstants.OP_DELETE,user.getFinYear());
-		SupplierOpeningBalanceUtilities.updateCob(cobService, 0, -purchasePayment.getTotalCost(), purchasePayment.getSupplierId().getSupplierId(), purchasePayment.getFinYear(),ERPConstants.SALES_PAYMENT);
+		SupplierOpeningBalanceUtilities.updateCob(cobService, 0, -purchasePayment.getTotalCost(), purchasePayment.getSupplierId().getSupplierId(), purchasePayment.getFinYear(),ERPConstants.PURCHASE_PAYMENT);
 		if(ERPConstants.PM_CASH.equals(purchasePayment.getPaymentMode()))
 		{
 			CompanyBean companyBean=(CompanyBean)session.getAttribute("company");

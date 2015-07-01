@@ -138,7 +138,7 @@ public class PurchaseOrderController {
 				savedPurchaseOrder=PurchaseOrderUtilities.getPurchaseOrderModel(purchaseOrderService, purchaseOrderBean.getPurchaseOrderId(),user.getFinYear());
 			}
 			purchaseOrderService.addPurchaseOrder(purchaseOrder);
-			ProductUtilities.updateProductDetails(purchaseOrderBean,productService,savedPurchaseOrder,ERPConstants.SALES_ORDER,ERPConstants.OP_CREATE);
+			ProductUtilities.updateProductDetails(purchaseOrderBean,productService,savedPurchaseOrder,ERPConstants.PURCHASE_ORDER,ERPConstants.OP_CREATE);
 			if(saveFlag!=null)
 			{
 				
@@ -153,7 +153,7 @@ public class PurchaseOrderController {
 			}
 			else
 			{
-				return new ModelAndView("redirect:../deliverychallan/deliverychallanDetails/"+purchaseOrder.getPurchaseOrderId());
+				return new ModelAndView("redirect:../purchaseinvoice/purchaseOrderDetails/"+purchaseOrder.getPurchaseOrderId());
 			}
 		} else {
 			return new ModelAndView("error");// , model);
@@ -265,7 +265,7 @@ public class PurchaseOrderController {
 		List<PurchaseOrderItem> pois = purchaseOrder.getPurchaseOrderItems();
 		purchaseOrderService.deletePurchaseOrder(purchaseOrder);
 		purchaseOrderItemService.deletePurchaseOrderItems(pois);
-		ProductUtilities.updateProductDetails(purchaseOrder,productService,purchaseOrder,ERPConstants.SALES_ORDER,ERPConstants.OP_DELETE);
+		ProductUtilities.updateProductDetails(purchaseOrder,productService,purchaseOrder,ERPConstants.PURCHASE_ORDER,ERPConstants.OP_DELETE);
 		model.put("purchaseOrder", null);
 		model.put("purchaseOrders", PurchaseOrderUtilities
 				.prepareListofPurchaseOrderBean(
