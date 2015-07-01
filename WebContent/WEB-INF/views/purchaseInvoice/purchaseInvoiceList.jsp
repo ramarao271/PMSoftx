@@ -24,7 +24,7 @@
 
 </head>
 <body onload="load()">
-	<h3>Sales Invoice List</h3>
+	<h3>Purchase Invoice List</h3>
 	<c:if test="${!empty purchaseInvoices}">
 		<table align="left" border="1" cellpadding="0" cellspacing="0">
 			<tr>
@@ -46,9 +46,9 @@
 					<td><c:out value="${purchaseInvoice.returnAmount}" /></td>
 					<td><c:out value="${purchaseInvoice.paidAmount}" /></td>
 					<td align="center"><a
-						href="editSalesInvoice.html?purchaseInvoiceId=${purchaseInvoice.purchaseInvoiceId}"><img
+						href="editPurchaseInvoice.html?purchaseInvoiceId=${purchaseInvoice.purchaseInvoiceId}"><img
 							src="${editImg}" /></a> | <a
-						href="deleteSalesInvoice.html?purchaseInvoiceId=${purchaseInvoice.purchaseInvoiceId}"
+						href="deletePurchaseInvoice.html?purchaseInvoiceId=${purchaseInvoice.purchaseInvoiceId}"
 						onclick="return checkDelete()"><img src="${deleteImg}" /></a></td>
 				</tr>
 			</c:forEach>

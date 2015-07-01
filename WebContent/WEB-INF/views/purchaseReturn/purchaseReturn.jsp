@@ -195,18 +195,18 @@
 	<h3>
 		<b><c:if test="${!empty operation}">
 				<c:out value="${operation}" />
-			</c:if> Sales Return</b>
+			</c:if> Purchase Return</b>
 	</h3>
 	<br />
 
 	<!-- supplierId purchaseReturnItemBeans -->
 	<form:form name="personForm" method="POST"
-		action="/ERPSoftware/purchasereturn/saveSalesReturn.html"
+		action="/ERPSoftware/purchasereturn/savePurchaseReturn.html"
 		modelAttribute="purchaseReturnBean">
 		<form:hidden path="supplierBean.supplierId" class="supplierId" />
 		<table cellpadding="0" cellspacing="5">
 			<tr>
-				<td>select Sales Invoice No</td>
+				<td>select Purchase Invoice No</td>
 				<td><form:input path="purchaseInvoiceBean.purchaseInvoiceId"
 						readonly="true" href="#" class="show-popup" data-showpopup="2"
 						value="${purchaseReturnBean.purchaseInvoiceBean.purchaseInvoiceId}" /></td>
@@ -356,7 +356,7 @@
 			frameborder="0" scrolling="auto" width="95%" height="350px"></iframe>
 	</div>
 	<div class="overlay-content popup2">
-		<iframe src="/ERPSoftware/purchaseinvoice/SalesInvoiceSelectionList.html"
+		<iframe src="/ERPSoftware/purchaseinvoice/PurchaseInvoiceSelectionList.html"
 			frameborder="0" scrolling="auto" width="95%" height="350px"></iframe>
 	</div>
 </body>

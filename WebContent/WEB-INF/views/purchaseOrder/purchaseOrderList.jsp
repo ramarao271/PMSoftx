@@ -24,7 +24,7 @@
 
 </head>
 <body onload="load()">
-	<h3><c:out value="${mode}" /> Sales Orders List</h3>
+	<h3><c:out value="${mode}" /> Purchase Orders List</h3>
 	<c:if test="${!empty purchaseOrders}">
 		<table align="left" border="1" cellpadding="0" cellspacing="0">
 			<tr>
@@ -42,11 +42,11 @@
 					<td><c:out value="${purchaseOrder.supplierBean.companyName}" /></td>
 					<td><c:out value="${purchaseOrder.totalCost}" /></td>
 					<td align="center"><a
-						href="editSalesOrder.html?purchaseOrderId=${purchaseOrder.purchaseOrderId}"><img src="${editImg}" /></a>
+						href="editPurchaseOrder.html?purchaseOrderId=${purchaseOrder.purchaseOrderId}"><img src="${editImg}" /></a>
 						| <a
-						href="deleteSalesOrder.html?purchaseOrderId=${purchaseOrder.purchaseOrderId}"
+						href="deletePurchaseOrder.html?purchaseOrderId=${purchaseOrder.purchaseOrderId}"
 						onclick="return checkDelete()"><img src="${deleteImg}" /></a>
-						| <a href="updateSalesOrder/${type}/${purchaseOrder.purchaseOrderId}"><c:out value="${type}"></c:out></a></td>
+						| <a href="updatePurchaseOrder/${type}/${purchaseOrder.purchaseOrderId}"><c:out value="${type}"></c:out></a></td>
 				</tr>
 			</c:forEach>
 		</table>

@@ -196,13 +196,13 @@
 	<h3>
 		<b><c:if test="${!empty operation}">
 				<c:out value="${operation}" />
-			</c:if> Sales Invoice</b>
+			</c:if> Purchase Invoice</b>
 	</h3>
 	<br />
 
 	<!-- supplierId purchaseInvoiceItemBeans -->
 	<form:form name="personForm" method="POST"
-		action="/ERPSoftware/purchaseinvoice/saveSalesInvoice.html"
+		action="/ERPSoftware/purchaseinvoice/savePurchaseInvoice.html"
 		modelAttribute="purchaseInvoiceBean">
 		<form:hidden path="supplierBean.supplierId" class="supplierId" />
 		<table cellpadding="0" cellspacing="5">

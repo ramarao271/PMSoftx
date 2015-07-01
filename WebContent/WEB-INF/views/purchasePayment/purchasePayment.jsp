@@ -189,11 +189,11 @@
 	<h3>
 		<b><c:if test="${!empty operation}">
 				<c:out value="${operation}" />
-			</c:if> Sales Payment</b>
+			</c:if> Purchase Payment</b>
 	</h3>
 	<br />
 	<form:form name="paymentForm" method="POST"
-		action="/ERPSoftware/purchasePayment/saveSalesPayment.html"
+		action="/ERPSoftware/purchasePayment/savePurchasePayment.html"
 		modelAttribute="purchasePaymentBean">
 		<form:hidden path="supplierBean.supplierId" class="supplierId" />
 		<table cellpadding="0" cellspacing="5">
@@ -209,7 +209,7 @@
 					<div id="branchSids"></div></td>
 			</tr>
 			<tr>
-				<td><form:label path="purchasePaymentDate">Sales Payment Date:</form:label></td>
+				<td><form:label path="purchasePaymentDate">Purchase Payment Date:</form:label></td>
 				<td><fmt:formatDate var="formattedDate" pattern="MM-dd-yyyy"
 						value="${purchasePaymentBean.purchasePaymentDate}" /> <form:input
 						path="purchasePaymentDate" value="${formattedDate}" /> <script

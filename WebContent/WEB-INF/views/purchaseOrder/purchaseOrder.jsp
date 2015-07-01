@@ -185,11 +185,11 @@
 	<h3>
 		<b><c:if test="${!empty operation}">
 				<c:out value="${operation}" />
-			</c:if> Sales Order</b>
+			</c:if> Purchase Order</b>
 	</h3>
 	<br />
 	<form:form name="personForm" method="POST"
-		action="/ERPSoftware/purchaseorder/saveSalesOrder.html"
+		action="/ERPSoftware/purchaseorder/savePurchaseOrder.html"
 		modelAttribute="purchaseOrderBean">
 		<form:hidden path="supplierBean.supplierId" class="supplierId" />
 		<table cellpadding="0" cellspacing="5">
@@ -205,7 +205,7 @@
 					<div id="branchSids"></div></td>
 			</tr>
 			<tr>
-				<td><form:label path="purchaseOrderDate">Sales Order Date:</form:label></td>
+				<td><form:label path="purchaseOrderDate">Purchase Order Date:</form:label></td>
 				<td><fmt:formatDate var="formattedDate" pattern="MM-dd-yyyy"
 						value="${purchaseOrderBean.purchaseOrderDate}" /> <form:input
 						path="purchaseOrderDate" value="${formattedDate}" /> <script

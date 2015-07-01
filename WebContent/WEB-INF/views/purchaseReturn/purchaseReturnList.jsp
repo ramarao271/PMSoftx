@@ -24,7 +24,7 @@
 
 </head>
 <body onload="load()">
-	<h3>Sales Return List</h3>
+	<h3>Purchase Return List</h3>
 	<c:if test="${!empty purchaseReturns}">
 		<table align="left" border="1" cellpadding="0" cellspacing="0">
 			<tr>
@@ -42,9 +42,9 @@
 					<td><c:out value="${purchaseReturn.supplierBean.companyName}" /></td>
 					<td><c:out value="${purchaseReturn.totalCost}" /></td>
 					<td align="center"><a
-						href="editSalesReturn.html?purchaseReturnId=${purchaseReturn.purchaseReturnId}"><img
+						href="editPurchaseReturn.html?purchaseReturnId=${purchaseReturn.purchaseReturnId}"><img
 							src="${editImg}" /></a> | <a
-						href="deleteSalesReturn.html?purchaseReturnId=${purchaseReturn.purchaseReturnId}"
+						href="deletePurchaseReturn.html?purchaseReturnId=${purchaseReturn.purchaseReturnId}"
 						onclick="return checkDelete()"><img src="${deleteImg}" /></a></td>
 				</tr>
 			</c:forEach>
