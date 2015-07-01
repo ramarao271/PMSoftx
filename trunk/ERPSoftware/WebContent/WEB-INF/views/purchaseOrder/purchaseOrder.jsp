@@ -71,7 +71,7 @@
 		$("#cityx").autocomplete({
 			source : function(request, response) {
 				$.ajax({
-					url : "/ERPSoftware/purchaseorder/listSOSuppliers.jsp",
+					url : "/ERPSoftware/purchaseorder/listPOSuppliers.jsp",
 					dataType : "json",
 					data : {
 						style : "full",
@@ -110,7 +110,7 @@
 		var items = [];
 		$
 				.ajax({
-					url : "/ERPSoftware/purchaseorder/listSOSuppliers.jsp",
+					url : "/ERPSoftware/purchaseorder/listPOSuppliers.jsp",
 					dataType : "json",
 					data : {
 						style : "full",
