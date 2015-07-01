@@ -67,7 +67,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 			<list>
 				<value>org.erp.tarak.salesinvoice.SalesInvoice</value>
 				<value>org.erp.tarak.salesinvoice.SalesInvoiceItem</value>
-				<value>org.erp.tarak.purchaseinvoice.PurcchaseInvoice</value>
+				<value>org.erp.tarak.purchaseinvoice.PurchaseInvoice</value>
 				<value>org.erp.tarak.purchaseinvoice.PurchaseInvoiceItem</value>
 				<value>org.erp.tarak.salesorder.SalesOrder</value>
 				<value>org.erp.tarak.salesorder.SalesOrderItem</value>
