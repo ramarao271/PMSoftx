@@ -170,10 +170,10 @@ public class PurchaseInvoiceController {
 			SupplierOpeningBalanceUtilities.updateCob(cobService, savedAmount,
 					purchaseInvoiceBean.getTotalCost(), purchaseInvoice
 							.getSupplierId().getSupplierId(), purchaseInvoice
-							.getFinYear(), ERPConstants.SALES_INVOICE);
+							.getFinYear(), ERPConstants.PURCHASE_INVOICE);
 			ProductUtilities.updateProductDetails(purchaseInvoiceBean,
 					productService, savedPurchaseInvoice,
-					ERPConstants.SALES_INVOICE, ERPConstants.OP_CREATE);
+					ERPConstants.PURCHASE_INVOICE, ERPConstants.OP_CREATE);
 			PurchaseOrder purchaseOrder = purchaseOrderService
 					.getPurchaseOrder(purchaseInvoice.getPurchaseOrder()
 							.getPurchaseOrderId(),user.getFinYear());
@@ -285,7 +285,7 @@ public class PurchaseInvoiceController {
 		purchaseInvoiceService.deletePurchaseInvoice(purchaseInvoice);
 		purchaseInvoiceItemService.deletePurchaseInvoiceItems(pois);
 		ProductUtilities.updateProductDetails(purchaseInvoiceBean, productService,
-				purchaseInvoice, ERPConstants.SALES_INVOICE,
+				purchaseInvoice, ERPConstants.PURCHASE_INVOICE,
 				ERPConstants.OP_DELETE);
 		PurchaseOrder purchaseOrder = purchaseOrderService
 				.getPurchaseOrder(purchaseInvoice.getPurchaseOrder()
@@ -294,7 +294,7 @@ public class PurchaseInvoiceController {
 		purchaseOrderService.addPurchaseOrder(purchaseOrder);
 		SupplierOpeningBalanceUtilities.updateCob(cobService, 0, -purchaseInvoice
 				.getTotalCost(), purchaseInvoice.getSupplierId().getSupplierId(),
-				purchaseInvoice.getFinYear(), ERPConstants.SALES_INVOICE);
+				purchaseInvoice.getFinYear(), ERPConstants.PURCHASE_INVOICE);
 		
 		model.put("purchaseInvoice", null);
 		model.put("purchaseInvoices", PurchaseInvoiceUtilities

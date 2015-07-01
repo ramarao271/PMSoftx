@@ -15,6 +15,7 @@ public class ERPConstants {
 	public static final String PRODUCTION_ORDER="ProductionOrder";
 	public static final String SALES_INVOICE="SalesInvoice";
 	public static final String SALES_RETURN="SalesReturn";
+	public static final String PURCHASE_PAYMENT="PurchasePayment";
 	public static final String SALES_PAYMENT="SalesPayment";
 	public static final String PURCHASE_RETURN="PurchaseReturn";
 	public static final String PURCHASE_INVOICE="PurchaseInvoice";
