@@ -11,6 +11,7 @@ import org.erp.tarak.product.ProductService;
 import org.erp.tarak.salesinvoice.SalesInvoiceItemService;
 import org.erp.tarak.salesinvoice.SalesInvoiceService;
 import org.erp.tarak.user.UserBean;
+import org.erp.tarak.variant.VariantReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +40,7 @@ public class ProductReportsController {
 		return new ModelAndView("index", model);
 	}
 	@RequestMapping(value = "/categoryWiseReport", method = RequestMethod.GET)
-	public ModelAndView accountsReceivable() {
+	public ModelAndView categoryWiseReport() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		if (session.getAttribute("user") != null)
 		{
@@ -49,4 +50,16 @@ public class ProductReportsController {
 		}
 		return new ModelAndView("categoryWiseReport", model);
 	}
+	@RequestMapping(value = "/variantWiseReport", method = RequestMethod.GET)
+	public ModelAndView variantWiseReport() {
+		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null)
+		{
+			UserBean user = (UserBean) session.getAttribute("user");
+			List<VariantReport> crs=salesInvoiceItemService.getSalesReportByVariant(user.getFinYear());
+			model.put("cats",crs );
+		}
+		return new ModelAndView("categoryWiseReport", model);
+	}
+
 }

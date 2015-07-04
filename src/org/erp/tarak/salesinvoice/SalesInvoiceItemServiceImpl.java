@@ -3,6 +3,7 @@ package org.erp.tarak.salesinvoice;
 import java.util.List;
 
 import org.erp.tarak.category.CategoryReport;
+import org.erp.tarak.variant.VariantReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -52,6 +53,11 @@ public class SalesInvoiceItemServiceImpl implements SalesInvoiceItemService {
 	public List<Object[]> listFrequesntlyProductsByCustomer(long customerId,
 			String finYear) {
 		return salesInvoiceItemDao.listFrequesntlyProductsByCustomer(customerId,finYear);
+	}
+
+	@Override
+	public List<VariantReport> getSalesReportByVariant(String finYear) {
+		return salesInvoiceItemDao.listFrequesntlyProductsByVariant(finYear);
 	}
 
 
