@@ -7,6 +7,7 @@ import java.util.List;
 import org.erp.tarak.category.CategoryReport;
 import org.erp.tarak.customer.Customer;
 import org.erp.tarak.product.Product;
+import org.erp.tarak.variant.VariantReport;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -92,5 +93,24 @@ public class SalesInvoiceItemDaoImpl implements SalesInvoiceItemDao {
 		List results = query.list();
 		return results;
 	}
-	
+
+	@Override
+	public List<VariantReport> listFrequesntlyProductsByVariant(String finYear) {
+		String hql = "select v.variantId as variantId,v.variantType as variantType,sum(s.quantity) as quantity,sum(s.totalCost) as amount,v.productCode as variantCode from salesInvoiceItem s,product p,variant v where s.Financial_Year='"+finYear+"' and p.product_Id=s.product_Id and v.variantType=p.variantType group by v.variantType;";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
+		List results = query.list();
+		List<VariantReport> cats=new LinkedList<VariantReport>();
+			List<Object[]> objects	= (List<Object[]>)results;
+			for(Object[] x: objects)
+			{
+				VariantReport xx=new VariantReport();
+				xx.setVariantId(((BigInteger) x[0]).longValue());
+				xx.setVariantType((String) x[1]);
+				xx.setQuantity((double) x[2]);
+				xx.setAmount((double) x[3]);
+				xx.setVariantCode((String)x[4]);
+				cats.add(xx);
+			}
+		return cats;
+	}
 }
