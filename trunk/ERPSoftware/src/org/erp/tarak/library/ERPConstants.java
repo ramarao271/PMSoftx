@@ -58,12 +58,16 @@ public class ERPConstants {
 	static {
 		customerMenuList.put("/ERPSoftware/customer/addCustomer", "Add Customer");
 		customerMenuList.put("/ERPSoftware/customer/listCustomer", "Customers List");
+		
 		supplierMenuList.put("/ERPSoftware/supplier/addSupplier", "Add Supplier");
 		supplierMenuList.put("/ERPSoftware/supplier/listSupplier", "Suppliers List");
+		
 		shipperMenuList.put("/ERPSoftware/shipper/addShipper", "Add Shipper");
 		shipperMenuList.put("/ERPSoftware/shipper/listShipper", "Shippers List");
+		
 		workerMenuList.put("/ERPSoftware/worker/addWorker", "Add worker");
 		workerMenuList.put("/ERPSoftware/worker/listWorker", "Workers List");
+		
 		productMenuList.put("/ERPSoftware/product/addProduct.html", "Add Product");
 		productMenuList.put("/ERPSoftware/product/products.html", "Products List");
 		productMenuList.put("/ERPSoftware/product/productStage.html", "Product Life Cycle");
@@ -72,42 +76,59 @@ public class ERPConstants {
 		productMenuList.put("/ERPSoftware/rawMaterial/index.html", "Raw Materials Stock");
 		productMenuList.put("/ERPSoftware/measurement/measurement.html", "Measurements");
 		productMenuList.put("/ERPSoftware/category/category.html", "Categories");
-		productMenuList.put("/ERPSoftware/variantProperties/variantProperties.html", "Variants");
 		productMenuList.put("/ERPSoftware/stageProperties/stageProperties.html", "Stages");
+		productMenuList.put("/ERPSoftware/variantProperties/variantProperties.html", "Variants");
+		productMenuList.put("/ERPSoftware/subVariantProperties/subVariantProperties.html", "Sub-Variants Categories");
+		productMenuList.put("/ERPSoftware/product/productSubVariant.html", "Sub-Variant Creation");
+		
 		purchaseOrderMenuList.put("/ERPSoftware/purchaseorder/addPurchaseOrder.html", "New Purchase Order");
 		purchaseOrderMenuList.put("/ERPSoftware/purchaseorder/pendingPurchaseorders.html", "Pending PO List");
 		purchaseOrderMenuList.put("/ERPSoftware/purchaseorder/processedPurchaseorders.html", "Processed PO List");
+		
 		salesOrderMenuList.put("/ERPSoftware/salesorder/addSalesOrder.html", "New Sales Order");
 		salesOrderMenuList.put("/ERPSoftware/salesorder/pendingSalesorders.html", "Pending SO List");
 		salesOrderMenuList.put("/ERPSoftware/salesorder/processedSalesorders.html", "Processed SO List");
+		
 		productionOrderMenuList.put("/ERPSoftware/productionorder/addProductionOrder.html", "New Production Order");
 		productionOrderMenuList.put("/ERPSoftware/productionorder/pendingProductionorders.html", "Pending PRO List");
 		productionOrderMenuList.put("/ERPSoftware/productionorder/processedProductionorders.html", "Processed PRO List");
+		
 		productionInvoiceMenuList.put("/ERPSoftware/productioninvoice/addProductionInvoice.html", "New Production Invoice");
 		productionInvoiceMenuList.put("/ERPSoftware/productioninvoice/productioninvoices.html", "Production Invoice List");
+		
 		deliveryChallanMenuList.put("/ERPSoftware/deliverychallan/addDeliveryChallan.html", "New Delivery Challan");
 		deliveryChallanMenuList.put("/ERPSoftware/deliverychallan/pendingDeliverychallans.html", "Pending DC List");
 		deliveryChallanMenuList.put("/ERPSoftware/deliverychallan/processedDeliverychallans.html", "Processed DC List");
+		
 		purchaseInvoiceMenuList.put("/ERPSoftware/purchaseinvoice/addPurchaseInvoice.html", "New Purchase Invoice");
 		purchaseInvoiceMenuList.put("/ERPSoftware/purchaseinvoice/purchaseinvoices.html", "Purchase Invoice List");
+		
 		salesInvoiceMenuList.put("/ERPSoftware/salesinvoice/addSalesInvoice.html", "New Sales Invoice");
 		salesInvoiceMenuList.put("/ERPSoftware/salesinvoice/salesinvoices.html", "Sales Invoice List");
+		
 		salesReturnMenuList.put("/ERPSoftware/salesreturn/addSalesReturn.html", "New Sales Return");
 		salesReturnMenuList.put("/ERPSoftware/salesreturn/salesreturns.html", "Sales Returns List");
+		
 		purchaseReturnMenuList.put("/ERPSoftware/purchasereturn/addPurchaseReturn.html", "New Purchase Return");
 		purchaseReturnMenuList.put("/ERPSoftware/purchasereturn/purchasereturns.html", "Purchase Returns List");
+		
 		salesPaymentMenuList.put("/ERPSoftware/salesPayment/addSalesPayment", "New Sales Payment");
 		salesPaymentMenuList.put("/ERPSoftware/salesPayment/salesPayments", "Sales Payments List");
+		
 		purchasePaymentMenuList.put("/ERPSoftware/purchasePayment/addPurchasePayment", "New Purchase Payment");
 		purchasePaymentMenuList.put("/ERPSoftware/purchasePayment/purchasePayments", "Purchase Payments List");
+		
 		balanceSheetMenuList.put("/ERPSoftware/expense/expense.html", "Expenses");
 		balanceSheetMenuList.put("/ERPSoftware/balanceSheet/addBalanceSheet.html", "Balance Sheet");
 		balanceSheetMenuList.put("/ERPSoftware/balanceSheet/pendingBalanceSheets.html", "Pending BS List");
 		balanceSheetMenuList.put("/ERPSoftware/balanceSheet/processedBalanceSheets.html", "Processed BS List");
+		
 		toolsMenuList.put("/ERPSoftware/company/addCompany","Companies");
 		financeMenuList.put("/ERPSoftware/financialReports/accountsReceivable","Accounts Receivables");
+		financeMenuList.put("/ERPSoftware/financialReports/accountsPayable","Accounts Payable");
 		productReportMenuList.put("/ERPSoftware/productReports/categoryWiseReport", "Products by Category");
 		marketingReportMenuList.put("/ERPSoftware/marketingReports/customerSalesReport","Customer Sales Report");
+		
 		linkMap.put("customer", customerMenuList);
 		linkMap.put("worker", workerMenuList);
 		linkMap.put("supplier", supplierMenuList);

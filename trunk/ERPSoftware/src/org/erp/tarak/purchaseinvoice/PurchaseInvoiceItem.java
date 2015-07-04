@@ -5,11 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.erp.tarak.product.Product;
@@ -43,7 +41,7 @@ public class PurchaseInvoiceItem implements Serializable {
 	private double totalCost;
 	private long variantId;
 	private String variantCode;
-	
+	private String packageList;
 	public int getSrNo() {
 		return srNo;
 	}
@@ -109,6 +107,12 @@ public class PurchaseInvoiceItem implements Serializable {
 	}
 	public void setVariantCode(String variantCode) {
 		this.variantCode = variantCode;
+	}
+	public String getPackageList() {
+		return packageList;
+	}
+	public void setPackageList(String packageList) {
+		this.packageList = packageList;
 	}
 
 

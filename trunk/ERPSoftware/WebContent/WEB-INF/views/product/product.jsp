@@ -124,7 +124,7 @@ function loadIndex(val)
 						</c:forEach>
 					</form:select></td>
 				<td><a id="myButton1"
-					href="/ERPSoftware/measurement/measurement.html">New
+					href="/ERPSoftware/measurement/measurement.html" target="_blank">New
 						Measurement</a> <form:errors path="measurementBean" /></td>
 			</tr>
 			<tr>
@@ -213,6 +213,7 @@ function loadIndex(val)
 						src="${addImg}" /></a></th>
 				<th>Variant Name</th>
 				<th>Quantity</th>
+				<th>Cost</th>
 			</tr>
 			<c:forEach items="${productBean.variantBeans}" var="i"
 				varStatus="itemsRow">
@@ -246,7 +247,9 @@ function loadIndex(val)
 					<td><form:input
 							path="variantBeans[${itemsRow.index}].quantity"
 							value="${i.quantity}" /></td>
-
+					<td><form:input
+							path="variantBeans[${itemsRow.index}].cost"
+							value="${i.cost}" /></td>
 				</tr>
 			</c:forEach>
 		</table>

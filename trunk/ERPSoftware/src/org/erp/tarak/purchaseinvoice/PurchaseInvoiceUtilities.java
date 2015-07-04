@@ -51,6 +51,7 @@ public class PurchaseInvoiceUtilities {
 					.getTotalCost());
 			purchaseInvoiceItemBean.setVariantCode(purchaseInvoiceItem.getVariantCode());
 			purchaseInvoiceItemBean.setVariantId(purchaseInvoiceItem.getVariantId());
+			purchaseInvoiceItemBean.setPackageList(purchaseInvoiceItem.getPackageList());
 			purchaseInvoiceItemBeans.add(purchaseInvoiceItemBean);
 		}
 
@@ -93,6 +94,7 @@ public class PurchaseInvoiceUtilities {
 				.getSupplierId().getSupplierId(), supplierService));
 		pob.setTotalCost(po.getTotalCost());
 		PurchaseOrderBean purchaseOrderBean=PurchaseOrderUtilities.preparePurchaseOrderBean(po.getPurchaseOrder());
+		pob.setPurchaseOrderBean(purchaseOrderBean);
 		pob.setPaidAmount(po.getPaidAmount());
 		pob.setReturnAmount(po.getReturnAmount());
 		pob.setLrNo(po.getLrNo());
@@ -158,6 +160,7 @@ public class PurchaseInvoiceUtilities {
 					.getTotalCost());
 			purchaseInvoiceItem.setVariantCode(purchaseInvoiceItemBean.getVariantCode());
 			purchaseInvoiceItem.setVariantId(purchaseInvoiceItemBean.getVariantId());
+			purchaseInvoiceItem.setPackageList(purchaseInvoiceItemBean.getPackageList());
 			purchaseInvoiceItems.add(purchaseInvoiceItem);
 		}
 
@@ -207,7 +210,6 @@ public class PurchaseInvoiceUtilities {
 		purchaseInvoice.setDiscountPercent(purchaseInvoiceBean.getDiscountPercent());
 		purchaseInvoice.setDiscountedAmount(purchaseInvoiceBean.getDiscountedAmount());
 		purchaseInvoice.setProcessed(purchaseInvoiceBean.isProcessed());
-		
 		return purchaseInvoice;
 	}
 
@@ -233,6 +235,7 @@ public class PurchaseInvoiceUtilities {
 					.getTotalCost());
 			purchaseInvoiceItem.setVariantCode(purchaseInvoiceItemBean.getVariantCode());
 			purchaseInvoiceItem.setVariantId(purchaseInvoiceItemBean.getVariantId());
+			purchaseInvoiceItem.setPackageList(purchaseInvoiceItemBean.getPackageList());
 			purchaseInvoiceItems.add(purchaseInvoiceItem);
 		}
 

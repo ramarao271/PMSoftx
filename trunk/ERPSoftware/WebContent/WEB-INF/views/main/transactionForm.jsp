@@ -20,10 +20,6 @@ table {
 <body>
 	<table cellspacing="0" >
 		<tr>
-			<td><a href="/ERPSoftware/product/addProduct.html"
-				target="transactionFrame">Product</a></td>
-			<td><a href="/ERPSoftware/customer/addCustomer.html"
-				target="transactionFrame">Customers</a></td>
 			<td><a href="/ERPSoftware/salesorder/addSalesOrder.html"
 				target="transactionFrame">Sales Orders</a></td>
 			<td><a
@@ -35,7 +31,7 @@ table {
 				target="transactionFrame">Sales Payment</a></td>
 		</tr>
 		<tr>
-			<td colspan="6"><iframe name="transactionFrame"
+			<td colspan="4"><iframe name="transactionFrame"
 					src="transaction.jsp" frameborder="0" width="910" height="560"></iframe></td>
 		</tr>
 	</table>

@@ -266,6 +266,7 @@
 							<td><form:label
 									path="salesInvoiceItemBeans[0].productId.productCode">Code</form:label></td>
 							<td><form:label path="salesInvoiceItemBeans[0].description">Description</form:label></td>
+							<td><form:label path="salesInvoiceItemBeans[0].packageList">Package List</form:label></td>
 							<td><form:label path="salesInvoiceItemBeans[0].quantity">Quantity</form:label></td>
 							<td><form:label path="salesInvoiceItemBeans[0].quantityType">Qty Type</form:label></td>
 							<td><form:label path="salesInvoiceItemBeans[0].rate">Unit Rate</form:label></td>
@@ -295,6 +296,12 @@
 										value="${i.description}" class="product_Description" /> <form:errors
 										path="salesInvoiceItemBeans[${itemsRow.index}].description"
 										cssStyle="color: #ff0000;" /></td>
+									<td><form:input
+										path="salesInvoiceItemBeans[${itemsRow.index}].packageList"
+										value="${i.packageList}" class="package_List" /> <form:errors
+										path="salesInvoiceItemBeans[${itemsRow.index}].packageList"
+										cssStyle="color: #ff0000;" /></td>
+				
 								<td><form:input
 										path="salesInvoiceItemBeans[${itemsRow.index}].quantity"
 										value="${i.quantity}" class="product_quantity" type="number"
