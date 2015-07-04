@@ -22,9 +22,13 @@ import org.erp.tarak.salesinvoice.SalesInvoiceItemService;
 import org.erp.tarak.stage.Stage;
 import org.erp.tarak.stage.StageBean;
 import org.erp.tarak.stageProperties.StagePropertiesService;
+import org.erp.tarak.subVariantProperties.SubVariantPropertiesService;
 import org.erp.tarak.user.UserBean;
+import org.erp.tarak.variant.Variant;
 import org.erp.tarak.variant.VariantBean;
 import org.erp.tarak.variantProperties.VariantPropertiesService;
+import org.erp.tarak.worker.WorkerService;
+import org.erp.tarak.worker.WorkerUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -38,6 +42,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ProductController {
 
+
+	@Autowired
+	private WorkerService workerService;
+	
 	@Autowired
 	private ProductService productService;
 
@@ -59,6 +67,9 @@ public class ProductController {
 	@Autowired
 	private VariantPropertiesService variantPropertiesService;
 
+	@Autowired
+	private SubVariantPropertiesService subVariantPropertiesService;
+	
 	@Autowired
 	private SalesInvoiceItemService salesInvoiceItemService;
 
@@ -219,6 +230,82 @@ public class ProductController {
 		return new ModelAndView("productStage", model);
 	}
 
+	@RequestMapping(value = { "/changeProductStageAction/{id}" }, method = RequestMethod.GET)
+	public ModelAndView changeProductStageAction(
+			@ModelAttribute("productBean") ProductBean productBean,
+			BindingResult result, @PathVariable long id) {
+		Map<String, Object> model = ProductUtilities.getInputsInMap(
+				productService, categoryService, measurementService,
+				variantPropertiesService, stagePropertiesService);
+
+		if (!ERPUtilities.isValidUser(session)) {
+			model.put("message", "Invalid User Session! Please login again");
+			return new ModelAndView("error", model);
+		}
+		ProductBean pb = null;
+		if (id > 0) {
+			pb = ProductUtilities.prepareProductBean(productService
+					.getProduct(id));
+
+		}
+		model.put("productBean", pb);
+		String variantType = pb.getVariantType();
+		model.put("vProperties", variantPropertiesService
+				.getVariantPropertiesByType(variantType));
+		if (id > 0) {
+			model.put("operation", "stage");
+		}
+		return new ModelAndView("productStageEdit", model);
+	}
+
+	@RequestMapping(value = "/productSubVariant", method = RequestMethod.GET)
+	public ModelAndView productSubVariant() {
+		Map<String, Object> model = ProductUtilities.getInputsInMap(
+				productService, categoryService, measurementService,
+				variantPropertiesService, stagePropertiesService);
+		if (!ERPUtilities.isValidUser(session)) {
+			model.put("message", "Invalid User Session! Please login again");
+			return new ModelAndView("error", model);
+		}
+		model.put("products", ProductUtilities
+				.prepareListofProductBean(productService.listProducts()));
+		model.put("subVariants", subVariantPropertiesService.listSubVariantPropertiess());
+		return new ModelAndView("productSubVariant", model);
+	}
+
+	@RequestMapping(value = { "/changeProductSubVariantAction/{id}" }, method = RequestMethod.GET)
+	public ModelAndView changeProductSubVariantAction(
+			@ModelAttribute("subVariantBean") SubVariantBean subVariantBean,
+			BindingResult result, @PathVariable long id) 
+	{
+		Map<String, Object> model = ProductUtilities.getInputsInMap(
+				productService, categoryService, measurementService,
+				variantPropertiesService, stagePropertiesService);
+		if (!ERPUtilities.isValidUser(session)) 
+		{
+			model.put("message", "Invalid User Session! Please login again");
+			return new ModelAndView("error", model);
+		}
+		ProductBean pb = null;
+		if (id > 0) 
+		{
+			pb = ProductUtilities.prepareProductBean(productService
+					.getProduct(id));
+		}
+		subVariantBean.setProductBean(pb);
+		model.put("subVariantBean",subVariantBean);
+		model.put("vProperties", subVariantPropertiesService
+				.listSubVariantPropertiess());
+		model.put("workers",
+				WorkerUtilities.prepareListofWorkerBeans(workerService.listWorkers()));
+		if (id > 0) 
+		{
+			model.put("operation", "stage");
+		}
+		return new ModelAndView("productSubVariantEdit", model);
+	}
+
+	
 	@RequestMapping(value = "/addProduct", method = RequestMethod.GET)
 	public ModelAndView addProduct(
 			@ModelAttribute("productBean") ProductBean productBean,
@@ -285,7 +372,7 @@ public class ProductController {
 		return new ModelAndView("ProductSelectionList", model);
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/inventory", method = RequestMethod.GET)
 	public ModelAndView welcome() {
 		Map<String, Object> model = ProductUtilities.getInputsInMap(
 				productService, categoryService, measurementService,
@@ -469,34 +556,7 @@ public class ProductController {
 		return new ModelAndView("product", model);
 	}
 
-	@RequestMapping(value = { "/changeProductStageAction/{id}" }, method = RequestMethod.GET)
-	public ModelAndView changeProductStageAction(
-			@ModelAttribute("productBean") ProductBean productBean,
-			BindingResult result, @PathVariable long id) {
-		Map<String, Object> model = ProductUtilities.getInputsInMap(
-				productService, categoryService, measurementService,
-				variantPropertiesService, stagePropertiesService);
-
-		if (!ERPUtilities.isValidUser(session)) {
-			model.put("message", "Invalid User Session! Please login again");
-			return new ModelAndView("error", model);
-		}
-		ProductBean pb = null;
-		if (id > 0) {
-			pb = ProductUtilities.prepareProductBean(productService
-					.getProduct(id));
-
-		}
-		model.put("productBean", pb);
-		String variantType = pb.getVariantType();
-		model.put("vProperties", variantPropertiesService
-				.getVariantPropertiesByType(variantType));
-		if (id > 0) {
-			model.put("operation", "stage");
-		}
-		return new ModelAndView("productStageEdit", model);
-	}
-
+	
 	@RequestMapping(value = "/saveProductStages/{id}", method = RequestMethod.POST)
 	public ModelAndView saveProductStage(
 			@ModelAttribute("productBean") @Valid ProductBean productBean,
@@ -562,4 +622,38 @@ public class ProductController {
 		return new ModelAndView("productWiseSales", model);
 
 	}
+	@RequestMapping(value = "/saveProductSubVariant", method = RequestMethod.POST)
+	public ModelAndView saveProductSubVariant(
+			@ModelAttribute("subVariantBean") SubVariantBean subVariantBean,
+			BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		Product product=ProductUtilities.getProductModel(subVariantBean.getProductBean().getProductId(), productService);
+		VariantBean variantBean=subVariantBean.getVariantBean();
+		boolean flag=false;
+		for(Variant vb: product.getVariants())
+		{
+			if(vb.getVariantId()==variantBean.getVariantId())
+			{
+				vb.setQuantity(vb.getQuantity()-subVariantBean.getQuantity());
+				variantBean.setVariantType(vb.getVariantType());
+				flag=true;
+			}
+		}
+		if(!flag)
+		{
+			product.setQuantity(product.getQuantity()-subVariantBean.getQuantity());
+		}
+		Variant variant=new Variant();
+		variant.setCost(product.getCost()+subVariantBean.getCost());
+		variant.setQuantity(subVariantBean.getQuantity());
+		variant.setProductCode(ProductUtilities.getVariantCode(product.getProductCode(), product.getVariants().size()+1));
+		variant.setVariantName(subVariantBean.getNewVariantName());
+		variant.setVariantType(variantBean.getVariantType());
+		product.getVariants().add(variant);
+		productService.addProduct(product);
+		model.put("products", ProductUtilities
+				.prepareListofProductBean(productService.listProducts()));
+		return new ModelAndView("productSubVariant", model);
+	}
+
 }

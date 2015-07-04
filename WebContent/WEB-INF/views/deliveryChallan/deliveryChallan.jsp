@@ -288,7 +288,6 @@
 	</h3>
 	<br />
 
-	<!-- customerId deliveryChallanItemBeans -->
 	<form:form name="personForm" method="POST"
 		action="/ERPSoftware/deliverychallan/saveDeliveryChallan.html"
 		modelAttribute="deliveryChallanBean">
@@ -341,8 +340,9 @@
 			</tr>
 			<tr>
 				<td>Select Shipper Company</td>
-				<td><form:input path="shipperBean.companyName" id="shipperc" />
-				</td>
+				<td><form:input path="shipperBean.companyName" id="shipperc" /><a
+					href="/ERPSoftware/shipper/addShipper" target="_blank">New
+						Shipper</a></td>
 			</tr>
 			<tr>
 				<td>Shipper Company Branch</td>
@@ -397,7 +397,7 @@
 							<tr>
 								<td><a href="#"
 									onClick="deleteItemsFields(${i.srNo}, 'deliverychallan')">
-										<img alt="" src="${deleteImg}">
+										<img src="${deleteImg}">
 								</a></td>
 								<td><form:hidden
 										path="deliveryChallanItemBeans[${itemsRow.index}].productId.productId"
@@ -470,8 +470,9 @@
 		<form:hidden path="deliveryChallanId"
 			value="${deliveryChallanBean.deliveryChallanId}" />
 		<input type="submit" value="Save" name="Save" />
-		<input type="submit" value="Save & Inovoice" name="SaveDC" />&nbsp; <input type="button"
-			name="cancel" value="Cancel" onclick="loadIndex('deliverychallan')" />
+		<input type="submit" value="Save & Inovoice" name="SaveDC" />&nbsp; <input
+			type="button" name="cancel" value="Cancel"
+			onclick="loadIndex('deliverychallan')" />
 	</form:form>
 
 	<div class="overlay-bg"></div>

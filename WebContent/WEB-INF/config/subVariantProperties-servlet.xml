@@ -16,7 +16,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/views/productionOrder/" />
+		<property name="prefix" value="/WEB-INF/views/subVariantProperties/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	<tx:annotation-driven transaction-manager="hibernateTransactionManager" />

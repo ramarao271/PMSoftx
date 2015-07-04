@@ -50,7 +50,7 @@ public class RawMaterialController {
 	@Autowired
 	private VariantPropertiesService variantPropertiesService;
 
-	@RequestMapping(value = "/addImage", method = RequestMethod.POST)
+	@RequestMapping(value = "/addRawMaterialImage", method = RequestMethod.POST)
 	public ModelAndView addImage(
 			@ModelAttribute("rawMaterialBean") RawMaterialBean rawMaterialBean,
 			BindingResult result) throws Exception {
@@ -208,7 +208,7 @@ public class RawMaterialController {
 		return new ModelAndView("RawMaterialSelectionList", model);
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView welcome() {
 		Map<String, Object> model = RawMaterialUtilities.getInputsInMap(rawMaterialService,categoryService,measurementService,variantPropertiesService);
 		
@@ -221,8 +221,8 @@ public class RawMaterialController {
 				.prepareListofRawMaterialBean(rawMaterialService.listRawMaterials()));
 		return new ModelAndView("index", model);
 	}
-
-	@RequestMapping(value = {"/index","/rawMaterial/index"}, method = RequestMethod.GET)
+*/
+	@RequestMapping(value = {"/rawMaterial/index"}, method = RequestMethod.GET)
 	public ModelAndView welcome1() {
 		Map<String, Object> model = RawMaterialUtilities.getInputsInMap(rawMaterialService,categoryService,measurementService,variantPropertiesService);
 		
@@ -238,7 +238,7 @@ public class RawMaterialController {
 
 	}
 	
-	@RequestMapping(value = "/addVariant", method = RequestMethod.POST)
+	@RequestMapping(value = "/addRawMaterialVariant", method = RequestMethod.POST)
 	public ModelAndView addVariant(@ModelAttribute("rawMaterialBean") RawMaterialBean rawMaterialBean,
 			BindingResult result) {
 		Map<String, Object> model = RawMaterialUtilities.getInputsInMap(rawMaterialService,categoryService,measurementService,variantPropertiesService);
@@ -261,7 +261,7 @@ public class RawMaterialController {
 		return new ModelAndView("rawMaterial",model);
 	}
 
-	@RequestMapping(value = "/loadVariant/{variantType}", method = RequestMethod.POST)
+	@RequestMapping(value = "/loadRawMaterialVariant/{variantType}", method = RequestMethod.POST)
 	public ModelAndView loadVariant(@ModelAttribute("rawMaterialBean") RawMaterialBean rawMaterialBean,
 			BindingResult result,@PathVariable String variantType) {
 		Map<String, Object> model = RawMaterialUtilities.getInputsInMap(rawMaterialService,categoryService,measurementService,variantPropertiesService);

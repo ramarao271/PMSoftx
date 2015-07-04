@@ -137,7 +137,7 @@ public class ProductUtilities {
 
 		VariantBean variantBean = new VariantBean();
 		variantBean.setVariantType(ERPConstants.UNASSIGNED);
-		variantBean.setVariantName("  ");
+		variantBean.setVariantName(ERPConstants.UNASSIGNED);
 		variantBean.setQuantity(product.getQuantity() - variantQuantity);
 		variantBean.setProductCode(product.getProductCode());
 		variantBean.setAllocated(product.getAllocated());
@@ -224,7 +224,7 @@ public class ProductUtilities {
 		return product;
 	}
 
-	private static String getVariantCode(String productCode, int variantCount) {
+	public static String getVariantCode(String productCode, int variantCount) {
 		String variantCode = "";
 		variantCode = ERPUtilities.fomatStringToN("" + variantCount, 2);
 		variantCode = productCode + variantCode;

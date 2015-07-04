@@ -68,7 +68,7 @@
 			<div id="nav">
 				<ul>
 				<li class="upp"><a id="myButton" href="/ERPSoftware/main/transactionForm.html">Transaction</a></li>
-					<li class="upp"><a href="/ERPSoftware/product/"
+					<li class="upp"><a href="/ERPSoftware/product/inventory"
 						target="mainFrame">Inventory</a></li>
 					<li class="upp"><a href="#">StakeHolders</a>
 						<ul>
@@ -118,6 +118,9 @@
 							<li>&#8250; <a
 								href="/ERPSoftware/purchasePayment/purchasePayment/"
 								target="mainFrame">Purchase Payment</a></li>
+								<li>&#8250; <a
+								href="/ERPSoftware/otherPayment/otherPayment/"
+								target="mainFrame">Other Payments</a></li>
 						</ul></li>
 					<li class="upp"><a href="#">Returns</a>
 						<ul>

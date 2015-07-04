@@ -15,7 +15,7 @@ public class PurchaseInvoiceItemBean {
 	private double totalCost;
 	private long variantId;
 	private String variantCode;
-	
+	private String packageList;
 	public int getSrNo() {
 		return srNo;
 	}
@@ -81,5 +81,11 @@ public class PurchaseInvoiceItemBean {
 	}
 	public void setVariantCode(String variantCode) {
 		this.variantCode = variantCode;
+	}
+	public String getPackageList() {
+		return packageList;
+	}
+	public void setPackageList(String packageList) {
+		this.packageList = packageList;
 	}
 }

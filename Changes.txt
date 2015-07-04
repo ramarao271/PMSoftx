@@ -170,10 +170,9 @@ java.lang.IllegalArgumentException: Can not set int field org.erp.tarak.balanceS
 (100*50+50*45+10*70)/(100+50+10)
 100*50/100=50--last three months
 
-Auto populate Package List
-Remove Product & Customer from Transaction
-New Shipping company option
-Package List in Invoice or bar code
+Remove Product & Customer from Transaction-done
+New Shipping company option--done
+Package List in Invoice or bar code-done
 
 
 Sub Variant
@@ -202,6 +201,12 @@ Reduce qty in the select variant
 
 
 ------------------------
-Add Cost entry to Variants also
+Add Cost entry to Variants also--done
 Printing transactions 
 Payments to be generic... can pay to supplier,shipper,worker etc....
+
+
+
+
+==================================================
+For both Acc Payable/Receivable - % bill that is pending
