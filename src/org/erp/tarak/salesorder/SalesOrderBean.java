@@ -4,14 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.erp.tarak.customer.CustomerBean;
-import org.hibernate.validator.constraints.NotEmpty;
 
 
 public class SalesOrderBean {
 
 	private long salesOrderId;
 	private String finYear;
-	@NotEmpty(message="Date should not be empty")
 	private Date salesOrderDate;
 	private CustomerBean customerBean;
 	private List<SalesOrderItemBean> salesOrderItemBeans;
