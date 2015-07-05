@@ -9,6 +9,7 @@ public class SalesInvoiceItemBean {
 	private String finYear;
 	private ProductBean productId;
 	private String description;
+	private String packageList;
 	private double quantity;
 	private String quantityType;
 	private double rate;
@@ -81,5 +82,11 @@ public class SalesInvoiceItemBean {
 	}
 	public void setVariantCode(String variantCode) {
 		this.variantCode = variantCode;
+	}
+	public String getPackageList() {
+		return packageList;
+	}
+	public void setPackageList(String packageList) {
+		this.packageList = packageList;
 	}
 }

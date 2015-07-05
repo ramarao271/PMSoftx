@@ -138,7 +138,7 @@
 					
 					<li class="upp"><a href="#">Reports</a>
 						<ul>
-							<li>&#8250; <a href="/ERPSoftware/financialReports/index.html" target="mainFrame">Finance Reports</a></li>
+							<li>&#8250; <a href="/ERPSoftware/financialReports/FR.html" target="mainFrame">Finance Reports</a></li>
 							<li>&#8250; <a href="" target="mainFrame">Operations Reports</a></li>
 							<li>&#8250; <a href="/ERPSoftware/productReports/PR.html" target="mainFrame">Product Reports</a></li>
 							<li>&#8250; <a href="/ERPSoftware/marketingReports/MR.html" target="mainFrame">Marketing Reports</a></li>

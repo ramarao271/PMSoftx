@@ -37,7 +37,7 @@ public class FinanceReportsController {
 	@Autowired
 	private HttpSession session;
 	
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/FR", method = RequestMethod.GET)
 	public ModelAndView welcome1() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("category", "financialReports");

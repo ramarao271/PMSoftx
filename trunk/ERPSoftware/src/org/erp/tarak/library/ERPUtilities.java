@@ -84,6 +84,7 @@ public class ERPUtilities {
 			pib.setSrNo(poi.getSrNo());
 			pib.setTotalCost(poi.getTotalCost());
 			pib.setVariantId(poi.getVariantId());
+			pib.setPackageList(poi.getPackageList());
 			if(poi.getVariantId()>0)
 			{
 				pib.setVariantCode(poi.getVariantCode());
