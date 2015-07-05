@@ -210,3 +210,27 @@ Payments to be generic... can pay to supplier,shipper,worker etc....
 
 ==================================================
 For both Acc Payable/Receivable - % bill that is pending
+
+
+
+======================================================
+If company has two branches, then showing twice in SO
+
+Not able to edit/delete payments/returns (Sales/Purchase)
+org.hibernate.internal.CriteriaImpl cannot be cast to org.erp.tarak.salesPayment.SalesPayment
+product image not getting uploaded
+raw material variant selection
+Raw material save not working
+Raw material stock not working
+
+Marketing Reports not working-
+financial year not working
+Shipper not delete
+Other Payments
+Company cash available should be updated based on payments made
+
+PI not going from PO--done
+PI not able to delete items in list--done
+
+Production Order/Invoice/
+Expenses

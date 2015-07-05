@@ -3,6 +3,7 @@ package org.erp.tarak.purchaseinvoice;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -361,6 +362,24 @@ public class PurchaseInvoiceController {
 						supplierService));
 		}
 		return new ModelAndView("PurchaseInvoicesSelectionList", model);
+	}
+	
+	@RequestMapping(value = "/purchaseinvoiceupdateItems/{srNo}", method = RequestMethod.POST)
+	public ModelAndView deletePurchaseInvoiceItems(@ModelAttribute("purchaseInvoiceBean") @Validated PurchaseInvoiceBean purchaseInvoiceBean,
+			BindingResult result,@PathVariable long srNo) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		Iterator<PurchaseInvoiceItemBean> itr=purchaseInvoiceBean.getPurchaseInvoiceItemBeans().iterator();
+		while(itr.hasNext())
+		{
+			PurchaseInvoiceItemBean dcib=itr.next();
+			if(dcib.getSrNo()==srNo)
+			{
+				itr.remove();
+			}
+		}
+		model.put("purchaseInvoiceBean", purchaseInvoiceBean);
+		model.put("operation", "Add");
+		return new ModelAndView("purchaseInvoice", model);
 	}
 
 	class supp {

@@ -3,10 +3,12 @@ package org.erp.tarak.salesorder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -231,7 +233,7 @@ public class SalesOrderController {
 			List<CustomerBean> customers = CustomerUtilities
 					.prepareListofCustomerBeans(customerService
 							.listCustomersbyCompanyName(company));
-			List<supp> sups = new LinkedList<supp>();
+			Set<supp> sups = new HashSet<supp>();
 			for (CustomerBean customerBean : customers) {
 				supp s = new supp(customerBean.getCustomerId(),
 						customerBean.getCompanyBranch(),
