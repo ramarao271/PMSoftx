@@ -153,7 +153,7 @@ public class PurchaseOrderController {
 			}
 			else
 			{
-				return new ModelAndView("redirect:../purchaseinvoice/purchaseOrderDetails/"+purchaseOrder.getPurchaseOrderId());
+				return new ModelAndView("redirect:../purchaseinvoice/purchaseinvoiceDetails/"+purchaseOrder.getPurchaseOrderId());
 			}
 		} else {
 			return new ModelAndView("error");// , model);

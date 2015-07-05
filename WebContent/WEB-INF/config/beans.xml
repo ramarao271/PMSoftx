@@ -18,7 +18,8 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<context:component-scan base-package="org.erp.tarak.tools" />
 	<context:component-scan base-package="org.erp.tarak.user" />
 	<context:component-scan base-package="org.erp.tarak.reports" />
-	
+	<context:component-scan base-package="org.erp.tarak.balanceSheet" />
+	<context:component-scan base-package="org.erp.tarak.expense" />
 	
 	<context:component-scan base-package="org.erp.tarak.rawMaterial" />
 	<context:component-scan base-package="org.erp.tarak.product" />
@@ -63,6 +64,9 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 			<list>
 				<value>org.erp.tarak.user.User</value>
 				<value>org.erp.tarak.company.Company</value>
+				<value>org.erp.tarak.balanceSheet.BalanceSheet</value>
+				<value>org.erp.tarak.balanceSheet.BalanceSheetItem</value>
+				<value>org.erp.tarak.expense.Expense</value>
 				
 				<value>org.erp.tarak.salesorder.SalesOrder</value>
 				<value>org.erp.tarak.salesorder.SalesOrderItem</value>

@@ -42,6 +42,7 @@
 <link rel="stylesheet" href="${democss}">
 <c:url value="/resources/autocomplete/images/ui-anim_basic_16x16.gif"
 	var="imag" />
+<c:url value="/resources/img/b_delete.png" var="deleteImg" />
 <style>
 .ui-autocomplete-loading {
 	background: white url('${imag}') right center no-repeat;
@@ -81,7 +82,7 @@
 		$("#cityx").autocomplete({
 			source : function(request, response) {
 				$.ajax({
-					url : "/ERPSoftware/purchaseinvoice/listSISuppliers.jsp",
+					url : "/ERPSoftware/purchaseinvoice/listPISuppliers.jsp",
 					dataType : "json",
 					data : {
 						style : "full",
@@ -120,7 +121,7 @@
 		var items = [];
 		$
 				.ajax({
-					url : "/ERPSoftware/purchaseinvoice/listSISuppliers.jsp",
+					url : "/ERPSoftware/purchaseinvoice/listPISuppliers.jsp",
 					dataType : "json",
 					data : {
 						style : "full",
@@ -261,6 +262,7 @@
 				<td colspan="2">
 					<table border=1 cellpadding=0 cellspacing=2>
 						<tr>
+						<td>Del</td>
 							<td><form:label
 									path="purchaseInvoiceItemBeans[0].productId.productName">Product Name</form:label></td>
 							<td><form:label
@@ -275,6 +277,10 @@
 						<c:forEach items="${purchaseInvoiceBean.purchaseInvoiceItemBeans}"
 							var="i" varStatus="itemsRow">
 							<tr>
+							<td><a href="#"
+									onClick="deleteItemsFields(${i.srNo}, 'purchaseInvoice')">
+										<img src="${deleteImg}">
+								</a></td>
 								<td><form:hidden
 										path="purchaseInvoiceItemBeans[${itemsRow.index}].productId.productId"
 										value="${i.productId.productId }" /> <form:hidden
