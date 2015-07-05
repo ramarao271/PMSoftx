@@ -207,10 +207,10 @@
 		<form:hidden path="supplierBean.supplierId" class="supplierId" />
 		<table cellpadding="0" cellspacing="5">
 			<tr>
-				<td>select Delivery Challan No</td>
-				<td><form:input path="deliveryChallanBean.deliveryChallanId"
+				<td>select Purchase Order No</td>
+				<td><form:input path="purchaseOrderBean.purchaseOrderId"
 						readonly="true" href="#" class="show-popup" data-showpopup="2"
-						value="${purchaseInvoiceBean.deliveryChallanBean.deliveryChallanId}" /></td>
+						value="${purchaseInvoiceBean.purchaseOrderBean.purchaseOrderId}" /></td>
 			</tr>
 			<tr>
 				<td>Select Supplier Company</td>
@@ -373,7 +373,7 @@
 	</div>
 	<div class="overlay-content popup2">
 		<iframe
-			src="/ERPSoftware/deliverychallan/DeliveryChallanSelectionList.html"
+			src="/ERPSoftware/purchaseorder/PurchaseOrderSelectionList.html"
 			frameborder="0" scrolling="auto" width="95%" height="350px"></iframe>
 	</div>
 </body>

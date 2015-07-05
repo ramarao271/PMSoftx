@@ -179,7 +179,7 @@ public class PurchaseInvoiceController {
 							.getPurchaseOrderId(),user.getFinYear());
 			purchaseOrder.setProcessed(true);
 			purchaseOrderService.addPurchaseOrder(purchaseOrder);
-			/*if (saveFlag != null) {*/
+			if (saveFlag != null) {
 				model.addAttribute("message",
 						"PurchaseInvoice details saved successfully!");
 
@@ -189,12 +189,12 @@ public class PurchaseInvoiceController {
 								supplierService));
 
 				return new ModelAndView("purchaseInvoiceList");// , model);
-			/*} else {
+			} else {
 				return new ModelAndView(
 						"redirect:../purchasePayment/listpurchaseInvoices/"
-								+ deliveryChallan.getSupplierId()
+								+ purchaseInvoiceBean.getSupplierBean()
 										.getSupplierId());
-			}*/
+			}
 		} else {
 			return new ModelAndView("error");// , model);
 		}

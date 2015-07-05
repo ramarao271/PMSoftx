@@ -18,7 +18,7 @@
 	function sendSelected() {
 
 		var purchaseOrderId = document.purchaseOrderSelection.purchaseOrderId.value;
-		parent.setOrderDetails(purchaseOrderId,"deliverychallan");
+		parent.setOrderDetails(purchaseOrderId,"purchaseinvoice");
 
 	}
 </script>

@@ -324,7 +324,7 @@
 		<form:hidden path="purchaseOrderId"
 			value="${purchaseOrderBean.purchaseOrderId}" />
 		<input type="submit" value="Save" name="Save" />
-		<input type="submit" value="Save & DC" name="SaveDC" />
+		<input type="submit" value="Save & Invoice" name="SaveDC" />
 		&nbsp;<input type="button"
 			name="cancel" value="Cancel" onclick="loadIndex('purchaseorder')" />
 	</form:form>

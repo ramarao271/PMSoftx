@@ -22,8 +22,6 @@ import org.erp.tarak.deliverychallan.DeliveryChallanUtilities;
 import org.erp.tarak.library.ERPConstants;
 import org.erp.tarak.library.ERPUtilities;
 import org.erp.tarak.measurement.MeasurementService;
-import org.erp.tarak.product.Product;
-import org.erp.tarak.product.ProductBean;
 import org.erp.tarak.product.ProductService;
 import org.erp.tarak.product.ProductUtilities;
 import org.erp.tarak.user.UserBean;

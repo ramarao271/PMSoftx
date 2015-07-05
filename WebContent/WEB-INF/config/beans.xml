@@ -11,10 +11,14 @@ http://www.springframework.org/schema/tx
 http://www.springframework.org/schema/tx/spring-tx.xsd
 http://www.springframework.org/schema/mvc 
 http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
 	<context:property-placeholder location="classpath:resources/database.properties" />
 	
 	<context:component-scan base-package="org.erp.tarak.main" />
+	<context:component-scan base-package="org.erp.tarak.tools" />
 	<context:component-scan base-package="org.erp.tarak.user" />
+	<context:component-scan base-package="org.erp.tarak.reports" />
+	
 	
 	<context:component-scan base-package="org.erp.tarak.rawMaterial" />
 	<context:component-scan base-package="org.erp.tarak.product" />
@@ -30,12 +34,12 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<context:component-scan base-package="org.erp.tarak.deliverychallan" />
 	<context:component-scan base-package="org.erp.tarak.salesinvoice" />
 	<context:component-scan base-package="org.erp.tarak.salesreturn" />
-	<context:component-scan base-package="org.erp.tarak.salespayment" />
+	<context:component-scan base-package="org.erp.tarak.salesPayment" />
 	
 	<context:component-scan base-package="org.erp.tarak.purchaseorder" />
 	<context:component-scan base-package="org.erp.tarak.purchaseinvoice" />
 	<context:component-scan base-package="org.erp.tarak.purchasereturn" />
-	<context:component-scan base-package="org.erp.tarak.purchasepayment" />
+	<context:component-scan base-package="org.erp.tarak.purchasePayment" />
 	
 	<context:component-scan base-package="org.erp.tarak.supplier" />
 	<context:component-scan base-package="org.erp.tarak.supplier.openingbalance" />
@@ -79,7 +83,6 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 				<value>org.erp.tarak.purchasereturn.PurchaseReturnItem</value>
 				<value>org.erp.tarak.purchasePayment.PurchasePayment</value>
 				<value>org.erp.tarak.purchasePayment.PurchasePaymentItem</value>
-					
 				
 				<value>org.erp.tarak.address.Address</value>
 				<value>org.erp.tarak.bankaccount.BankAccount</value>
@@ -99,7 +102,6 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 				<value>org.erp.tarak.stageProperties.StageProperties</value>
 				<value>org.erp.tarak.variantProperties.VariantProperties</value>
 				<value>org.erp.tarak.subVariantProperties.SubVariantProperties</value>
-				
 			</list>
 		</property>
 		<property name="hibernateProperties">

@@ -4,14 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.erp.tarak.category.CategoryService;
-import org.erp.tarak.supplier.Supplier;
-import org.erp.tarak.supplier.SupplierService;
-import org.erp.tarak.supplier.SupplierUtilities;
-import org.erp.tarak.deliverychallan.DeliveryChallanItem;
 import org.erp.tarak.measurement.MeasurementService;
 import org.erp.tarak.product.Product;
 import org.erp.tarak.product.ProductBean;
 import org.erp.tarak.product.ProductUtilities;
+import org.erp.tarak.purchaseinvoice.PurchaseInvoiceItem;
+import org.erp.tarak.supplier.Supplier;
+import org.erp.tarak.supplier.SupplierService;
+import org.erp.tarak.supplier.SupplierUtilities;
 import org.erp.tarak.user.UserBean;
 
 public class PurchaseOrderUtilities {
@@ -178,9 +178,9 @@ public class PurchaseOrderUtilities {
 	}
 
 	public static void updatePurchaseOrderStatus(long purchaseOrderId,
-			List<DeliveryChallanItem> deliveryChallanItems,PurchaseOrderService purchaseOrderService,String finYear) {
+			List<PurchaseInvoiceItem> purchaseInvoiceItems,PurchaseOrderService purchaseOrderService,String finYear) {
 		PurchaseOrder purchaseOrder=purchaseOrderService.getPurchaseOrder(purchaseOrderId,finYear);
-		if(deliveryChallanItems!=null && deliveryChallanItems.size()>0)
+		if(purchaseInvoiceItems!=null && purchaseInvoiceItems.size()>0)
 		{
 			if(purchaseOrder.getPurchaseOrderItems()!=null && purchaseOrder.getPurchaseOrderItems().size()>0)
 			{
@@ -188,9 +188,9 @@ public class PurchaseOrderUtilities {
 				for(PurchaseOrderItem purchaseOrderItem: purchaseOrder.getPurchaseOrderItems())
 				{
 					boolean processed=false;
-					for(DeliveryChallanItem deliveryChallanItem: deliveryChallanItems)
+					for(PurchaseInvoiceItem purchaseInvoiceItem: purchaseInvoiceItems)
 					{
-						if(purchaseOrderItem.getVariantCode().equals(deliveryChallanItem.getVariantCode()) && purchaseOrderItem.getQuantity()==deliveryChallanItem.getQuantity())
+						if(purchaseOrderItem.getVariantCode().equals(purchaseInvoiceItem.getVariantCode()) && purchaseOrderItem.getQuantity()==purchaseInvoiceItem.getQuantity())
 						{
 							count++;
 							purchaseOrderItem.setProcessed(true);
