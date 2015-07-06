@@ -278,7 +278,7 @@
 							var="i" varStatus="itemsRow">
 							<tr>
 							<td><a href="#"
-									onClick="deleteItemsFields(${i.srNo}, 'purchaseInvoice')">
+									onClick="deleteItemsFields(${i.srNo}, 'purchaseinvoice')">
 										<img src="${deleteImg}">
 								</a></td>
 								<td><form:hidden
