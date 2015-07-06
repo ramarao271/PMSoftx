@@ -1,3 +1,4 @@
+
 package org.erp.tarak.library;
 
 import java.util.LinkedHashMap;
@@ -73,7 +74,7 @@ public class ERPConstants {
 		productMenuList.put("/ERPSoftware/product/productStage.html", "Product Life Cycle");
 		productMenuList.put("/ERPSoftware/rawMaterial/addRawMaterial.html", "Raw Material");
 		productMenuList.put("/ERPSoftware/rawMaterial/rawMaterials.html", "Raw Materials List");
-		productMenuList.put("/ERPSoftware/rawMaterial/index.html", "Raw Materials Stock");
+		productMenuList.put("/ERPSoftware/rawMaterial/rawMaterial.html", "Raw Materials Stock");
 		productMenuList.put("/ERPSoftware/measurement/measurement.html", "Measurements");
 		productMenuList.put("/ERPSoftware/category/category.html", "Categories");
 		productMenuList.put("/ERPSoftware/stageProperties/stageProperties.html", "Stages");

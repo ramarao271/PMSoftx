@@ -96,6 +96,14 @@ function loadVariant(name, value) {
 			+ value;
 	document.productForm.submit();
 }
+function loadRawMaterialVariant(name, value) {
+	if (value == '') {
+		value = document.getElementById("variantBeans0.variantType").value;
+	}
+	document.productForm.action = "/ERPSoftware/" + name + "/loadRawMaterialVariant/"
+			+ value;
+	document.productForm.submit();
+}
 function deleteItemsFields(val, name) {
 	document.personForm.action = "/ERPSoftware/" + name + "/" + name
 			+ "updateItems/" + val;

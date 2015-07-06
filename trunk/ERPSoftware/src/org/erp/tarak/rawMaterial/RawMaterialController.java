@@ -222,7 +222,7 @@ public class RawMaterialController {
 		return new ModelAndView("index", model);
 	}
 */
-	@RequestMapping(value = {"/rawMaterial/index"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/rawMaterial"}, method = RequestMethod.GET)
 	public ModelAndView welcome1() {
 		Map<String, Object> model = RawMaterialUtilities.getInputsInMap(rawMaterialService,categoryService,measurementService,variantPropertiesService);
 		

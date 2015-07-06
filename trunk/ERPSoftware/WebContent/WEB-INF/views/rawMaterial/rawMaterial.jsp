@@ -160,7 +160,7 @@ function uploadImage()
 			<tr>
 				<td>Variant</td>
 				<td><form:select path="variantType" class="branch"
-						onchange="loadVariant('rawMaterial',this.value)">
+						onchange="loadRawMaterialVariant('rawMaterial',this.value)">
 						<c:forEach items="${variantTypes}" var="vTypes">
 							<c:choose>
 								<c:when test="${rawMaterialBean.variantType eq vTypes}">

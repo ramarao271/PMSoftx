@@ -99,6 +99,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 				<value>org.erp.tarak.worker.Worker</value>
 				
 				<value>org.erp.tarak.product.Product</value>
+				<value>org.erp.tarak.rawMaterial.RawMaterial</value>
 				<value>org.erp.tarak.variant.Variant</value>
 				<value>org.erp.tarak.category.Category</value>
 				<value>org.erp.tarak.measurement.Measurement</value>
