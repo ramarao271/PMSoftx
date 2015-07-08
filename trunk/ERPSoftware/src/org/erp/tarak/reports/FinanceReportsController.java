@@ -9,10 +9,13 @@ import javax.servlet.http.HttpSession;
 
 import org.erp.tarak.customer.Customer;
 import org.erp.tarak.customer.CustomerBean;
+import org.erp.tarak.customer.CustomerService;
 import org.erp.tarak.customer.CustomerUtilities;
+import org.erp.tarak.deliverychallan.DeliveryChallanService;
 import org.erp.tarak.library.ERPUtilities;
 import org.erp.tarak.purchaseinvoice.PurchaseInvoiceService;
 import org.erp.tarak.salesinvoice.SalesInvoiceService;
+import org.erp.tarak.salesorder.SalesOrderService;
 import org.erp.tarak.supplier.Supplier;
 import org.erp.tarak.supplier.SupplierBean;
 import org.erp.tarak.supplier.SupplierUtilities;
@@ -29,11 +32,18 @@ public class FinanceReportsController {
 	@Autowired
 	private SalesInvoiceService salesInvoiceService;
 
-
 	@Autowired
 	private PurchaseInvoiceService purchaseInvoiceService;
 
+	@Autowired
+	private SalesOrderService salesOrderService;
 	
+	@Autowired
+	private CustomerService customerService;
+
+	@Autowired
+	private DeliveryChallanService deliveryChallanService;
+
 	@Autowired
 	private HttpSession session;
 	
@@ -43,6 +53,32 @@ public class FinanceReportsController {
 		model.put("category", "financialReports");
 		return new ModelAndView("index", model);
 	}
+	
+	@RequestMapping(value = "/ordersToShip", method = RequestMethod.GET)
+	public ModelAndView ordersToShip() {
+		/*Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+			model.put("salesOrders", SalesOrderUtilities
+				.prepareListofSalesOrderBean(
+						salesOrderService.listPendingSalesOrders(user.getFinYear()), customerService));
+		}*/
+		return new ModelAndView("redirect:../salesorder/pendingSalesorders.html");
+	}
+	
+	@RequestMapping(value = "/ordersToInvoice", method = RequestMethod.GET)
+	public ModelAndView ordersToInvoice() {
+		/*Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+			model.put("deliveryChallans", DeliveryChallanUtilities
+				.prepareListofDeliveryChallanBean(
+						deliveryChallanService.listPendingDeliveryChallans(user.getFinYear()), customerService));
+		}
+		*/
+		return new ModelAndView("redirect:../deliverychallan/pendingDeliverychallans.html");
+	}
+	
 	@RequestMapping(value = "/accountsReceivable", method = RequestMethod.GET)
 	public ModelAndView accountsReceivable() {
 		Map<String, Object> model = new HashMap<String, Object>();

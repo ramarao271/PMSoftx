@@ -1,7 +1,9 @@
 package org.erp.tarak.salesinvoice;
 
+import java.util.Date;
 import java.util.List;
 
+import org.erp.tarak.customer.CustomerReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -59,6 +61,21 @@ public class SalesInvoiceServiceImpl implements SalesInvoiceService {
 	@Override
 	public List<Object[]> listPendingSalesInvoicesByCustomer(String finYear) {
 		return salesInvoiceDao.listPendingSalesInvoicesByCustomer(finYear);
+	}
+
+	@Override
+	public List<CustomerReport> getAvgTktPrice() {
+		return salesInvoiceDao.getAvgTktPrice();
+	}
+
+	@Override
+	public List<CustomerReport> getCustomerFrequency() {
+		return salesInvoiceDao.getCustomerFrequency();
+	}
+
+	@Override
+	public List<SalesInvoice> listSalesInvoicesByDate(Date balanceSheetDate) {
+		return salesInvoiceDao.listSalesInvoicesByDate(balanceSheetDate);
 	}
 
 }

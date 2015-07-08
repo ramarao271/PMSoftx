@@ -73,11 +73,13 @@ public class SalesInvoiceUtilities {
 		pob.setDeliveryChallanBean(deliveryChallanBean);
 		pob.setPaidAmount(po.getPaidAmount());
 		pob.setReturnAmount(po.getReturnAmount());
+		pob.setAdjustedAmount(po.getAdjustedAmount());
 		pob.setLrNo(po.getLrNo());
 		pob.setDiscountPercent(po.getDiscountPercent());
 		pob.setDiscountedAmount(po.getDiscountedAmount());
 		pob.setInvoiceAmount(po.getInvoiceAmount());
 		pob.setProcessed(po.isProcessed());
+		pob.setReturnAmount(po.getReturnAmount());
 		return pob;
 	}
 	
@@ -98,6 +100,7 @@ public class SalesInvoiceUtilities {
 		pob.setDeliveryChallanBean(deliveryChallanBean);
 		pob.setPaidAmount(po.getPaidAmount());
 		pob.setReturnAmount(po.getReturnAmount());
+		pob.setAdjustedAmount(po.getAdjustedAmount());
 		pob.setLrNo(po.getLrNo());
 		pob.setDiscountPercent(po.getDiscountPercent());
 		pob.setDiscountedAmount(po.getDiscountedAmount());
@@ -127,6 +130,7 @@ public class SalesInvoiceUtilities {
 		salesInvoice.setPaidAmount(salesInvoiceBean.getPaidAmount());
 		salesInvoice.setLrNo(salesInvoiceBean.getLrNo());
 		salesInvoice.setReturnAmount(salesInvoiceBean.getReturnAmount());
+		salesInvoice.setAdjustedAmount(salesInvoiceBean.getAdjustedAmount());
 		salesInvoice.setInvoiceAmount(salesInvoiceBean.getInvoiceAmount());
 		salesInvoice.setDiscountPercent(salesInvoiceBean.getDiscountPercent());
 		salesInvoice.setDiscountedAmount(salesInvoiceBean.getDiscountedAmount());
@@ -206,11 +210,11 @@ public class SalesInvoiceUtilities {
 		salesInvoice.setPaidAmount(salesInvoiceBean.getPaidAmount());
 		salesInvoice.setLrNo(salesInvoiceBean.getLrNo());
 		salesInvoice.setReturnAmount(salesInvoiceBean.getReturnAmount());
+		salesInvoice.setAdjustedAmount(salesInvoiceBean.getAdjustedAmount());
 		salesInvoice.setInvoiceAmount(salesInvoiceBean.getInvoiceAmount());
 		salesInvoice.setDiscountPercent(salesInvoiceBean.getDiscountPercent());
 		salesInvoice.setDiscountedAmount(salesInvoiceBean.getDiscountedAmount());
 		salesInvoice.setProcessed(salesInvoiceBean.isProcessed());
-		
 		return salesInvoice;
 	}
 

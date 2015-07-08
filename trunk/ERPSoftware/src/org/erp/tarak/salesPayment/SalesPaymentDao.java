@@ -1,5 +1,6 @@
 package org.erp.tarak.salesPayment;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -12,4 +13,6 @@ public interface SalesPaymentDao {
 	public SalesPayment getSalesPayment(long salesPaymentId,String finYear);
 	
 	public void deleteSalesPayment(SalesPayment salesPayment);
+
+	public List<SalesPayment> listSalesInvoicesByDate(Date balanceSheetDate);
 }

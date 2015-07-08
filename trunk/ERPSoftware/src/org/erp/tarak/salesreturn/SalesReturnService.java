@@ -1,5 +1,6 @@
 package org.erp.tarak.salesreturn;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -14,4 +15,6 @@ public interface SalesReturnService {
 	public void deleteSalesReturn(SalesReturn salesReturn);
 
 	public  List<SalesReturn> listSalesReturnsByCustomer(long customerId,String finYear);
+
+	public List<SalesReturn> listSalesReturnsByDate(Date balanceSheetDate);
 }

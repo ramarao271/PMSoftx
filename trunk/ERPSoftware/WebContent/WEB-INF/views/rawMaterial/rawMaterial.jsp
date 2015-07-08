@@ -179,7 +179,7 @@ function uploadImage()
 		</table>
 		<table border=1 cellpadding="0" cellspacing="2">
 			<tr>
-				<th><a href="#" onclick="addVariant('rawMaterial')"><img
+				<th><a href="#" onclick="addRawMaterialVariant('rawMaterial')"><img
 						src="${addImg}" /></a></th>
 				<th>Variant Name</th>
 				<th>Quantity</th>

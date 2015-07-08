@@ -1,5 +1,6 @@
 package org.erp.tarak.salesPayment;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class SalesPaymentServiceImpl implements SalesPaymentService {
 	
 	public void deleteSalesPayment(SalesPayment salesPayment) {
 		salesPaymentDao.deleteSalesPayment(salesPayment);
+	}
+
+	@Override
+	public List<SalesPayment> listSalesInvoicesByDate(Date balanceSheetDate) {
+		return salesPaymentDao.listSalesInvoicesByDate(balanceSheetDate);
 	}
 
 }

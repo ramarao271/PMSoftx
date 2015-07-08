@@ -1,5 +1,6 @@
 package org.erp.tarak.purchasePayment;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class PurchasePaymentServiceImpl implements PurchasePaymentService {
 	
 	public void deletePurchasePayment(PurchasePayment purchasePayment) {
 		purchasePaymentDao.deletePurchasePayment(purchasePayment);
+	}
+
+	@Override
+	public List<PurchasePayment> listPurchasePaymentsByDate(Date balanceSheetDate) {
+		return purchasePaymentDao.listPurchasePaymentsByDate(balanceSheetDate);
 	}
 
 }

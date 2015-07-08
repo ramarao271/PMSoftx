@@ -85,4 +85,12 @@ public class ProductDaoImpl implements ProductDao {
 		List results = crit.list();
 		return results;
 	}
+
+	@Override
+	public List<Product> listProductsBySold() {
+		String hql = "from Product order by sold";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List results = query.list();
+		return results;
+	}
 }

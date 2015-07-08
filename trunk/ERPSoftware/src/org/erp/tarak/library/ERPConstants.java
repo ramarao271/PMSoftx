@@ -125,10 +125,20 @@ public class ERPConstants {
 		balanceSheetMenuList.put("/ERPSoftware/balanceSheet/processedBalanceSheets.html", "Processed BS List");
 		
 		toolsMenuList.put("/ERPSoftware/company/addCompany","Companies");
+
 		financeMenuList.put("/ERPSoftware/financialReports/accountsReceivable","Accounts Receivables");
 		financeMenuList.put("/ERPSoftware/financialReports/accountsPayable","Accounts Payable");
+		financeMenuList.put("/ERPSoftware/financialReports/ordersToShip","Orders to be Shipped");
+		financeMenuList.put("/ERPSoftware/financialReports/ordersToInvoice","Orders to be Invoiced");
+		
 		productReportMenuList.put("/ERPSoftware/productReports/categoryWiseReport", "Products by Category");
+		productReportMenuList.put("/ERPSoftware/productReports/variantWiseReport", "Products by Variant");
+		
 		marketingReportMenuList.put("/ERPSoftware/marketingReports/customerSalesReport","Customer Sales Report");
+		marketingReportMenuList.put("/ERPSoftware/marketingReports/customerProfitReport","Customer Profit Report");
+		marketingReportMenuList.put("/ERPSoftware/marketingReports/avgTktPrice","Avg Tkt Price");
+		marketingReportMenuList.put("/ERPSoftware/marketingReports/purchaseFreqCustomer","Customer Purchase Frequency");
+		marketingReportMenuList.put("/ERPSoftware/marketingReports/frequentProduct","Frequently Purchased Product");
 		
 		linkMap.put("customer", customerMenuList);
 		linkMap.put("worker", workerMenuList);
@@ -153,3 +163,4 @@ public class ERPConstants {
 		linkMap.put("marketingReports",marketingReportMenuList);
 	}
 }
+

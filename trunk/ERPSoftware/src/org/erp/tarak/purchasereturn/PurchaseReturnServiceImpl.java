@@ -1,5 +1,6 @@
 package org.erp.tarak.purchasereturn;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class PurchaseReturnServiceImpl implements PurchaseReturnService {
 	@Override
 	public List<PurchaseReturn> listPurchaseReturnsBySupplier(long supplierId,String finYear) {
 		return  purchaseReturnDao.listPurchaseReturnsBySupplier(supplierId,finYear);
+	}
+
+	@Override
+	public List<PurchaseReturn> listPurchaseReturns(Date balanceSheetDate) {
+		return  purchaseReturnDao.listPurchaseReturns(balanceSheetDate);
 	}
 
 }

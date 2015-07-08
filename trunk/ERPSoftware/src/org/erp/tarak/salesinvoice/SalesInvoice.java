@@ -73,7 +73,10 @@ public class SalesInvoice implements Serializable {
 	
 	private double paidAmount;
 	
+	private double adjustedAmount;
+	
 	private double returnAmount;
+	
 	@Type(type="boolean")
 	private boolean processed;
 	
@@ -153,14 +156,6 @@ public class SalesInvoice implements Serializable {
 		this.paidAmount = paidAmount;
 	}
 
-	public double getReturnAmount() {
-		return returnAmount;
-	}
-
-	public void setReturnAmount(double returnAmount) {
-		this.returnAmount = returnAmount;
-	}
-
 	public double getInvoiceAmount() {
 		return invoiceAmount;
 	}
@@ -191,6 +186,22 @@ public class SalesInvoice implements Serializable {
 
 	public void setProcessed(boolean processed) {
 		this.processed = processed;
+	}
+
+	public double getAdjustedAmount() {
+		return adjustedAmount;
+	}
+
+	public void setAdjustedAmount(double adjustedAmount) {
+		this.adjustedAmount = adjustedAmount;
+	}
+
+	public double getReturnAmount() {
+		return returnAmount;
+	}
+
+	public void setReturnAmount(double returnAmount) {
+		this.returnAmount = returnAmount;
 	}
 
 }

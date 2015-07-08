@@ -1,5 +1,6 @@
 package org.erp.tarak.purchaseinvoice;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,11 @@ public class PurchaseInvoiceServiceImpl implements PurchaseInvoiceService {
 	@Override
 	public List<Object[]> listPendingPurchaseInvoicesBySupplier(String finYear) {
 		return purchaseInvoiceDao.listPendingPurchaseInvoicesBySupplier(finYear);
+	}
+
+	@Override
+	public List<PurchaseInvoice> listPurchaseInvoicesByDate(Date balanceSheetDate) {
+		return purchaseInvoiceDao.listPurchaseInvoicesByDate(balanceSheetDate);
 	}
 
 }

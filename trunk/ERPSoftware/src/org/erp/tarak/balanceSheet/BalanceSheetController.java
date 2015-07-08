@@ -16,6 +16,18 @@ import org.erp.tarak.company.CompanyUtilities;
 import org.erp.tarak.expense.ExpenseService;
 import org.erp.tarak.expense.ExpenseUtilities;
 import org.erp.tarak.library.ERPConstants;
+import org.erp.tarak.purchasePayment.PurchasePayment;
+import org.erp.tarak.purchasePayment.PurchasePaymentService;
+import org.erp.tarak.purchaseinvoice.PurchaseInvoice;
+import org.erp.tarak.purchaseinvoice.PurchaseInvoiceService;
+import org.erp.tarak.purchasereturn.PurchaseReturn;
+import org.erp.tarak.purchasereturn.PurchaseReturnService;
+import org.erp.tarak.salesPayment.SalesPayment;
+import org.erp.tarak.salesPayment.SalesPaymentService;
+import org.erp.tarak.salesinvoice.SalesInvoice;
+import org.erp.tarak.salesinvoice.SalesInvoiceService;
+import org.erp.tarak.salesreturn.SalesReturn;
+import org.erp.tarak.salesreturn.SalesReturnService;
 import org.erp.tarak.user.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,7 +50,25 @@ public class BalanceSheetController {
 
 	@Autowired
 	private BalanceSheetService balanceSheetService;
+	
+	@Autowired
+	private SalesInvoiceService salesInvoiceService;
 
+	@Autowired
+	private PurchaseInvoiceService purchaseInvoiceService;
+
+	@Autowired
+	private SalesPaymentService salesPaymentService;
+
+	@Autowired
+	private PurchasePaymentService purchasePaymentService;
+	
+	@Autowired
+	private SalesReturnService salesReturnService;
+
+	@Autowired
+	private PurchaseReturnService purchaseReturnService;
+	
 	@Autowired
 	private BalanceSheetItemService balanceSheetItemService;
 
@@ -310,9 +340,80 @@ public class BalanceSheetController {
 			@ModelAttribute("command") BalanceSheetBean balanceSheetBean,
 			BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("balanceSheetBean", BalanceSheetUtilities.prepareBalanceSheetBean(
+		BalanceSheetBean bsb=BalanceSheetUtilities.prepareBalanceSheetBean(
 				balanceSheetService.getBalanceSheet(balanceSheetBean
-						.getBalanceSheetId())));
+						.getBalanceSheetId()));
+		List<SalesInvoice> salesInvoices=salesInvoiceService.listSalesInvoicesByDate(bsb.getBalanceSheetDate());
+		List<SalesPayment> salesPayments=salesPaymentService.listSalesInvoicesByDate(bsb.getBalanceSheetDate());
+		List<SalesReturn> salesReturns=salesReturnService.listSalesReturnsByDate(bsb.getBalanceSheetDate());
+		List<PurchaseInvoice> purchaseInvoices=purchaseInvoiceService.listPurchaseInvoicesByDate(bsb.getBalanceSheetDate());
+		List<PurchasePayment> purchasePayments=purchasePaymentService.listPurchasePaymentsByDate(bsb.getBalanceSheetDate());
+		List<PurchaseReturn> purchaseReturns=purchaseReturnService.listPurchaseReturns(bsb.getBalanceSheetDate());
+		List<BalanceSheetItemBean> bsibs=new LinkedList<BalanceSheetItemBean>();
+		bsibs.addAll(bsb.getBalanceSheetItemBeans());
+		int srno=bsb.getBalanceSheetItemBeans().size();
+		for(SalesInvoice si: salesInvoices)
+		{
+			BalanceSheetItemBean bsib=new BalanceSheetItemBean();
+			bsib.setBalanceSheetId(bsb.getBalanceSheetId());
+			bsib.setDescription("Sales Invoice-"+si.getSalesInvoiceId());
+			bsib.setFinYear(bsb.getFinYear());
+			bsib.setRate(si.getTotalCost());
+			bsib.setSrNo(++srno);
+			bsibs.add(bsib);
+		}
+		for(PurchaseInvoice si: purchaseInvoices)
+		{
+			BalanceSheetItemBean bsib=new BalanceSheetItemBean();
+			bsib.setBalanceSheetId(bsb.getBalanceSheetId());
+			bsib.setDescription("Purchase Invoice-"+si.getPurchaseInvoiceId());
+			bsib.setFinYear(bsb.getFinYear());
+			bsib.setRate(-si.getTotalCost());
+			bsib.setSrNo(++srno);
+			bsibs.add(bsib);
+		}
+		for(SalesPayment si: salesPayments)
+		{
+			BalanceSheetItemBean bsib=new BalanceSheetItemBean();
+			bsib.setBalanceSheetId(bsb.getBalanceSheetId());
+			bsib.setDescription("Sales Payment-"+si.getSalesPaymentId());
+			bsib.setFinYear(bsb.getFinYear());
+			bsib.setRate(si.getTotalCost());
+			bsib.setSrNo(++srno);
+			bsibs.add(bsib);
+		}
+		for(PurchasePayment si: purchasePayments)
+		{
+			BalanceSheetItemBean bsib=new BalanceSheetItemBean();
+			bsib.setBalanceSheetId(bsb.getBalanceSheetId());
+			bsib.setDescription("Purchase Payment-"+si.getPurchasePaymentId());
+			bsib.setFinYear(bsb.getFinYear());
+			bsib.setRate(-si.getTotalCost());
+			bsib.setSrNo(++srno);
+			bsibs.add(bsib);
+		}
+		for(SalesReturn si: salesReturns)
+		{
+			BalanceSheetItemBean bsib=new BalanceSheetItemBean();
+			bsib.setBalanceSheetId(bsb.getBalanceSheetId());
+			bsib.setDescription("Sales Return-"+si.getSalesReturnId());
+			bsib.setFinYear(bsb.getFinYear());
+			bsib.setRate(-si.getTotalCost());
+			bsib.setSrNo(++srno);
+			bsibs.add(bsib);
+		}
+		for(PurchaseReturn si: purchaseReturns)
+		{
+			BalanceSheetItemBean bsib=new BalanceSheetItemBean();
+			bsib.setBalanceSheetId(bsb.getBalanceSheetId());
+			bsib.setDescription("Purchase Return-"+si.getPurchaseReturnId());
+			bsib.setFinYear(bsb.getFinYear());
+			bsib.setRate(+si.getTotalCost());
+			bsib.setSrNo(++srno);
+			bsibs.add(bsib);
+		}
+		bsb.setBalanceSheetItemBeans(bsibs);
+		model.put("balanceSheetBean", bsb);
 		return new ModelAndView("balanceSheetView", model);
 	}
 	

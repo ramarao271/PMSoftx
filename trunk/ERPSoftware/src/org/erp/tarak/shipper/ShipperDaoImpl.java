@@ -36,7 +36,6 @@ public class ShipperDaoImpl implements ShipperDao {
 	public Shipper getShipper(long empid) {
 		Shipper s=(Shipper) sessionFactory.getCurrentSession().get(
 				Shipper.class, empid);
-				sessionFactory.getCurrentSession().flush();
 		return s;
 	}
 

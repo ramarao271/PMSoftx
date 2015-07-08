@@ -20,6 +20,7 @@ public class SalesInvoiceBean {
 	private double discountedAmount;
 	private double totalCost;
 	private double paidAmount;
+	private double adjustedAmount;
 	private double returnAmount;
 	private String lrNo;
 	private boolean processed;
@@ -98,14 +99,6 @@ public class SalesInvoiceBean {
 		this.paidAmount = paidAmount;
 	}
 
-	public double getReturnAmount() {
-		return returnAmount;
-	}
-
-	public void setReturnAmount(double returnAmount) {
-		this.returnAmount = returnAmount;
-	}
-
 	public double getInvoiceAmount() {
 		return invoiceAmount;
 	}
@@ -144,6 +137,22 @@ public class SalesInvoiceBean {
 
 	public void setNoOfDays(int noOfDays) {
 		this.noOfDays = noOfDays;
+	}
+
+	public double getAdjustedAmount() {
+		return adjustedAmount;
+	}
+
+	public void setAdjustedAmount(double adjustedAmount) {
+		this.adjustedAmount = adjustedAmount;
+	}
+
+	public double getReturnAmount() {
+		return returnAmount;
+	}
+
+	public void setReturnAmount(double returnAmount) {
+		this.returnAmount = returnAmount;
 	}
 
 }

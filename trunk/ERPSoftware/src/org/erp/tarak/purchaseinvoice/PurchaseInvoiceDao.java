@@ -1,6 +1,7 @@
 package org.erp.tarak.purchaseinvoice;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 
@@ -25,4 +26,6 @@ public interface PurchaseInvoiceDao {
 	public List<Long> listBilledSuppliers(String finYear);
 
 	public List<Object[]> listPendingPurchaseInvoicesBySupplier(String finYear);
+
+	public List<PurchaseInvoice> listPurchaseInvoicesByDate(Date balanceSheetDate);
 }

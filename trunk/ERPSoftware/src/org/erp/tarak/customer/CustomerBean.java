@@ -30,6 +30,7 @@ public class CustomerBean {
 	private double totalAmount;
 	private double returnAmount;
 	private double paidAmount;
+	private double profitAmount;
 	public CustomerBean() {
 		super();
 	}
@@ -156,6 +157,12 @@ public class CustomerBean {
 	}
 	public void setPaidAmount(double paidAmount) {
 		this.paidAmount = paidAmount;
+	}
+	public double getProfitAmount() {
+		return profitAmount;
+	}
+	public void setProfitAmount(double profitAmount) {
+		this.profitAmount = profitAmount;
 	}
 	
 }

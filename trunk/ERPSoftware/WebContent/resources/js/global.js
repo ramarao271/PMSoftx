@@ -69,6 +69,11 @@ function addVariant(name) {
 	document.productForm.action = "/ERPSoftware/" + name + "/addVariant.html";
 	document.productForm.submit();
 }
+function addRawMaterialVariant(name) {
+	document.productForm.action = "/ERPSoftware/" + name + "/addRawMaterialVariant.html";
+	document.productForm.submit();
+}
+
 function addExpense(name) {
 	document.productForm.action = "/ERPSoftware/" + name + "/addExpense.html";
 	document.productForm.submit();
