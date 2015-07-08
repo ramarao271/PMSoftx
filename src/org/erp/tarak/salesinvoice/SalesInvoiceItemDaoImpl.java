@@ -96,7 +96,7 @@ public class SalesInvoiceItemDaoImpl implements SalesInvoiceItemDao {
 
 	@Override
 	public List<VariantReport> listFrequesntlyProductsByVariant(String finYear) {
-		String hql = "select v.variantId as variantId,v.variantType as variantType,sum(s.quantity) as quantity,sum(s.totalCost) as amount,v.productCode as variantCode from salesInvoiceItem s,product p,variant v where s.Financial_Year='"+finYear+"' and p.product_Id=s.product_Id and v.variantType=p.variantType group by v.variantType;";
+		String hql = "select v.variantType,s.variantId,sum(s.quantity),sum(s.totalcost) from salesinvoiceitem s,variant v where s.variantId=v.variantId and s.Financial_Year='"+finYear+"' group by v.variantType;";
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		List results = query.list();
 		List<VariantReport> cats=new LinkedList<VariantReport>();

@@ -48,6 +48,7 @@ public class ProductBean {
 	private List <StageBean> stageBeans;
 	private String qty;
 	private double totalCost;
+	private double soldVariants;
 	public String getProductName() {
 		return productName;
 	}
@@ -246,5 +247,13 @@ public class ProductBean {
 
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
+	}
+
+	public double getSoldVariants() {
+		return soldVariants;
+	}
+
+	public void setSoldVariants(double soldVariants) {
+		this.soldVariants = soldVariants;
 	}
 }

@@ -166,7 +166,7 @@ public class ProductController {
 			String fileExt = multipartFile.getOriginalFilename().substring(
 					multipartFile.getOriginalFilename().lastIndexOf("."),
 					multipartFile.getOriginalFilename().length());
-			File dest = new File(servletContext.getRealPath("resources/images")
+			File dest = new File(servletContext.getRealPath("/resources/images/")
 					+ File.separator + product.getProductCode() + fileExt);
 			product.setImagePath("/ERPSoftware/resources/images"
 					+ File.separator + product.getProductCode() + fileExt);

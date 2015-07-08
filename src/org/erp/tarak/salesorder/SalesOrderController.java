@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.erp.tarak.category.CategoryService;
+import org.erp.tarak.customer.Customer;
 import org.erp.tarak.customer.CustomerBean;
 import org.erp.tarak.customer.CustomerService;
 import org.erp.tarak.customer.CustomerUtilities;
@@ -243,10 +245,14 @@ public class SalesOrderController {
 			json = g.toJson(sups);
 
 		} else if (search != null && !"".equals(search)) {
-			List<CustomerBean> customers = CustomerUtilities
-					.prepareListofCustomerBeans(customerService
-							.listCustomersbyCompanyNameRegex(search));
-			json = g.toJson(customers);
+			List <Customer> customers=customerService
+			.listCustomersbyCompanyNameRegex(search);
+			Set<CustomerBean> customerSet=new LinkedHashSet<CustomerBean>();
+			
+			List<CustomerBean> customerBeans = CustomerUtilities
+					.prepareListofCustomerBeans(customers);
+			customerSet.addAll(customerBeans);
+			json = g.toJson(customerSet);
 			model.put("customers", json);
 
 		}

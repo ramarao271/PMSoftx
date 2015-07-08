@@ -222,7 +222,10 @@ public class PurchasePaymentUtilities {
 
 	public static PurchasePayment preparePurchasePaymentModelFromSession(
 			PurchasePaymentBean purchasePaymentBean, PurchasePaymentBean s1pBean, UserBean user) {
-		purchasePaymentBean.setSupplierBean(s1pBean.getSupplierBean());
+		if(s1pBean!=null)
+		{
+			purchasePaymentBean.setSupplierBean(s1pBean.getSupplierBean());
+		}	
 		purchasePaymentBean.setFinYear(user.getFinYear());
 		List<PurchasePaymentItemBean> purchasePaymentItemBeans=preparePurchasePaymentItemBeansFromSession(purchasePaymentBean.getPurchasePaymentItemBeans(),purchasePaymentBean.getPurchasePaymentItemBeans(),user);
 		purchasePaymentBean.setPurchasePaymentItemBeans(purchasePaymentItemBeans);

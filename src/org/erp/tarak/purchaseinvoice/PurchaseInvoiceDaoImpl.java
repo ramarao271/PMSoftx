@@ -1,9 +1,11 @@
 package org.erp.tarak.purchaseinvoice;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.erp.tarak.salesinvoice.SalesInvoice;
 import org.erp.tarak.supplier.Supplier;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -98,6 +100,15 @@ public class PurchaseInvoiceDaoImpl implements PurchaseInvoiceDao {
 		String sql="select {c.*},sum(totalCost) as totalCost, sum(s.returnAmount) as returnAmount,sum(s.paidAmount) as paidAmount from purchaseInvoice s,Supplier c where s.finYear='"+finYear+"' and c.supplierId=s.supplier_Id group by c.supplierId";
 		Query query=sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity("c", Supplier.class).addScalar("totalCost").addScalar("returnAmount").addScalar("paidAmount");
 		return query.list();
+	}
+
+	@Override
+	public List<PurchaseInvoice> listPurchaseInvoicesByDate(Date balanceSheetDate) {
+		Criteria crit = sessionFactory.getCurrentSession().createCriteria(
+				PurchaseInvoice.class);
+		crit.add(Restrictions.eq("purchaseInvoiceDate", balanceSheetDate));
+		List results = crit.list();
+		return results;
 	}
 
 }

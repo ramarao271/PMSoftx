@@ -59,7 +59,7 @@ public class ProductReportsController {
 			List<VariantReport> crs=salesInvoiceItemService.getSalesReportByVariant(user.getFinYear());
 			model.put("cats",crs );
 		}
-		return new ModelAndView("categoryWiseReport", model);
+		return new ModelAndView("variantWiseReport", model);
 	}
 
 }

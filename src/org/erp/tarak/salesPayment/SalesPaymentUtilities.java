@@ -222,7 +222,10 @@ public class SalesPaymentUtilities {
 
 	public static SalesPayment prepareSalesPaymentModelFromSession(
 			SalesPaymentBean salesPaymentBean, SalesPaymentBean s1pBean, UserBean user) {
-		salesPaymentBean.setCustomerBean(s1pBean.getCustomerBean());
+		if(s1pBean!=null)
+		{
+			salesPaymentBean.setCustomerBean(s1pBean.getCustomerBean());
+		}
 		salesPaymentBean.setFinYear(user.getFinYear());
 		List<SalesPaymentItemBean> salesPaymentItemBeans=prepareSalesPaymentItemBeansFromSession(salesPaymentBean.getSalesPaymentItemBeans(),salesPaymentBean.getSalesPaymentItemBeans(),user);
 		salesPaymentBean.setSalesPaymentItemBeans(salesPaymentItemBeans);

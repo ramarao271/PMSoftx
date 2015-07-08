@@ -1,14 +1,19 @@
 package org.erp.tarak.reports;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.erp.tarak.customer.Customer;
 import org.erp.tarak.customer.CustomerBean;
+import org.erp.tarak.customer.CustomerReport;
 import org.erp.tarak.customer.CustomerService;
 import org.erp.tarak.customer.CustomerUtilities;
 import org.erp.tarak.customer.openingbalance.CustomerOpeningBalance;
@@ -21,7 +26,9 @@ import org.erp.tarak.purchaseinvoice.PurchaseInvoiceBean;
 import org.erp.tarak.purchaseinvoice.PurchaseInvoiceItemService;
 import org.erp.tarak.purchaseinvoice.PurchaseInvoiceService;
 import org.erp.tarak.purchaseinvoice.PurchaseInvoiceUtilities;
+import org.erp.tarak.salesinvoice.SalesInvoice;
 import org.erp.tarak.salesinvoice.SalesInvoiceBean;
+import org.erp.tarak.salesinvoice.SalesInvoiceItem;
 import org.erp.tarak.salesinvoice.SalesInvoiceItemService;
 import org.erp.tarak.salesinvoice.SalesInvoiceService;
 import org.erp.tarak.salesinvoice.SalesInvoiceUtilities;
@@ -32,6 +39,7 @@ import org.erp.tarak.supplier.SupplierUtilities;
 import org.erp.tarak.supplier.openingbalance.SupplierOpeningBalance;
 import org.erp.tarak.supplier.openingbalance.SupplierOpeningBalanceService;
 import org.erp.tarak.user.UserBean;
+import org.erp.tarak.variant.VariantBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -78,6 +86,47 @@ public class MarketingReportsController {
 		model.put("category", "marketingReports");
 		return new ModelAndView("index", model);
 	}
+	@RequestMapping(value = "/avgTktPrice", method = RequestMethod.GET)
+	public ModelAndView avgTktPrice() {
+		Map<String, Object> model = new HashMap<String, Object>();
+		List<CustomerReport> customerReports=salesInvoiceService.getAvgTktPrice();
+		model.put("cats", customerReports);
+		return new ModelAndView("avgTktPrice", model);
+	}
+	@RequestMapping(value = "/purchaseFreqCustomer", method = RequestMethod.GET)
+	public ModelAndView purchaseFreqCustomer() {
+		Map<String, Object> model = new HashMap<String, Object>();
+		List<CustomerReport> customerReports=salesInvoiceService.getCustomerFrequency();
+		model.put("cats", customerReports);
+		return new ModelAndView("purchaseFreqCustomer", model);
+	}
+	
+	@RequestMapping(value = "/frequentProduct", method = RequestMethod.GET)
+	public ModelAndView frequentProduct() {
+		Map<String, Object> model = new HashMap<String, Object>();
+		List<ProductBean> products=ProductUtilities.prepareListofProductBean(productService.listProductsBySold());
+		Iterator<ProductBean> iter=products.iterator();
+		while(iter.hasNext())
+		{
+			ProductBean pb=iter.next();
+			double qty=0;
+			for(VariantBean vb: pb.getVariantBeans())
+			{
+				qty+=vb.getSold();
+			}
+			if(qty>0)
+			{
+				pb.setSoldVariants(qty);
+			}
+			else
+			{
+				iter.remove();
+			}
+			
+		}
+		model.put("products",products);
+		return new ModelAndView("frequentProduct", model);
+	}
 	@RequestMapping(value = "/customerWiseReport", method = RequestMethod.GET)
 	public ModelAndView accountsReceivable() {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -107,6 +156,73 @@ public class MarketingReportsController {
 			model.put("customers", customerBeans);
 		}
 		return new ModelAndView("customerSalesReport", model);
+	}
+	@RequestMapping(value = "/customerProfitReport", method = RequestMethod.GET)
+	public ModelAndView customerProfitReport() {
+		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null)
+		{
+			UserBean user = (UserBean) session.getAttribute("user");
+			List<SalesInvoice> salesInvoices=salesInvoiceService.listSalesInvoicesByCustomer(user.getFinYear());
+			Set<Product> products=new LinkedHashSet<Product>();
+			Map<Long, Double> customerMap=new LinkedHashMap<Long,Double>();
+			Map<Long,Customer> customer=new LinkedHashMap<Long,Customer>();
+			for(SalesInvoice si: salesInvoices)
+			{
+				Map<Long,Double[]> productMap=new LinkedHashMap<Long,Double[]>();
+				customer.put(si.getCustomerId().getCustomerId(), si.getCustomerId());
+				for(SalesInvoiceItem sii: si.getSalesInvoiceItems())
+				{
+					products.add(sii.getProductId());
+					if(productMap.containsKey(sii.getProductId().getProductId()))
+					{
+						Double[] d=productMap.get(sii.getProductId().getProductId());
+						d[0]+=sii.getQuantity();
+						d[1]+=sii.getTotalCost();
+						d[2]=d[1]/d[0];
+						productMap.put(sii.getProductId().getProductId(),d);
+					}
+					else
+					{
+						Double [] d=new Double[3];
+						d[0]=sii.getQuantity();
+						d[1]=sii.getTotalCost();
+						d[2]=d[1]/d[0];
+						/*(10*10+9*9+8*8)/(10+9+8)-5*(17)=(100+81+64-85)/17=240/17*/
+						
+						productMap.put(sii.getProductId().getProductId(),d);
+					}
+				}
+				double profit=0;
+				for(Long l:productMap.keySet())
+				{
+					for(Product p: products)
+					{
+						if(p.getProductId()==l)
+						{
+							profit+=(productMap.get(l)[1]-p.getCost())/productMap.get(l)[0];
+						}
+					}
+				}
+				if(customerMap.containsKey(si.getCustomerId().getCustomerId()))
+				{
+					customerMap.put(si.getCustomerId().getCustomerId(),customerMap.get(si.getCustomerId().getCustomerId())+profit);
+				}
+				else
+				{
+					customerMap.put(si.getCustomerId().getCustomerId(),profit);
+				}
+			}
+			List<CustomerBean> cbs=new LinkedList<CustomerBean>();
+			for(Long id:customer.keySet())
+			{
+				CustomerBean cb=CustomerUtilities.prepareCustomerBean(customer.get(id));
+				cb.setProfitAmount(customerMap.get(id));
+				cbs.add(cb);
+			}
+			model.put("customers", cbs);
+		}
+		return new ModelAndView("customerProfitReport", model);
 	}
 	@RequestMapping(value = "/frequentlySoldItems/{customerId}", method = RequestMethod.GET)
 	public ModelAndView frequentlySoldItems(@PathVariable long customerId) {

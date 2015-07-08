@@ -236,3 +236,17 @@ PI not able to delete items in list--done
 
 Production Order/Invoice/
 Expenses
+=======================================================================
+For both Acc Payable/Receivable - % bill that is pending
+Color/variant wise (with option to chose the price range) sale/purchase report (As a graph & table)
+
+
+================================================================================
+Customer purchse frequency
+frequently purchased products list should not display 0 quantity
+Check quantity and amount in product by variant
+sales/purchase return edit not working
+raw material variant not working
+Apply opening balance to shipper and worker / fin year
+Generic payment
+

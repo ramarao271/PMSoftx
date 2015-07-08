@@ -175,6 +175,19 @@
 		<url-pattern>/financialReports/*</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>marketingReports</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/marketingReports-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>marketingReports</servlet-name>
+		<url-pattern>/marketingReports/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>productReports</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>

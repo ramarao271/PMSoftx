@@ -1,5 +1,6 @@
 package org.erp.tarak.salesreturn;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class SalesReturnServiceImpl implements SalesReturnService {
 	@Override
 	public List<SalesReturn> listSalesReturnsByCustomer(long customerId,String finYear) {
 		return  salesReturnDao.listSalesReturnsByCustomer(customerId,finYear);
+	}
+
+	@Override
+	public List<SalesReturn> listSalesReturnsByDate(Date balanceSheetDate) {
+		return  salesReturnDao.listSalesReturnsByDate(balanceSheetDate);
 	}
 
 }

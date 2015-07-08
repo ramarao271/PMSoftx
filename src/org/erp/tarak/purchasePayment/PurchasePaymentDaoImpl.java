@@ -1,7 +1,10 @@
 package org.erp.tarak.purchasePayment;
 
+import java.util.Date;
 import java.util.List;
 
+import org.erp.tarak.salesinvoice.SalesInvoice;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -47,7 +50,7 @@ public class PurchasePaymentDaoImpl implements PurchasePaymentDao {
 	}
 
 	public PurchasePayment getPurchasePayment(long empid,String finYear) {
-		PurchasePayment purchasePayment=(PurchasePayment) sessionFactory.getCurrentSession().createCriteria(PurchasePayment.class).add(Restrictions.eq("finYear", finYear)).add(Restrictions.eq("purchasePaymentId",empid));
+		PurchasePayment purchasePayment=(PurchasePayment) sessionFactory.getCurrentSession().createCriteria(PurchasePayment.class).add(Restrictions.eq("finYear", finYear)).add(Restrictions.eq("purchasePaymentId",empid)).list().get(0);
 		return purchasePayment;
 	}
 
@@ -57,6 +60,15 @@ public class PurchasePaymentDaoImpl implements PurchasePaymentDao {
 				.createQuery(
 						"DELETE FROM PurchasePayment WHERE purchasePaymentId = "
 								+ purchasePayment.getPurchasePaymentId()).executeUpdate();
+	}
+
+	@Override
+	public List<PurchasePayment> listPurchasePaymentsByDate(Date balanceSheetDate) {
+		Criteria crit = sessionFactory.getCurrentSession().createCriteria(
+				PurchasePayment.class);
+		crit.add(Restrictions.eq("purchasePaymentDate", balanceSheetDate));
+		List results = crit.list();
+		return results;
 	}
 
 }

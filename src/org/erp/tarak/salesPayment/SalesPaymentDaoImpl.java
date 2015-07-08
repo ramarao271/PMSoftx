@@ -1,7 +1,10 @@
 package org.erp.tarak.salesPayment;
 
+import java.util.Date;
 import java.util.List;
 
+import org.erp.tarak.salesinvoice.SalesInvoice;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -47,7 +50,7 @@ public class SalesPaymentDaoImpl implements SalesPaymentDao {
 	}
 
 	public SalesPayment getSalesPayment(long empid,String finYear) {
-		SalesPayment salesPayment=(SalesPayment) sessionFactory.getCurrentSession().createCriteria(SalesPayment.class).add(Restrictions.eq("finYear", finYear)).add(Restrictions.eq("salesPaymentId",empid));
+		SalesPayment salesPayment=(SalesPayment) sessionFactory.getCurrentSession().createCriteria(SalesPayment.class).add(Restrictions.eq("finYear", finYear)).add(Restrictions.eq("salesPaymentId",empid)).list().get(0);
 		return salesPayment;
 	}
 
@@ -57,6 +60,15 @@ public class SalesPaymentDaoImpl implements SalesPaymentDao {
 				.createQuery(
 						"DELETE FROM SalesPayment WHERE salesPaymentId = "
 								+ salesPayment.getSalesPaymentId()).executeUpdate();
+	}
+
+	@Override
+	public List<SalesPayment> listSalesInvoicesByDate(Date balanceSheetDate) {
+		Criteria crit = sessionFactory.getCurrentSession().createCriteria(
+				SalesPayment.class);
+		crit.add(Restrictions.eq("salessalesPaymentDateDate", balanceSheetDate));
+		List results = crit.list();
+		return results;
 	}
 
 }

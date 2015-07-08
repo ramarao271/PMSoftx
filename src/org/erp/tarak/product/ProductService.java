@@ -22,4 +22,6 @@ public interface ProductService {
 	public Product getProductByName(String productName);
 
 	public List<Product> listProductsbyCategory();
+
+	public List<Product> listProductsBySold();
 }

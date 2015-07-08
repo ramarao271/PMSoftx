@@ -55,4 +55,9 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.listProductsbyCategory();
 	}
 
+	@Override
+	public List<Product> listProductsBySold() {
+		return productDao.listProductsBySold();
+	}
+
 }

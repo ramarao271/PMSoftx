@@ -168,14 +168,15 @@ public class SalesReturnController {
 			if(savedSalesReturn!=null)
 				
 			{
-				rtnAmt=(salesInvoice.getReturnAmount()-salesReturn.getTotalCost()+savedSalesReturn.getTotalCost());
+				rtnAmt=(salesInvoice.getAdjustedAmount()-salesReturn.getTotalCost()+savedSalesReturn.getTotalCost());
 				savedAmount=savedSalesReturn.getTotalCost();
 			}
 			else
 			{
-				rtnAmt=salesInvoice.getTotalCost()-(salesInvoice.getReturnAmount()+salesReturn.getTotalCost());				
+				rtnAmt=salesInvoice.getTotalCost()-(salesInvoice.getAdjustedAmount()+salesReturn.getTotalCost());				
 			}
-			salesInvoice.setReturnAmount(rtnAmt);
+			salesInvoice.setAdjustedAmount(rtnAmt);
+			salesInvoice.setReturnAmount(salesReturn.getTotalCost());
 			CustomerOpeningBalanceUtilities.updateCob(cobService, savedAmount, salesReturn.getTotalCost(), salesReturn.getCustomerId().getCustomerId(), salesReturn.getFinYear(),ERPConstants.SALES_RETURN);
 			salesInvoiceService.addSalesInvoice(salesInvoice);
 			model.addAttribute("message",
@@ -282,8 +283,8 @@ public class SalesReturnController {
 				,productService,salesReturn,ERPConstants.SALES_RETURN,ERPConstants.OP_DELETE);
 		SalesInvoice salesInvoice=salesInvoiceService.getSalesInvoice(salesReturn.getSalesInvoice().getSalesInvoiceId(),user.getFinYear());
 		double rtnAmt=0.0;
-		rtnAmt=-salesReturn.getTotalCost()+salesInvoice.getReturnAmount();
-		salesInvoice.setReturnAmount(rtnAmt);
+		rtnAmt=-salesReturn.getTotalCost()+salesInvoice.getAdjustedAmount();
+		salesInvoice.setAdjustedAmount(rtnAmt);
 		salesInvoiceService.addSalesInvoice(salesInvoice);
 		CustomerOpeningBalanceUtilities.updateCob(cobService,0, -salesReturn.getTotalCost(), salesReturn.getCustomerId().getCustomerId(), salesReturn.getFinYear(),ERPConstants.SALES_RETURN);
 		
