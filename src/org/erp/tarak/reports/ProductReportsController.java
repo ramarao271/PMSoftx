@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.erp.tarak.category.CategoryReport;
 import org.erp.tarak.product.ProductService;
+import org.erp.tarak.purchaseinvoice.PurchaseInvoiceItemService;
 import org.erp.tarak.salesinvoice.SalesInvoiceItemService;
 import org.erp.tarak.salesinvoice.SalesInvoiceService;
 import org.erp.tarak.user.UserBean;
@@ -29,6 +30,9 @@ public class ProductReportsController {
 	
 	@Autowired
 	private SalesInvoiceItemService salesInvoiceItemService;
+
+	@Autowired
+	private PurchaseInvoiceItemService purchaseInvoiceItemService;
 	
 	@Autowired
 	private ProductService productService;
@@ -39,6 +43,7 @@ public class ProductReportsController {
 		model.put("category", "productReports");
 		return new ModelAndView("index", model);
 	}
+	
 	@RequestMapping(value = "/categoryWiseReport", method = RequestMethod.GET)
 	public ModelAndView categoryWiseReport() {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -47,9 +52,24 @@ public class ProductReportsController {
 			UserBean user = (UserBean) session.getAttribute("user");
 			List<CategoryReport> crs=salesInvoiceItemService.getSalesReportByCategory(user.getFinYear());
 			model.put("cats",crs );
+			model.put("operation","Sales");
 		}
 		return new ModelAndView("categoryWiseReport", model);
 	}
+
+	@RequestMapping(value = "/categoryWisePurchaseReport", method = RequestMethod.GET)
+	public ModelAndView categoryWisePurchaseReport() {
+		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null)
+		{
+			UserBean user = (UserBean) session.getAttribute("user");
+			List<CategoryReport> crp=purchaseInvoiceItemService.getPurchaseReportByCategory(user.getFinYear());
+			model.put("cats",crp);
+			model.put("operation","Purchase");
+		}
+		return new ModelAndView("categoryWiseReport", model);
+	}
+	
 	@RequestMapping(value = "/variantWiseReport", method = RequestMethod.GET)
 	public ModelAndView variantWiseReport() {
 		Map<String, Object> model = new HashMap<String, Object>();

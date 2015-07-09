@@ -96,7 +96,7 @@ public class SalesInvoiceItemDaoImpl implements SalesInvoiceItemDao {
 
 	@Override
 	public List<VariantReport> listFrequesntlyProductsByVariant(String finYear) {
-		String hql = "select v.variantType,s.variantId,sum(s.quantity),sum(s.totalcost) from salesinvoiceitem s,variant v where s.variantId=v.variantId and s.Financial_Year='"+finYear+"' group by v.variantType;";
+		String hql = "select s.variantId,v.variantType,sum(s.quantity),sum(s.totalcost) from salesinvoiceitem s,variant v where s.variantId=v.variantId and s.Financial_Year='"+finYear+"' group by v.variantType;";
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		List results = query.list();
 		List<VariantReport> cats=new LinkedList<VariantReport>();
@@ -112,5 +112,24 @@ public class SalesInvoiceItemDaoImpl implements SalesInvoiceItemDao {
 				cats.add(xx);
 			}
 		return cats;
+	}
+
+	@Override
+	public List<VariantReport> getSalesReportByVariant(String finYear) {
+		String hql="select v.variantType,sum(s.quantity),sum(s.totalCost) from salesInvoiceItem s,Variant v where v.variantId=s.variantId and s.Financial_Year='"+finYear+"' group by v.variantType;";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
+		List results = query.list();
+		List<VariantReport> cats=new LinkedList<VariantReport>();
+			List<Object[]> objects	= (List<Object[]>)results;
+			for(Object[] x: objects)
+			{
+				VariantReport xx=new VariantReport();
+				xx.setVariantType((String) x[1]);
+				xx.setQuantity((double) x[2]);
+				xx.setAmount((double) x[3]);
+				cats.add(xx);
+			}
+		return cats;
+
 	}
 }

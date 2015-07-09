@@ -131,7 +131,8 @@ public class ERPConstants {
 		financeMenuList.put("/ERPSoftware/financialReports/ordersToShip","Orders to be Shipped");
 		financeMenuList.put("/ERPSoftware/financialReports/ordersToInvoice","Orders to be Invoiced");
 		
-		productReportMenuList.put("/ERPSoftware/productReports/categoryWiseReport", "Products by Category");
+		productReportMenuList.put("/ERPSoftware/productReports/categoryWiseReport", "Products by Category(Sales)");
+		productReportMenuList.put("/ERPSoftware/productReports/categoryWisePurchaseReport", "Products by Category(Purchase)");
 		productReportMenuList.put("/ERPSoftware/productReports/variantWiseReport", "Products by Variant");
 		
 		marketingReportMenuList.put("/ERPSoftware/marketingReports/customerSalesReport","Customer Sales Report");

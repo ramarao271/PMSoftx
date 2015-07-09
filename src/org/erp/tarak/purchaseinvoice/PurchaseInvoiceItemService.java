@@ -21,6 +21,7 @@ public interface PurchaseInvoiceItemService {
 	public List<Object[]> listPurchaseInvoiceItemsByCategory(long id, String finYear);
 
 	public List<Object[]> listFrequesntlyProductsBySupplier(long supplierId, String finYear);
+
 	
 
 }

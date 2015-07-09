@@ -54,5 +54,10 @@ public class PurchaseInvoiceItemServiceImpl implements PurchaseInvoiceItemServic
 		return purchaseInvoiceItemDao.listFrequesntlyProductsBySupplier(supplierId,finYear);
 	}
 
+	@Override
+	public List<CategoryReport> getSalesReportByCategory(String finYear) {
+		return purchaseInvoiceItemDao.getSalesReportByCategory(finYear);
+	}
+
 
 }
