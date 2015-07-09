@@ -57,7 +57,7 @@ public class SalesInvoiceItemServiceImpl implements SalesInvoiceItemService {
 
 	@Override
 	public List<VariantReport> getSalesReportByVariant(String finYear) {
-		return salesInvoiceItemDao.listFrequesntlyProductsByVariant(finYear);
+		return salesInvoiceItemDao.getSalesReportByVariant(finYear);
 	}
 
 

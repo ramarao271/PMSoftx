@@ -26,4 +26,6 @@ public interface SalesInvoiceItemDao {
 	public List<Object[]> listFrequesntlyProductsByCustomer(long customerId, String finYear);
 
 	public List<VariantReport> listFrequesntlyProductsByVariant(String finYear);
+
+	public List<VariantReport> getSalesReportByVariant(String finYear);
 }

@@ -23,4 +23,5 @@ public interface PurchaseInvoiceItemDao {
 			String finYear);
 
 	public List<Object[]> listFrequesntlyProductsBySupplier(long supplierId, String finYear);
+
 }
