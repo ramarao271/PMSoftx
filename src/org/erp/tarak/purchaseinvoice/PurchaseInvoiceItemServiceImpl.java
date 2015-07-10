@@ -3,6 +3,7 @@ package org.erp.tarak.purchaseinvoice;
 import java.util.List;
 
 import org.erp.tarak.category.CategoryReport;
+import org.erp.tarak.variant.VariantReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -53,5 +54,11 @@ public class PurchaseInvoiceItemServiceImpl implements PurchaseInvoiceItemServic
 			String finYear) {
 		return purchaseInvoiceItemDao.listFrequesntlyProductsBySupplier(supplierId,finYear);
 	}
+
+	@Override
+	public List<VariantReport> getPurchaseReportByVariant(String finYear) {
+		return purchaseInvoiceItemDao.getPurchaseReportByVariant(finYear);
+	}
+
 
 }

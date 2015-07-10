@@ -32,12 +32,15 @@ public class SalesInvoiceItemDaoImpl implements SalesInvoiceItemDao {
 	@SuppressWarnings("unchecked")
 	public List<SalesInvoiceItem> listSalesInvoiceItems(String finYear) {
 		return (List<SalesInvoiceItem>) sessionFactory.getCurrentSession()
-				.createCriteria(SalesInvoiceItem.class).add(Restrictions.eq("finYear",finYear)).list();
+				.createCriteria(SalesInvoiceItem.class)
+				.add(Restrictions.eq("finYear", finYear)).list();
 	}
 
-	public SalesInvoiceItem getSalesInvoiceItem(long empid,String finYear) {
+	public SalesInvoiceItem getSalesInvoiceItem(long empid, String finYear) {
 		return (SalesInvoiceItem) sessionFactory.getCurrentSession()
-				.createCriteria(SalesInvoiceItem.class).add(Restrictions.eq("finYear",finYear)).add(Restrictions.eq("salesInvoiceId",empid)).list().get(0);
+				.createCriteria(SalesInvoiceItem.class)
+				.add(Restrictions.eq("finYear", finYear))
+				.add(Restrictions.eq("salesInvoiceId", empid)).list().get(0);
 	}
 
 	public void deleteSalesInvoiceItem(SalesInvoiceItem salesInvoiceItem) {
@@ -45,91 +48,101 @@ public class SalesInvoiceItemDaoImpl implements SalesInvoiceItemDao {
 				.getCurrentSession()
 				.createQuery(
 						"DELETE FROM SalesInvoiceItem WHERE salesInvoiceId = "
-								+ salesInvoiceItem.getSalesInvoiceId()).executeUpdate();
+								+ salesInvoiceItem.getSalesInvoiceId())
+				.executeUpdate();
 	}
 
 	@Override
 	public void deleteSalesInvoiceItems(List<SalesInvoiceItem> pois) {
-		for(SalesInvoiceItem poi:pois)
-		{
+		for (SalesInvoiceItem poi : pois) {
 			deleteSalesInvoiceItem(poi);
 		}
-		
+
 	}
 
 	@Override
 	public List<CategoryReport> getSalesReportByCategory(String finYear) {
-		String hql = "select c.categoryId as categoryId,c.category_Name as category,sum(s.quantity) as quantity,sum(s.totalCost) as amount,c.Category_Code as categoryCode from salesInvoiceItem s,product p,category c where s.Financial_Year='"+finYear+"' and p.product_Id=s.product_Id and c.categoryId=p.category_id group by c.categoryid;";
+		String hql = "select c.categoryId as categoryId,c.category_Name as category,sum(s.quantity) as quantity,sum(s.totalCost) as amount,c.Category_Code as categoryCode from salesInvoiceItem s,product p,category c where s.Financial_Year='"
+				+ finYear
+				+ "' and p.product_Id=s.product_Id and c.categoryId=p.category_id group by c.categoryid;";
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		List results = query.list();
-		List<CategoryReport> cats=new LinkedList<CategoryReport>();
-			List<Object[]> objects	= (List<Object[]>)results;
-			for(Object[] x: objects)
-			{
-				CategoryReport xx=new CategoryReport();
-				xx.setCategoryId(((BigInteger) x[0]).longValue());
-				xx.setCategory((String) x[1]);
-				xx.setQuantity((double) x[2]);
-				xx.setAmount((double) x[3]);
-				xx.setCategoryCode((String)x[4]);
-				cats.add(xx);
-			}
+		List<CategoryReport> cats = new LinkedList<CategoryReport>();
+		List<Object[]> objects = (List<Object[]>) results;
+		for (Object[] x : objects) {
+			CategoryReport xx = new CategoryReport();
+			xx.setCategoryId(((BigInteger) x[0]).longValue());
+			xx.setCategory((String) x[1]);
+			xx.setQuantity((double) x[2]);
+			xx.setAmount((double) x[3]);
+			xx.setCategoryCode((String) x[4]);
+			cats.add(xx);
+		}
 		return cats;
 	}
 
 	@Override
 	public List<Object[]> listSalesInvoiceItemsByCategory(long id,
 			String finYear) {
-		String hql = "select {p.*},sum(s.quantity) as quantity ,sum(s.totalCost) as cost from salesInvoiceItem s,product p,category c where s.Financial_Year='"+finYear+"' and p.product_Id=s.product_Id and c.categoryId=p.category_id and c.categoryId="+id+" group by s.product_Id;";
-		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity("p", Product.class).addScalar("quantity").addScalar("cost");
+		String hql = "select {p.*},sum(s.quantity) as quantity ,sum(s.totalCost) as cost from salesInvoiceItem s,product p,category c where s.Financial_Year='"
+				+ finYear
+				+ "' and p.product_Id=s.product_Id and c.categoryId=p.category_id and c.categoryId="
+				+ id + " group by s.product_Id;";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql)
+				.addEntity("p", Product.class).addScalar("quantity")
+				.addScalar("cost");
 		List results = query.list();
 		return results;
 	}
 
 	@Override
-	public List<Object[]> listFrequesntlyProductsByCustomer(long customerId,String finYear) {
-		String hql = "select {c.*},{p.*},count(s.*) as count from salesInvoiceItem s,product p,Customer c where s.Financial_Year='"+finYear+"' and s.customer_id=c.customerId group by s.product_id order by s.customer_Id;";
-		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity("c",Customer.class).addEntity("p", Product.class).addScalar("count");
+	public List<Object[]> listFrequesntlyProductsByCustomer(long customerId,
+			String finYear) {
+		String hql = "select {c.*},{p.*},count(s.*) as count from salesInvoiceItem s,product p,Customer c where s.Financial_Year='"
+				+ finYear
+				+ "' and s.customer_id=c.customerId group by s.product_id order by s.customer_Id;";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql)
+				.addEntity("c", Customer.class).addEntity("p", Product.class)
+				.addScalar("count");
 		List results = query.list();
 		return results;
 	}
 
 	@Override
 	public List<VariantReport> listFrequesntlyProductsByVariant(String finYear) {
-		String hql = "select s.variantId,v.variantType,sum(s.quantity),sum(s.totalcost) from salesinvoiceitem s,variant v where s.variantId=v.variantId and s.Financial_Year='"+finYear+"' group by v.variantType;";
+		String hql = "select v.variantType,s.variantId,sum(s.quantity),sum(s.totalcost) from salesinvoiceitem s,variant v where s.variantId=v.variantId and s.Financial_Year='"
+				+ finYear + "' group by v.variantType;";
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		List results = query.list();
-		List<VariantReport> cats=new LinkedList<VariantReport>();
-			List<Object[]> objects	= (List<Object[]>)results;
-			for(Object[] x: objects)
-			{
-				VariantReport xx=new VariantReport();
-				xx.setVariantId(((BigInteger) x[0]).longValue());
-				xx.setVariantType((String) x[1]);
-				xx.setQuantity((double) x[2]);
-				xx.setAmount((double) x[3]);
-				xx.setVariantCode((String)x[4]);
-				cats.add(xx);
-			}
+		List<VariantReport> cats = new LinkedList<VariantReport>();
+		List<Object[]> objects = (List<Object[]>) results;
+		for (Object[] x : objects) {
+			VariantReport xx = new VariantReport();
+			xx.setVariantId(((BigInteger) x[1]).longValue());
+			xx.setVariantType((String) x[0]);
+			xx.setQuantity((double) x[2]);
+			xx.setAmount((double) x[3]);
+			xx.setVariantCode((String) x[4]);
+			cats.add(xx);
+		}
 		return cats;
 	}
 
 	@Override
 	public List<VariantReport> getSalesReportByVariant(String finYear) {
-		String hql="select v.variantType,sum(s.quantity),sum(s.totalCost) from salesInvoiceItem s,Variant v where v.variantId=s.variantId and s.Financial_Year='"+finYear+"' group by v.variantType;";
+		String hql = "select v.variantType,sum(s.quantity),sum(s.totalcost) from salesinvoiceitem s,variant v where s.variantId=v.variantId and s.Financial_Year='"
+				+ finYear + "' group by v.variantType;";
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		List results = query.list();
-		List<VariantReport> cats=new LinkedList<VariantReport>();
-			List<Object[]> objects	= (List<Object[]>)results;
-			for(Object[] x: objects)
-			{
-				VariantReport xx=new VariantReport();
-				xx.setVariantType((String) x[1]);
-				xx.setQuantity((double) x[2]);
-				xx.setAmount((double) x[3]);
-				cats.add(xx);
-			}
+		List<VariantReport> cats = new LinkedList<VariantReport>();
+		List<Object[]> objects = (List<Object[]>) results;
+		for (Object[] x : objects) {
+			VariantReport xx = new VariantReport();
+			xx.setVariantType((String) x[0]);
+			xx.setQuantity((double) x[1]);
+			xx.setAmount((double) x[2]);
+			cats.add(xx);
+		}
 		return cats;
-
 	}
 }
