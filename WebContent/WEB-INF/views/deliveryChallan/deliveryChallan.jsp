@@ -356,6 +356,11 @@
 						value="${deliveryChallanBean.bookedAddress}" cols="22"></form:textarea></td>
 			</tr>
 			<tr>
+				<td>Shipping Charges</td>
+				<td><form:input path="shippingCost" value="${deliveryChallanBean.shippingCost }" />
+			</tr>
+
+			<tr>
 				<td>select No of Items</td>
 				<td><form:select path="" name="deliverychallan"
 						onchange="setItemsFields(this.value,this.name)">
