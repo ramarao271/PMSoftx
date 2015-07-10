@@ -30,7 +30,7 @@
 </head>
 <body onload="load()">
 	<h3>
-		Products Sales by Category
+		Products <c:out value="${operation }" /> by Category
 	</h3>
 	<c:if test="${!empty cats}">
 		<div class="scrollingtable">

@@ -21,7 +21,7 @@
 
 </head>
 <body onload="load()">
-	<h3>Customers Sales Report</h3>
+	<h3>Customers Profit Report</h3>
 	<c:if test="${!empty customers}">
 		<div class="scrollingtable">
 			<div>
