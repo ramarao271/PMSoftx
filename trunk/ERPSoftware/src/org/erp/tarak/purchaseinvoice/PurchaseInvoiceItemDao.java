@@ -3,6 +3,7 @@ package org.erp.tarak.purchaseinvoice;
 import java.util.List;
 
 import org.erp.tarak.category.CategoryReport;
+import org.erp.tarak.variant.VariantReport;
 
 
 public interface PurchaseInvoiceItemDao {
@@ -24,4 +25,5 @@ public interface PurchaseInvoiceItemDao {
 
 	public List<Object[]> listFrequesntlyProductsBySupplier(long supplierId, String finYear);
 
+	public List<VariantReport> getPurchaseReportByVariant(String finYear);
 }

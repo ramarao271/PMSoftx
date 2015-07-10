@@ -133,13 +133,14 @@ public class ERPConstants {
 		
 		productReportMenuList.put("/ERPSoftware/productReports/categoryWiseReport", "Products by Category(Sales)");
 		productReportMenuList.put("/ERPSoftware/productReports/categoryWisePurchaseReport", "Products by Category(Purchase)");
-		productReportMenuList.put("/ERPSoftware/productReports/variantWiseReport", "Products by Variant");
+		productReportMenuList.put("/ERPSoftware/productReports/variantWiseReport", "Products by Variant(Sales)");
+		productReportMenuList.put("/ERPSoftware/productReports/variantWisePurchaseReport", "Products by Variant(Purchase)");
 		
 		marketingReportMenuList.put("/ERPSoftware/marketingReports/customerSalesReport","Customer Sales Report");
 		marketingReportMenuList.put("/ERPSoftware/marketingReports/customerProfitReport","Customer Profit Report");
 		marketingReportMenuList.put("/ERPSoftware/marketingReports/avgTktPrice","Avg Tkt Price");
 		marketingReportMenuList.put("/ERPSoftware/marketingReports/purchaseFreqCustomer","Customer Purchase Frequency");
-		marketingReportMenuList.put("/ERPSoftware/marketingReports/frequentProduct","Frequently Purchased Product");
+		productReportMenuList.put("/ERPSoftware/productReports/frequentProduct","Frequently Purchased Product");
 		
 		linkMap.put("customer", customerMenuList);
 		linkMap.put("worker", workerMenuList);
