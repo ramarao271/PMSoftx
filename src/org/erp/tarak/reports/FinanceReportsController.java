@@ -90,10 +90,11 @@ public class FinanceReportsController {
 			for(Object[] obj: lsib)
 			{
 				CustomerBean customer=CustomerUtilities.prepareCustomerBean((Customer)obj[0]);
-				customer.setTotalAmount((double)obj[1]);
-				customer.setReturnAmount((double)obj[2]);
-				customer.setPaidAmount((double)obj[3]);
-				double balance=(double)obj[2]>0?(double)obj[2]-(double)obj[3]:(double)obj[1]-(double)obj[3];
+				customer.setTotalAmount(ERPUtilities.round((double)obj[1],2));
+				customer.setReturnAmount(ERPUtilities.round((double)obj[2],2));
+				customer.setAdjustedAmount(ERPUtilities.round((double)obj[3],2));
+				customer.setPaidAmount(ERPUtilities.round((double)obj[4],2));
+				double balance=(double)obj[2]>0?(double)obj[3]-(double)obj[4]:(double)obj[1]-(double)obj[4];
 				balance=ERPUtilities.round(balance, 2);
 				customer.setCurrentBalance(balance);
 				customerBeans.add(customer);
@@ -118,10 +119,11 @@ public class FinanceReportsController {
 			for(Object[] obj: lsib)
 			{
 				SupplierBean supplier=SupplierUtilities.prepareSupplierBean((Supplier)obj[0]);
-				supplier.setTotalAmount((double)obj[1]);
-				supplier.setReturnAmount((double)obj[2]);
-				supplier.setPaidAmount((double)obj[3]);
-				double balance=(double)obj[2]>0?(double)obj[2]-(double)obj[3]:(double)obj[1]-(double)obj[3];
+				supplier.setTotalAmount(ERPUtilities.round((double)obj[1],2));
+				supplier.setReturnAmount(ERPUtilities.round((double)obj[2],2));
+				supplier.setAdjustedAmount(ERPUtilities.round((double)obj[3],2));
+				supplier.setPaidAmount(ERPUtilities.round((double)obj[4],2));
+				double balance=(double)obj[2]>0?(double)obj[3]-(double)obj[4]:(double)obj[1]-(double)obj[4];
 				balance=ERPUtilities.round(balance, 2);
 				supplier.setCurrentBalance(balance);
 				supplierBeans.add(supplier);

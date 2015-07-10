@@ -2,6 +2,7 @@ package org.erp.tarak.customer;
 
 public class CustomerReport {
 	private String customerName;
+	private String companyName;
 	private String companyBranch;
 	private long customerId;
 	private double totalPrice;
@@ -43,6 +44,12 @@ public class CustomerReport {
 	}
 	public void setCompanyBranch(String companyBranch) {
 		this.companyBranch = companyBranch;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 	
 

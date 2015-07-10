@@ -45,6 +45,7 @@ public class Shipper implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Address_Id")
 	private Address companyAddress = new Address();
+	private double openingBalance;
 	
 	public long getShipperId() {
 		return shipperId;
@@ -132,5 +133,13 @@ public class Shipper implements Serializable {
 
 	public void setShipperType(String shipperType) {
 		this.shipperType = shipperType;
+	}
+
+	public double getOpeningBalance() {
+		return openingBalance;
+	}
+
+	public void setOpeningBalance(double openingBalance) {
+		this.openingBalance = openingBalance;
 	}
 }

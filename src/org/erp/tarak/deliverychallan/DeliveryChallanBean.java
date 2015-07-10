@@ -21,7 +21,7 @@ public class DeliveryChallanBean {
 	private double totalCost;
 	private String deliveryType;
 	private boolean processed;
-	
+	private double shippingCost;
 	public long getDeliveryChallanId() {
 		return deliveryChallanId;
 	}
@@ -110,6 +110,14 @@ public class DeliveryChallanBean {
 
 	public void setProcessed(boolean processed) {
 		this.processed = processed;
+	}
+
+	public double getShippingCost() {
+		return shippingCost;
+	}
+
+	public void setShippingCost(double shippingCost) {
+		this.shippingCost = shippingCost;
 	}
 
 }

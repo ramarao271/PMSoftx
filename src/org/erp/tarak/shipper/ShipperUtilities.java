@@ -27,6 +27,7 @@ public class ShipperUtilities {
 		shipper.setCompanyTelephone2(shipperBean.getCompanyTelephone2());
 		shipper.setShipperId(shipperBean.getShipperId());
 		shipper.setShipperName(shipperBean.getShipperName());
+		shipper.setOpeningBalance(shipperBean.getOpeningBalance());
 		if (shipperBean.getCompanyAddressBean() != null) {
 			Address address = AddressUtilities.populateAddress(shipperBean
 					.getCompanyAddressBean());
@@ -55,6 +56,7 @@ public class ShipperUtilities {
 				AddressBean addressBean = AddressUtilities
 						.prepareAddressBean(shipper.getCompanyAddress());
 				bean.setCompanyAddressBean(addressBean);
+				bean.setOpeningBalance(shipper.getOpeningBalance());
 				beans.add(bean);
 			}
 		}
@@ -79,6 +81,7 @@ public class ShipperUtilities {
 		bean.setCompanyAddressBean(addressBean);
 		bean.setShipperId(shipper.getShipperId());
 		bean.setShipperName(shipper.getShipperName());
+		bean.setOpeningBalance(shipper.getOpeningBalance());
 		return bean;
 	}
 
@@ -98,6 +101,7 @@ public class ShipperUtilities {
 			bean.setCompanyAddressBean(addressBean);
 			bean.setShipperId(shipper.getShipperId());
 			bean.setShipperName(shipper.getShipperName());
+			bean.setOpeningBalance(shipper.getOpeningBalance());
 		}
 		return bean;
 	}
@@ -122,6 +126,7 @@ public class ShipperUtilities {
 				bean.setCompanyTelephone2(shipper.getCompanyTelephone2());
 				bean.setShipperId(shipper.getShipperId());
 				bean.setShipperName(shipper.getShipperName());
+				bean.setOpeningBalance(shipper.getOpeningBalance());
 				beans.add(bean);
 			}
 		}

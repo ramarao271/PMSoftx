@@ -16,6 +16,7 @@ public class ShipperBean {
 	private long companyMobile1;
 	private long companyMobile2;
 	private String companyEmail;
+	private double openingBalance;
 	private AddressBean companyAddressBean;
 	public ShipperBean() {
 		super();
@@ -89,5 +90,11 @@ public class ShipperBean {
 	}
 	public void setShipperType(String shipperType) {
 		this.shipperType = shipperType;
+	}
+	public double getOpeningBalance() {
+		return openingBalance;
+	}
+	public void setOpeningBalance(double openingBalance) {
+		this.openingBalance = openingBalance;
 	}
 }
