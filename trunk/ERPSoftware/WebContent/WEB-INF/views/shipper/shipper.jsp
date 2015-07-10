@@ -23,15 +23,15 @@
 			</c:if> Shipper Details</b>
 	</h3>
 	<form:form name="personForm" method="POST"
-		action="/ERPSoftware/shipper/saveShipper.html" modelAttribute="shipperBean">
+		action="/ERPSoftware/shipper/saveShipper.html"
+		modelAttribute="shipperBean">
 		<table>
 			<tr>
 				<td><form:label path="shipperName">Shipper Name</form:label></td>
 				<td><form:input path="shipperName"
 						value="${shipperBean.shipperName}" /></td>
 
-				<td>*<form:errors path="shipperName"
-						cssStyle="color: #ff0000;" /></td>
+				<td>*<form:errors path="shipperName" cssStyle="color: #ff0000;" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="companyName">Company Name:</form:label></td>
@@ -49,7 +49,7 @@
 			</tr>
 			<tr>
 				<td><form:label path="companyTelephone1">Company Telephone1:</form:label></td>
-				<td><form:input path="companyTelephone1"  type="number"  /></td>
+				<td><form:input path="companyTelephone1" type="number" /></td>
 				<td><form:errors path="companyTelephone1"
 						cssStyle="color: #ff0000;" /></td>
 			</tr>
@@ -57,21 +57,21 @@
 			<tr>
 				<td><form:label path="companyTelephone2">Company Telephone2:</form:label></td>
 				<td><form:input path="companyTelephone2"
-						value="${shipperBean.companyTelephone2}"  type="number" /></td>
+						value="${shipperBean.companyTelephone2}" type="number" /></td>
 				<td><form:errors path="companyTelephone2"
 						cssStyle="color: #ff0000;" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="companyMobile1">Company Mobile1 :</form:label></td>
 				<td><form:input path="companyMobile1"
-						value="${shipperBean.companyMobile1}"  type="number" /></td>
+						value="${shipperBean.companyMobile1}" type="number" /></td>
 				<td>*<form:errors path="companyMobile1"
 						cssStyle="color: #ff0000;" /></td>
 			</tr>
 			<tr>
 				<td><form:label path="companyMobile2">Company Mobile2:</form:label></td>
 				<td><form:input path="companyMobile2"
-						value="${shipperBean.companyMobile2}"  type="number"  /></td>
+						value="${shipperBean.companyMobile2}" type="number" /></td>
 				<td><form:errors path="companyMobile2"
 						cssStyle="color: #ff0000;" /></td>
 			</tr>
@@ -79,8 +79,7 @@
 				<td><form:label path="companyEmail">Company Email:</form:label></td>
 				<td><form:input path="companyEmail"
 						value="${shipperBean.companyEmail}" /></td>
-				<td><form:errors path="companyEmail"
-						cssStyle="color: #ff0000;" /></td>
+				<td><form:errors path="companyEmail" cssStyle="color: #ff0000;" /></td>
 			</tr>
 			<tr>
 				<td colspan="3"><b>Address Details</b></td>
@@ -104,7 +103,7 @@
 			<tr>
 				<td><form:label path="companyAddressBean.pinCode">Pin code</form:label></td>
 				<td><form:input path="companyAddressBean.pinCode"
-						value="${shipperBean.companyAddressBean.pinCode}"  type="number"  /></td>
+						value="${shipperBean.companyAddressBean.pinCode}" type="number" /></td>
 
 				<td>*<form:errors path="companyAddressBean.pinCode"
 						cssStyle="color: #ff0000;" /></td>
@@ -141,7 +140,15 @@
 				<td>*<form:errors path="companyAddressBean.country"
 						cssStyle="color: #ff0000;" /></td>
 			</tr>
-			
+			<tr>
+				<td><form:label path="openingBalance">Opening Balance: </form:label></td>
+				<td><form:input path="openingBalance"
+						value="${shipperBean.openingBalance}" /></td>
+				<td><form:errors path="openingBalance"
+						cssStyle="color: #ff0000;" /></td>
+			</tr>
+
+
 		</table>
 		<input type="submit" value="Submit" />&nbsp;<input type="button"
 			name="cancel" value="Cancel" onclick="loadIndex('shipper')" />

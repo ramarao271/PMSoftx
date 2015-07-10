@@ -38,11 +38,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${cats}" var="customer">
+							<c:forEach items="${customers}" var="customer">
 								<tr>
 									<td><c:out value="${customer.companyName}" /></td>
 									<td><c:out value="${customer.companyBranch}" /></td>
-									<td><c:out value="${customer.totalPrice" /></td>
+									<td><c:out value="${customer.totalPrice}" /></td>
 									<td><c:out value="${customer.noOfBills}" /></td>
 									<td><c:out value="${customer.avgTktPrice}" /></td>
 								</tr>

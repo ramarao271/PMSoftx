@@ -37,7 +37,8 @@
 							<tr>
 								<th><div label="Company"></div></th>
 								<th><div label="Bill Amount"></div></th>
-								<th><div label="Adjusted Amount"></div></th>
+								<th><div label="Returned Amount"></div></th>
+								<th><div label="Final Amount"></div></th>
 								<th><div label="Paid Amount"></div></th>
 								<th><div label="Balance"></div></th>
 							</tr>
@@ -48,6 +49,7 @@
 									<td><c:out value="${customer.companyName}" /></td>
 									<td><c:out value="${customer.totalAmount}" /></td>
 									<td><c:out value="${customer.returnAmount}" /></td>
+									<td><c:choose><c:when test="${customer.returnAmount >0 }" ><c:out value="${customer.adjustedAmount}" /></c:when><c:otherwise><c:out value="${customer.totalAmount}" /></c:otherwise></c:choose></td>
 									<td><c:out value="${customer.paidAmount}" /></td>
 									<td><c:out value="${customer.currentBalance}" /></td>
 								</tr>

@@ -32,7 +32,8 @@
 				<th>Date</th>
 				<th>Company</th>
 				<th>Bill Amount</th>
-				<th>Adjusted Amount</th>
+				<th>Returned Amount</th>
+				<th>Final Amount</th>
 				<th>Paid Amount</th>
 				<th>Actions</th>
 			</tr>
@@ -44,6 +45,7 @@
 					<td><c:out value="${salesInvoice.customerBean.companyName}" /></td>
 					<td><c:out value="${salesInvoice.totalCost}" /></td>
 					<td><c:out value="${salesInvoice.returnAmount}" /></td>
+					<td><c:choose ><c:when test="${salesInvoice.returnAmount >0 }"><c:out value="${salesInvoice.adjustedAmount}" /></c:when><c:otherwise><c:out value="${salesInvoice.totalCost}" /></c:otherwise></c:choose></td>
 					<td><c:out value="${salesInvoice.paidAmount}" /></td>
 					<td align="center"><a
 						href="editSalesInvoice.html?salesInvoiceId=${salesInvoice.salesInvoiceId}"><img
