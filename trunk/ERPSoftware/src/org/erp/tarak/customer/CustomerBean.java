@@ -29,6 +29,7 @@ public class CustomerBean {
 	private double currentBalance;
 	private double totalAmount;
 	private double returnAmount;
+	private double adjustedAmount;
 	private double paidAmount;
 	private double profitAmount;
 	public CustomerBean() {
@@ -163,6 +164,12 @@ public class CustomerBean {
 	}
 	public void setProfitAmount(double profitAmount) {
 		this.profitAmount = profitAmount;
+	}
+	public double getAdjustedAmount() {
+		return adjustedAmount;
+	}
+	public void setAdjustedAmount(double adjustedAmount) {
+		this.adjustedAmount = adjustedAmount;
 	}
 	
 }

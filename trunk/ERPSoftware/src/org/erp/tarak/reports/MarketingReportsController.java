@@ -18,6 +18,7 @@ import org.erp.tarak.customer.CustomerService;
 import org.erp.tarak.customer.CustomerUtilities;
 import org.erp.tarak.customer.openingbalance.CustomerOpeningBalance;
 import org.erp.tarak.customer.openingbalance.CustomerOpeningBalanceService;
+import org.erp.tarak.library.ERPUtilities;
 import org.erp.tarak.product.Product;
 import org.erp.tarak.product.ProductBean;
 import org.erp.tarak.product.ProductService;
@@ -90,43 +91,18 @@ public class MarketingReportsController {
 	public ModelAndView avgTktPrice() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		List<CustomerReport> customerReports=salesInvoiceService.getAvgTktPrice();
-		model.put("cats", customerReports);
+		model.put("customers", customerReports);
 		return new ModelAndView("avgTktPrice", model);
 	}
 	@RequestMapping(value = "/purchaseFreqCustomer", method = RequestMethod.GET)
 	public ModelAndView purchaseFreqCustomer() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		List<CustomerReport> customerReports=salesInvoiceService.getCustomerFrequency();
-		model.put("cats", customerReports);
+		model.put("customers", customerReports);
 		return new ModelAndView("purchaseFreqCustomer", model);
 	}
 	
-	@RequestMapping(value = "/frequentProduct", method = RequestMethod.GET)
-	public ModelAndView frequentProduct() {
-		Map<String, Object> model = new HashMap<String, Object>();
-		List<ProductBean> products=ProductUtilities.prepareListofProductBean(productService.listProductsBySold());
-		Iterator<ProductBean> iter=products.iterator();
-		while(iter.hasNext())
-		{
-			ProductBean pb=iter.next();
-			double qty=0;
-			for(VariantBean vb: pb.getVariantBeans())
-			{
-				qty+=vb.getSold();
-			}
-			if(qty>0)
-			{
-				pb.setSoldVariants(qty);
-			}
-			else
-			{
-				iter.remove();
-			}
-			
-		}
-		model.put("products",products);
-		return new ModelAndView("frequentProduct", model);
-	}
+	
 	@RequestMapping(value = "/customerWiseReport", method = RequestMethod.GET)
 	public ModelAndView accountsReceivable() {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -200,7 +176,8 @@ public class MarketingReportsController {
 					{
 						if(p.getProductId()==l)
 						{
-							profit+=(productMap.get(l)[1]-p.getCost())/productMap.get(l)[0];
+							profit+=productMap.get(l)[1]-p.getCost()*productMap.get(l)[0];
+							break;
 						}
 					}
 				}
@@ -217,7 +194,7 @@ public class MarketingReportsController {
 			for(Long id:customer.keySet())
 			{
 				CustomerBean cb=CustomerUtilities.prepareCustomerBean(customer.get(id));
-				cb.setProfitAmount(customerMap.get(id));
+				cb.setProfitAmount(ERPUtilities.round(customerMap.get(id),2));
 				cbs.add(cb);
 			}
 			model.put("customers", cbs);

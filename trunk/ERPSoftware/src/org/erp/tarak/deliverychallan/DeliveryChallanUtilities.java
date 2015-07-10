@@ -83,6 +83,7 @@ public class DeliveryChallanUtilities {
 		pob.setShipperBean(shipperBean);
 		pob.setDeliveryType(po.getDeliveryType());
 		pob.setProcessed(po.isProcessed());
+		pob.setShippingCost(po.getShippingCost());
 		return pob;
 	}
 
@@ -112,6 +113,7 @@ public class DeliveryChallanUtilities {
 		deliveryChallan.setShipper(shipper);
 		deliveryChallan.setDeliveryType(deliveryChallanBean.getDeliveryType());
 		deliveryChallan.setProcessed(deliveryChallanBean.isProcessed());
+		deliveryChallan.setShippingCost(deliveryChallanBean.getShippingCost());
 		return deliveryChallan;
 	}
 
@@ -176,6 +178,7 @@ public class DeliveryChallanUtilities {
 		pob.setShipperBean(shipperBean);
 		pob.setDeliveryType(po.getDeliveryType());
 		pob.setProcessed(po.isProcessed());
+		pob.setShippingCost(po.getShippingCost());
 		return pob;
 	}
 

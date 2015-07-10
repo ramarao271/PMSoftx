@@ -135,6 +135,8 @@ public class ProductUtilities {
 			variantQuantity += variantBean.getQuantity();
 		}
 
+		if((product.getQuantity() - variantQuantity)>0)
+		{
 		VariantBean variantBean = new VariantBean();
 		variantBean.setVariantType(ERPConstants.UNASSIGNED);
 		variantBean.setVariantName(ERPConstants.UNASSIGNED);
@@ -145,7 +147,7 @@ public class ProductUtilities {
 		variantBean.setRequired(product.getRequired());
 		variantBean.setSold(product.getSold());
 		variantBeans.add(variantBean);
-
+		}
 		bean.setVariantBeans(variantBeans);
 		return bean;
 	}

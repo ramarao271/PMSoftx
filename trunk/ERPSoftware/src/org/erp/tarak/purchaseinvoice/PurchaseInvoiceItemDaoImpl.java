@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.erp.tarak.category.CategoryReport;
 import org.erp.tarak.supplier.Supplier;
+import org.erp.tarak.variant.VariantReport;
 import org.erp.tarak.product.Product;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -91,6 +92,24 @@ public class PurchaseInvoiceItemDaoImpl implements PurchaseInvoiceItemDao {
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity("c",Supplier.class).addEntity("p", Product.class).addScalar("count");
 		List results = query.list();
 		return results;
+	}
+
+	@Override
+	public List<VariantReport> getPurchaseReportByVariant(String finYear) {
+		String hql = "select v.variantType,sum(s.quantity),sum(s.totalcost) from purchaseinvoiceitem s,variant v where s.variantId=v.variantId and s.Financial_Year='"
+				+ finYear + "' group by v.variantType;";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
+		List results = query.list();
+		List<VariantReport> cats = new LinkedList<VariantReport>();
+		List<Object[]> objects = (List<Object[]>) results;
+		for (Object[] x : objects) {
+			VariantReport xx = new VariantReport();
+			xx.setVariantType((String) x[0]);
+			xx.setQuantity((double) x[1]);
+			xx.setAmount((double) x[2]);
+			cats.add(xx);
+		}
+		return cats;
 	}
 	
 }

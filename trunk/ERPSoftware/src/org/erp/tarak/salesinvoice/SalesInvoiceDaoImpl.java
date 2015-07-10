@@ -49,8 +49,8 @@ public class SalesInvoiceDaoImpl implements SalesInvoiceDao {
 
 	@Override
 	public List<SalesInvoice> listSalesInvoicesByCustomer(long customerId,String finYear) {
-		String hql = "select * from SalesInvoice where customerId="+customerId+" and finYear='"+finYear+"' )";
-		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
+		String hql = "select * from SalesInvoice where customer_Id="+customerId+" and finYear='"+finYear+"'";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(SalesInvoice.class);
 		List results = query.list();
 		return results;
 	}
@@ -75,7 +75,7 @@ public class SalesInvoiceDaoImpl implements SalesInvoiceDao {
 	@Override
 	public List<SalesInvoice> listSalesInvoicesByCustomer(String finYear) {
 		String hql = "select * from SalesInvoice where finYear='"+finYear+"' order by customer_Id";
-		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(SalesInvoice.class);
 		List results = query.list();
 		return results;
 	
@@ -96,14 +96,14 @@ public class SalesInvoiceDaoImpl implements SalesInvoiceDao {
 
 	@Override
 	public List<Object[]> listPendingSalesInvoicesByCustomer(String finYear) {
-		String sql="select {c.*},sum(totalCost) as totalCost, sum(s.returnAmount) as returnAmount,sum(s.paidAmount) as paidAmount from salesInvoice s,Customer c where s.finYear='"+finYear+"' and c.customerId=s.customer_Id group by c.customerId";
-		Query query=sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity("c", Customer.class).addScalar("totalCost").addScalar("returnAmount").addScalar("paidAmount");
+		String sql="select {c.*},sum(totalCost) as totalCost, sum(s.returnAmount) as returnAmount,sum(s.adjustedAmount) as adjustedAmount,sum(s.paidAmount) as paidAmount from salesInvoice s,Customer c where s.finYear='"+finYear+"' and c.customerId=s.customer_Id group by c.customerId";
+		Query query=sessionFactory.getCurrentSession().createSQLQuery(sql).addEntity("c", Customer.class).addScalar("totalCost").addScalar("returnAmount").addScalar("adjustedAmount").addScalar("paidAmount");
 		return query.list();
 	}
 
 	@Override
 	public List<CustomerReport> getAvgTktPrice() {
-		String hql = "select c.Company_Name,c.Company_Branch,c.customerId, sum(s.totalCost)-sum(s.returnAmount) from salesInvoice s,customer c where c.customerId=s.customer_Id group by c.customerId;";
+		String hql = "select c.Customer_Name,c.Company_Name,c.Company_Branch,c.customerId, sum(s.totalCost)-sum(s.returnAmount) from salesInvoice s,customer c where c.customerId=s.customer_Id group by c.customerId;";
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		List results = query.list();
 		List<CustomerReport> cats=new LinkedList<CustomerReport>();
@@ -112,9 +112,10 @@ public class SalesInvoiceDaoImpl implements SalesInvoiceDao {
 		{
 			CustomerReport cr=new CustomerReport();
 			cr.setCustomerName((String)x[0]);
-			cr.setCompanyBranch((String)x[1]);
-			cr.setCustomerId((long)x[2]);
-			cr.setTotalPrice((double)x[3]);
+			cr.setCompanyName((String)x[1]);
+			cr.setCompanyBranch((String)x[2]);
+			cr.setCustomerId(((BigInteger)x[3]).longValue());
+			cr.setTotalPrice((double)x[4]);
 			cats.add(cr);
 		}
 		hql="select customer_Id, count(*) from salesInvoice group by customer_Id;";
@@ -125,9 +126,9 @@ public class SalesInvoiceDaoImpl implements SalesInvoiceDao {
 		{
 			for(CustomerReport cr: cats)
 			{
-				if(cr.getCustomerId()==(long)x[0])
+				if(cr.getCustomerId()==((BigInteger)x[0]).longValue())
 				{
-					cr.setNoOfBills((int)x[1]);
+					cr.setNoOfBills(((BigInteger)x[1]).intValue());
 					cr.setAvgTktPrice(cr.getTotalPrice()/cr.getNoOfBills());
 					break;
 				}
@@ -138,7 +139,7 @@ public class SalesInvoiceDaoImpl implements SalesInvoiceDao {
 
 	@Override
 	public List<CustomerReport> getCustomerFrequency() {
-		String hql = "select c.Company_Name,c.Company_Branch,c.customerId from salesInvoice s,customer c  where c.customerId=s.customer_Id group by c.customerId;";
+		String hql = "select c.Customer_Name,c.Company_Name,c.Company_Branch,c.customerId,sum(totalCost) from salesInvoice s,customer c  where c.customerId=s.customer_Id group by c.customerId;";
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		List results = query.list();
 		List<CustomerReport> cats=new LinkedList<CustomerReport>();
@@ -147,11 +148,13 @@ public class SalesInvoiceDaoImpl implements SalesInvoiceDao {
 		{
 			CustomerReport cr=new CustomerReport();
 			cr.setCustomerName((String)x[0]);
-			cr.setCompanyBranch((String)x[1]);
-			cr.setCustomerId((long)x[2]);
+			cr.setCompanyName((String)x[1]);
+			cr.setCompanyBranch((String)x[2]);
+			cr.setCustomerId(((BigInteger)x[3]).longValue());
+			cr.setTotalPrice((double)x[4]);
 			cats.add(cr);
 		}
-		hql="select customer_Id, count(*) from salesInvoice group by s.customer_Id;";
+		hql="select customer_Id, count(*) from salesInvoice group by customer_Id;";
 		query = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		results = query.list();
 		objects	= (List<Object[]>)results;
@@ -159,10 +162,9 @@ public class SalesInvoiceDaoImpl implements SalesInvoiceDao {
 		{
 			for(CustomerReport cr: cats)
 			{
-				if(cr.getCustomerId()==(long)x[0])
+				if(cr.getCustomerId()==((BigInteger)x[0]).longValue())
 				{
-					cr.setNoOfBills((int)x[1]);
-					break;
+					cr.setNoOfBills(((BigInteger)x[1]).intValue());
 				}
 			}
 		}

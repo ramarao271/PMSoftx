@@ -29,6 +29,7 @@ public class SupplierBean {
 	private double currentBalance;
 	private double totalAmount;
 	private double returnAmount;
+	private double adjustedAmount;
 	private double paidAmount;
 	public SupplierBean() {
 		super();
@@ -156,6 +157,12 @@ public class SupplierBean {
 	}
 	public void setPaidAmount(double paidAmount) {
 		this.paidAmount = paidAmount;
+	}
+	public double getAdjustedAmount() {
+		return adjustedAmount;
+	}
+	public void setAdjustedAmount(double adjustedAmount) {
+		this.adjustedAmount = adjustedAmount;
 	}
 	
 }
