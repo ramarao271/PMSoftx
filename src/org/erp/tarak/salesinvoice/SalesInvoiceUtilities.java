@@ -80,6 +80,7 @@ public class SalesInvoiceUtilities {
 		pob.setInvoiceAmount(po.getInvoiceAmount());
 		pob.setProcessed(po.isProcessed());
 		pob.setReturnAmount(po.getReturnAmount());
+		pob.setShippingCost(po.getShippingCost());
 		return pob;
 	}
 	
@@ -106,6 +107,7 @@ public class SalesInvoiceUtilities {
 		pob.setDiscountedAmount(po.getDiscountedAmount());
 		pob.setInvoiceAmount(po.getInvoiceAmount());
 		pob.setProcessed(po.isProcessed());
+		pob.setShippingCost(po.getShippingCost());
 		return pob;
 	}
 
@@ -135,6 +137,7 @@ public class SalesInvoiceUtilities {
 		salesInvoice.setDiscountPercent(salesInvoiceBean.getDiscountPercent());
 		salesInvoice.setDiscountedAmount(salesInvoiceBean.getDiscountedAmount());
 		salesInvoice.setProcessed(salesInvoiceBean.isProcessed());
+		salesInvoice.setShippingCost(salesInvoiceBean.getShippingCost());
 		return salesInvoice;
 	}
 
@@ -215,6 +218,7 @@ public class SalesInvoiceUtilities {
 		salesInvoice.setDiscountPercent(salesInvoiceBean.getDiscountPercent());
 		salesInvoice.setDiscountedAmount(salesInvoiceBean.getDiscountedAmount());
 		salesInvoice.setProcessed(salesInvoiceBean.isProcessed());
+		salesInvoice.setShippingCost(salesInvoiceBean.getShippingCost());
 		return salesInvoice;
 	}
 

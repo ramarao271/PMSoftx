@@ -79,7 +79,7 @@ public class SalesInvoice implements Serializable {
 	
 	@Type(type="boolean")
 	private boolean processed;
-	
+	private double shippingCost;	
 	public long getSalesInvoiceId() {
 		return salesInvoiceId;
 	}
@@ -202,6 +202,14 @@ public class SalesInvoice implements Serializable {
 
 	public void setReturnAmount(double returnAmount) {
 		this.returnAmount = returnAmount;
+	}
+
+	public double getShippingCost() {
+		return shippingCost;
+	}
+
+	public void setShippingCost(double shippingCost) {
+		this.shippingCost = shippingCost;
 	}
 
 }

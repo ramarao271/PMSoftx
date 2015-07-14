@@ -46,8 +46,11 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<context:component-scan base-package="org.erp.tarak.supplier.openingbalance" />
 	<context:component-scan base-package="org.erp.tarak.customer" />
 	<context:component-scan base-package="org.erp.tarak.customer.openingbalance" />	
-	<context:component-scan base-package="org.erp.tarak.worker" />
 	<context:component-scan base-package="org.erp.tarak.shipper" />
+	<context:component-scan base-package="org.erp.tarak.shipper.openingbalance" />
+	<context:component-scan base-package="org.erp.tarak.worker" />
+	<context:component-scan base-package="org.erp.tarak.worker.openingbalance" />
+	
 		
 	<context:component-scan base-package="org.erp.tarak.company" />
 	<context:component-scan base-package="org.erp.tarak.contactperson" />
@@ -96,7 +99,9 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 				<value>org.erp.tarak.customer.Customer</value>
 				<value>org.erp.tarak.customer.openingbalance.CustomerOpeningBalance</value>
 				<value>org.erp.tarak.shipper.Shipper</value>
+				<value>org.erp.tarak.shipper.openingbalance.ShipperOpeningBalance</value>
 				<value>org.erp.tarak.worker.Worker</value>
+				<value>org.erp.tarak.worker.openingbalance.WorkerOpeningBalance</value>
 				
 				<value>org.erp.tarak.product.Product</value>
 				<value>org.erp.tarak.rawMaterial.RawMaterial</value>

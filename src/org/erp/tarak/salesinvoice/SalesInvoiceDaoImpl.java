@@ -182,4 +182,12 @@ public class SalesInvoiceDaoImpl implements SalesInvoiceDao {
 	
 	}
 
+	@Override
+	public List<Customer> getBilledCustomers(String finYear) {
+		String hql = "select distinct c.* from SalesInvoice s,Customer c where s.finYear='"+finYear+"' and c.customerId=s.customer_Id";
+		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql).addEntity(Customer.class);
+		List results = query.list();
+		return results;
+	}
+
 }

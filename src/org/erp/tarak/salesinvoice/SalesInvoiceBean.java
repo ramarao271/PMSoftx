@@ -25,6 +25,7 @@ public class SalesInvoiceBean {
 	private String lrNo;
 	private boolean processed;
 	private int noOfDays;
+	private double shippingCost;
 	public long getSalesInvoiceId() {
 		return salesInvoiceId;
 	}
@@ -153,6 +154,14 @@ public class SalesInvoiceBean {
 
 	public void setReturnAmount(double returnAmount) {
 		this.returnAmount = returnAmount;
+	}
+
+	public double getShippingCost() {
+		return shippingCost;
+	}
+
+	public void setShippingCost(double shippingCost) {
+		this.shippingCost = shippingCost;
 	}
 
 }

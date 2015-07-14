@@ -3,10 +3,15 @@ package org.erp.tarak.worker;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.erp.tarak.address.AddressBean;
 import org.erp.tarak.address.AddressService;
 import org.erp.tarak.bankaccount.BankAccountService;
 import org.erp.tarak.contactperson.ContactPersonService;
+import org.erp.tarak.user.UserBean;
+import org.erp.tarak.worker.openingbalance.WorkerOpeningBalance;
+import org.erp.tarak.worker.openingbalance.WorkerOpeningBalanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
@@ -33,6 +38,12 @@ public class WorkerController {
 	@Qualifier("messageSource")
 	private MessageSource messageSource;
 
+	@Autowired
+	private HttpSession session;
+
+	@Autowired
+	private WorkerOpeningBalanceService wkrService;
+	
 	/*@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.setValidator(validator);
@@ -75,11 +86,29 @@ public class WorkerController {
 			model.put("workerBean", workerBean);
 			return new ModelAndView("worker", model);
 		}
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+
+		
 		Worker worker = WorkerUtilities.prepareWorkerModel(workerBean);
+		WorkerOpeningBalance workerOpeningBalance=null;
+		if(worker.getWorkerId()==0)
+		{
+			workerOpeningBalance=new WorkerOpeningBalance();
+			workerOpeningBalance.setFinancialYear(user.getFinYear());
+		}
+		else
+		{
+			workerOpeningBalance=wkrService.getWorkerOpeningBalance(user.getFinYear(), workerBean.getWorkerId());
+		}
 		workerService.addWorker(worker);
+		workerOpeningBalance.setWorkerId(worker.getWorkerId());
+		workerOpeningBalance.setOpeningBalance(worker.getOpeningBalance());
+		wkrService.addWorkerOpeningBalance(workerOpeningBalance);
 		model.put("message", "Worker details saved successfully!");
 		model.put("workers",
 				WorkerUtilities.prepareListofWorkerBeans(workerService.listWorkers()));
+		}
 		return new ModelAndView("workerList", model);
 	}
 

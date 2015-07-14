@@ -1,5 +1,9 @@
 package org.erp.tarak.customer;
 
+import java.util.List;
+
+import org.erp.tarak.category.CategoryBean;
+
 public class CustomerReport {
 	private String customerName;
 	private String companyName;
@@ -8,7 +12,7 @@ public class CustomerReport {
 	private double totalPrice;
 	private double noOfBills;
 	private double avgTktPrice;
-	
+	private List<CategoryBean> categoryBeans;
 	public double getAvgTktPrice() {
 		return avgTktPrice;
 	}
@@ -51,6 +55,11 @@ public class CustomerReport {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-	
+	public List<CategoryBean> getCategoryBeans() {
+		return categoryBeans;
+	}
+	public void setCategoryBeans(List<CategoryBean> categoryBeans) {
+		this.categoryBeans = categoryBeans;
+	}
 
 }

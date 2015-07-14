@@ -3,6 +3,7 @@ package org.erp.tarak.salesinvoice;
 import java.util.Date;
 import java.util.List;
 
+import org.erp.tarak.customer.Customer;
 import org.erp.tarak.customer.CustomerReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,11 @@ public class SalesInvoiceServiceImpl implements SalesInvoiceService {
 	@Override
 	public List<SalesInvoice> listSalesInvoicesByDate(Date balanceSheetDate) {
 		return salesInvoiceDao.listSalesInvoicesByDate(balanceSheetDate);
+	}
+
+	@Override
+	public List<Customer> getBilledCustomers(String finYear) {
+		return salesInvoiceDao.getBilledCustomers(finYear);
 	}
 
 }

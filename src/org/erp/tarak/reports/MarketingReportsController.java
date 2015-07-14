@@ -1,7 +1,7 @@
 package org.erp.tarak.reports;
 
+import java.math.BigInteger;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
+import org.erp.tarak.category.CategoryBean;
 import org.erp.tarak.customer.Customer;
 import org.erp.tarak.customer.CustomerBean;
 import org.erp.tarak.customer.CustomerReport;
@@ -40,7 +41,6 @@ import org.erp.tarak.supplier.SupplierUtilities;
 import org.erp.tarak.supplier.openingbalance.SupplierOpeningBalance;
 import org.erp.tarak.supplier.openingbalance.SupplierOpeningBalanceService;
 import org.erp.tarak.user.UserBean;
-import org.erp.tarak.variant.VariantBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -201,26 +201,36 @@ public class MarketingReportsController {
 		}
 		return new ModelAndView("customerProfitReport", model);
 	}
-	@RequestMapping(value = "/frequentlySoldItems/{customerId}", method = RequestMethod.GET)
-	public ModelAndView frequentlySoldItems(@PathVariable long customerId) {
+	@RequestMapping(value = "/frequentProductByCustomer", method = RequestMethod.GET)
+	public ModelAndView frequentlySoldItems() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		if (session.getAttribute("user") != null)
 		{
 			UserBean user = (UserBean) session.getAttribute("user");
-			List<Object[]> objects=salesInvoiceItemService.listFrequesntlyProductsByCustomer(customerId,user.getFinYear());
-			List<ProductBean> productBeans=new LinkedList<ProductBean>();
-			List<CustomerBean> customerBeans=new LinkedList<CustomerBean>();
-			for(Object[] obj : objects)
+			List<Customer> billedCustomers=salesInvoiceService.getBilledCustomers(user.getFinYear());
+			List<CustomerReport> customerReports=new LinkedList<CustomerReport>();
+			for(Customer customer: billedCustomers)
 			{
-				CustomerBean customerBean=CustomerUtilities.prepareCustomerBean((Customer)obj[0]);
-				customerBeans.add(customerBean);
-				ProductBean productBean=ProductUtilities.prepareProductBean((Product)obj[1]);
-				double count=(double)obj[2];
-				productBean.setQty(count+"");
-				productBeans.add(productBean);
+				List<Object[]> objects=salesInvoiceItemService.listFrequesntlyProductsByCustomer(customer.getCustomerId(),user.getFinYear());
+				CustomerReport customerReport=new CustomerReport();
+				customerReport.setCompanyBranch(customer.getCompanyBranch());
+				customerReport.setCustomerName(customer.getCustomerName());
+				customerReport.setCompanyName(customer.getCompanyName());
+				customerReport.setCustomerId(customer.getCustomerId());
+				List<CategoryBean> categoryBeans=new LinkedList<CategoryBean>();
+				for(Object[] x : objects)
+				{
+					CategoryBean categoryBean=new CategoryBean();
+					categoryBean.setQuantity((double)x[0]);
+					categoryBean.setCategoryId(((BigInteger)x[1]).longValue());
+					categoryBean.setCategoryName((String)x[2]);
+					categoryBean.setCategoryCode((String)x[3]);
+					categoryBeans.add(categoryBean);
+				}
+				customerReport.setCategoryBeans(categoryBeans);
+				customerReports.add(customerReport);
 			}
-			model.put("customer",customerBeans);
-			model.put("products",productBeans);
+			model.put("customers",customerReports);
 		}
 		return new ModelAndView("frequentlyPurchasedItems", model);
 	}
@@ -279,3 +289,4 @@ public class MarketingReportsController {
 		return new ModelAndView("frequentlyPurchasedItems", model);
 	}	
 }
+

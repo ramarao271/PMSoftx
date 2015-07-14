@@ -188,7 +188,7 @@
 		var discountPercent=parseFloat(document.getElementById("discountPercent").value);
 		var discountAmount=(parseFloat(discountPercent/100 || 0)*parseFloat(total)).toFixed(2);
 		document.getElementById("discountedAmount").value = parseFloat(discountAmount).toFixed(2);
-		document.getElementById("totalCost").value = parseFloat(parseFloat(total)-parseFloat(discountAmount)).toFixed(2);
+		document.getElementById("totalCost").value = parseFloat(parseFloat(total)+parseFloat(document.getElementById("shippingCost").value || 0)-parseFloat(discountAmount)).toFixed(2);
 	}
 </script>
 </head>
@@ -240,6 +240,12 @@
 				<td><form:input path="lrNo" class="branch" value="${salesInvoiceBean.lrNo }" />
 				</td>
 			</tr>
+						<tr>
+				<td>Shipping Charges</td>
+				<td><form:input path="shippingCost" value="${salesInvoiceBean.shippingCost }" onkeyup="calculateCost()"
+										onchange="calculateCost()"  />
+			</tr>
+			
 			<tr>
 				<td>Select No. of Items</td>
 				<td><form:select path="" name="salesinvoice"

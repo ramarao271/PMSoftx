@@ -7,7 +7,7 @@ public class CategoryBean {
 	@NotEmpty(message="Category cannot be empty")
 	private String categoryName;
 	private String categoryCode;
-
+	private double quantity; 
 	public String getCategoryName() {
 		return categoryName;
 	}
@@ -30,5 +30,13 @@ public class CategoryBean {
 
 	public void setCategoryCode(String categoryCode) {
 		this.categoryCode = categoryCode;
+	}
+
+	public double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
 	}
 }

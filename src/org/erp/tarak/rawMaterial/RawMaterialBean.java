@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import org.erp.tarak.category.CategoryBean;
 import org.erp.tarak.measurement.MeasurementBean;
+import org.erp.tarak.stage.StageBean;
 import org.erp.tarak.variant.VariantBean;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,13 +25,13 @@ public class RawMaterialBean {
 	private double cost;
 	@Min(value=0,message="should be Positive value")
 	private double price;
-/*	@Min(value=0,message="should be Positive value")
-	private double price1;
+	@Min(value=0,message="should be Positive value")
+	/*private double price1;
 	@Min(value=0,message="should be Positive value")
 	private double price2;
 	@Min(value=0,message="should be Positive value")
 	private double price3;
-*/	@Min(value=0,message="should be Positive value")
+	@Min(value=0,message="should be Positive value")*/
 	private double quantity;
 	private double allocated;
 	private double sold;
@@ -44,6 +45,10 @@ public class RawMaterialBean {
 	private String rawMaterialionType;
 	private MultipartFile image;
 	private String imagePath;
+	private List <StageBean> stageBeans;
+	private String qty;
+	private double totalCost;
+	private double soldVariants;
 	public String getRawMaterialName() {
 		return rawMaterialName;
 	}
@@ -147,31 +152,7 @@ public class RawMaterialBean {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
-/*	public double getPrice1() {
-		return price1;
-	}
-
-	public void setPrice1(double price1) {
-		this.price1 = price1;
-	}
-
-	public double getPrice2() {
-		return price2;
-	}
-
-	public void setPrice2(double price2) {
-		this.price2 = price2;
-	}
-
-	public double getPrice3() {
-		return price3;
-	}
-
-	public void setPrice3(double price3) {
-		this.price3 = price3;
-	}
-*/
+	
 	public List<VariantBean> getVariantBeans() {
 		return variantBeans;
 	}
@@ -220,5 +201,35 @@ public class RawMaterialBean {
 		this.imagePath = imagePath;
 	}
 
-	
+	public List<StageBean> getStageBeans() {
+		return stageBeans;
+	}
+
+	public void setStageBeans(List<StageBean> stageBeans) {
+		this.stageBeans = stageBeans;
+	}
+
+	public String getQty() {
+		return qty;
+	}
+
+	public void setQty(String qty) {
+		this.qty = qty;
+	}
+
+	public double getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+
+	public double getSoldVariants() {
+		return soldVariants;
+	}
+
+	public void setSoldVariants(double soldVariants) {
+		this.soldVariants = soldVariants;
+	}
 }

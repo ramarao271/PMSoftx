@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.erp.tarak.category.Category;
 import org.erp.tarak.measurement.Measurement;
+import org.erp.tarak.stage.Stage;
 import org.erp.tarak.variant.Variant;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -97,6 +98,10 @@ public class RawMaterial implements Serializable{
 	private String rawMaterialionType;
 	
 	private String imagePath;
+
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@Fetch(value=FetchMode.SELECT)
+	private List <Stage> stages;
 	
 	public String getRawMaterialName() {
 		return rawMaterialName;
@@ -264,6 +269,14 @@ public class RawMaterial implements Serializable{
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public List<Stage> getStages() {
+		return stages;
+	}
+
+	public void setStages(List<Stage> stages) {
+		this.stages = stages;
 	}
 
 }

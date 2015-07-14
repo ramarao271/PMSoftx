@@ -60,5 +60,22 @@ public class SalesInvoiceItemServiceImpl implements SalesInvoiceItemService {
 		return salesInvoiceItemDao.getSalesReportByVariant(finYear);
 	}
 
+	@Override
+	public List<Object[]> listSalesReportByCategoryWise(String finYear,int type,String date) {
+		return salesInvoiceItemDao.listSalesReportByCategoryWise(finYear,type,date);
+	}
+
+	@Override
+	public List<Object[]> listSalesReportByCategoryWise(String finYear,
+			int date, String fromDate, String toDate) {
+		return salesInvoiceItemDao.listSalesReportByCategoryWise(finYear,date,fromDate,toDate);
+	}
+
+	@Override
+	public List<Object[]> getProfitReportByCategoryWise(String finYear,
+			int type, String date) {
+		return salesInvoiceItemDao.getProfitReportByCategoryWise(finYear,type, date);
+	}
+
 
 }

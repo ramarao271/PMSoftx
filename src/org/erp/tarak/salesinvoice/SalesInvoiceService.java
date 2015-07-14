@@ -1,9 +1,9 @@
 package org.erp.tarak.salesinvoice;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
+import org.erp.tarak.customer.Customer;
 import org.erp.tarak.customer.CustomerReport;
 
 
@@ -26,6 +26,8 @@ public interface SalesInvoiceService {
 	public List<SalesInvoice> listSalesInvoicesByCustomer(String finYear);
 	
 	public List<Long> listBilledCustomers(String finYear);
+	
+	public List<Customer> getBilledCustomers(String finYear);
 
 	public List<Object[]> listPendingSalesInvoicesByCustomer(String finYear);
 

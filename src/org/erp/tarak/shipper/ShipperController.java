@@ -3,11 +3,16 @@ package org.erp.tarak.shipper;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.erp.tarak.address.Address;
 import org.erp.tarak.address.AddressBean;
 import org.erp.tarak.address.AddressService;
 import org.erp.tarak.bankaccount.BankAccountService;
 import org.erp.tarak.contactperson.ContactPersonService;
+import org.erp.tarak.shipper.openingbalance.ShipperOpeningBalance;
+import org.erp.tarak.shipper.openingbalance.ShipperOpeningBalanceService;
+import org.erp.tarak.user.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
@@ -30,6 +35,10 @@ public class ShipperController {
 	@Qualifier("shipperValidator")
 	private Validator validator;*/
 
+
+	@Autowired
+	private HttpSession session;
+	
 	@Autowired
 	@Qualifier("messageSource")
 	private MessageSource messageSource;
@@ -39,6 +48,9 @@ public class ShipperController {
 		binder.setValidator(validator);
 	}*/
 
+	@Autowired
+	private ShipperOpeningBalanceService shpService;
+	
 	@Autowired
 	private AddressService addressService;
 	@Autowired
@@ -76,11 +88,29 @@ public class ShipperController {
 			model.put("shipperBean", shipperBean);
 			return new ModelAndView("shipper", model);
 		}
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+		
 		Shipper shipper = ShipperUtilities.prepareShipperModel(shipperBean);
+		ShipperOpeningBalance shipperOpeningBalance=null;
+		if(shipper.getShipperId()==0)
+		{
+			shipperOpeningBalance=new ShipperOpeningBalance();
+			shipperOpeningBalance.setFinancialYear(user.getFinYear());
+		}
+		else
+		{
+			shipperOpeningBalance=shpService.getShipperOpeningBalance(user.getFinYear(), shipperBean.getShipperId());
+		}
 		shipperService.addShipper(shipper);
+		shipperOpeningBalance.setShipperId(shipper.getShipperId());
+		shipperOpeningBalance.setOpeningBalance(shipper.getOpeningBalance());
+		shpService.addShipperOpeningBalance(shipperOpeningBalance);
+		
 		model.put("message", "Shipper details saved successfully!");
 		model.put("shippers",
 				ShipperUtilities.prepareListofShipperBeans(shipperService.listShippers()));
+		}
 		return new ModelAndView("shipperList", model);
 	}
 

@@ -3,6 +3,7 @@ package org.erp.tarak.salesinvoice;
 import java.util.Date;
 import java.util.List;
 
+import org.erp.tarak.customer.Customer;
 import org.erp.tarak.customer.CustomerReport;
 
 
@@ -33,4 +34,6 @@ public interface SalesInvoiceDao {
 	public List<CustomerReport> getCustomerFrequency();
 
 	public List<SalesInvoice> listSalesInvoicesByDate(Date balanceSheetDate);
+
+	public List<Customer> getBilledCustomers(String finYear);
 }

@@ -88,7 +88,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public List<Product> listProductsBySold() {
-		String hql = "from Product order by sold";
+		String hql = "from Product order by category_Id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		List results = query.list();
 		return results;

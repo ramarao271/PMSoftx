@@ -70,8 +70,8 @@ function addVariant(name) {
 	document.productForm.submit();
 }
 function addRawMaterialVariant(name) {
-	document.productForm.action = "/ERPSoftware/" + name + "/addRawMaterialVariant.html";
-	document.productForm.submit();
+	document.rawMaterialForm.action = "/ERPSoftware/" + name + "/addRawMaterialVariant.html";
+	document.rawMaterialForm.submit();
 }
 
 function addExpense(name) {
@@ -105,9 +105,9 @@ function loadRawMaterialVariant(name, value) {
 	if (value == '') {
 		value = document.getElementById("variantBeans0.variantType").value;
 	}
-	document.productForm.action = "/ERPSoftware/" + name + "/loadRawMaterialVariant/"
+	document.rawMaterialForm.action = "/ERPSoftware/" + name + "/loadRawMaterialVariant/"
 			+ value;
-	document.productForm.submit();
+	document.rawMaterialForm.submit();
 }
 function deleteItemsFields(val, name) {
 	document.personForm.action = "/ERPSoftware/" + name + "/" + name

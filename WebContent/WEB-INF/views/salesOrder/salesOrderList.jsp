@@ -37,7 +37,7 @@
 			<c:forEach items="${salesOrders}" var="salesOrder">
 				<tr>
 					<td><c:out value="${salesOrder.salesOrderId}" /></td>
-					<td><fmt:formatDate pattern="MM-dd-yyyy"
+					<td><fmt:formatDate pattern="dd-MM-yyyy"
 							value="${salesOrder.salesOrderDate}" /></td>
 					<td><c:out value="${salesOrder.customerBean.companyName}" /></td>
 					<td><c:out value="${salesOrder.totalCost}" /></td>

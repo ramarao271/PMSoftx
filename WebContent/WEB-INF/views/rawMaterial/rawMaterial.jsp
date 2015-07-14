@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,6 +22,13 @@ function uploadImage()
 	document.rawMaterialForm.action="/ERPSoftware/rawMaterial/addImage.html";
 	document.rawMaterialForm.submit();	
 }
+function loadIndex(val)
+{
+	document.rawMaterialForm.action = "/ERPSoftware/" +val+"/"+val+"/index.jsp";
+	document.rawMaterialForm.method="GET";
+	document.rawMaterialForm.submit();
+}
+
 	function load() {
 		var msg = '<c:if test="${!empty message}"><c:out value="${message}" /></c:if>';
 		if (msg != "")
@@ -53,14 +60,6 @@ function uploadImage()
 		}
 		return true;
 	}	
-	function loadIndex(val)
-	{
-		document.productForm.action = "/ERPSoftware/" +val+"/"+val+"/index.jsp";
-		document.productForm.method="GET";
-		document.productForm.submit();
-	}
-
-
 </script>
 
 </head>
@@ -69,23 +68,23 @@ function uploadImage()
 		<c:if test="${!empty operation}">
 			<c:out value="${operation}" />
 		</c:if>
-		Raw Material Details
+		RawMaterial Details
 	</h3>
 	<form:form method="POST"
 		action="/ERPSoftware/rawMaterial/saveRawMaterial.html"
-		modelAttribute="rawMaterialBean" name="productForm"
+		modelAttribute="rawMaterialBean" name="rawMaterialForm"
 		id="rawMaterialForm" enctype="multipart/form-data">
 		<form:input path="rawMaterialId" cssStyle="visibility:hidden"
 			value="${rawMaterialBean.rawMaterialId}" />
 		<table cellpadding=0 cellspacing=5>
 			<tr>
-				<td>Raw Material Name</td>
+				<td>RawMaterial Name</td>
 				<td><form:input path="rawMaterialName"
 						value="${rawMaterialBean.rawMaterialName}" /></td>
 				<td><form:errors path="rawMaterialName" /></td>
 			</tr>
 			<tr>
-				<td>Raw Material Category</td>
+				<td>RawMaterial Category</td>
 				<td><form:select path="categoryBean.categoryId" class="branch">
 						<c:forEach items="${categories}" var="category">
 							<c:choose>
@@ -99,10 +98,12 @@ function uploadImage()
 							</c:choose>
 						</c:forEach>
 					</form:select></td>
-				<td><form:errors path="categoryBean" /></td>
+				<td><a id="myButton1"
+					href="/ERPSoftware/category/category.html" target="_blank">New
+						Category</a> <form:errors path="categoryBean" /></td>
 			</tr>
 			<tr>
-				<td>Raw Material Quantity</td>
+				<td>RawMaterial Quantity</td>
 				<td><form:input path="quantity"
 						value="${rawMaterialBean.quantity}" type="number" step="0.01" /></td>
 				<td><form:errors path="quantity" /></td>
@@ -124,28 +125,30 @@ function uploadImage()
 							</c:choose>
 						</c:forEach>
 					</form:select></td>
-				<td><form:errors path="measurementBean" /></td>
+				<td><a id="myButton1"
+					href="/ERPSoftware/measurement/measurement.html" target="_blank">New
+						Measurement</a> <form:errors path="measurementBean" /></td>
 			</tr>
 			<tr>
-				<td>Raw Material Cost</td>
+				<td>RawMaterial Cost</td>
 				<td><form:input path="cost" value="${rawMaterialBean.cost}"
 						type="number" step="0.01" /></td>
 				<td><form:errors path="cost" /></td>
 			</tr>
 			<tr>
-				<td>Raw Material Price</td>
+				<td>RawMaterial Price</td>
 				<td><form:input path="price" value="${rawMaterialBean.price}"
 						type="number" step="0.01" onkeyup="populatePrices(this.value)" /></td>
 				<td><form:errors path="price" /></td>
 			</tr>
 			<%-- <tr>
-				<td>Raw Material Price1</td>
+				<td>RawMaterial Price1</td>
 				<td><form:input path="price1" value="${rawMaterialBean.price1}"
 						type="number" step="0.01" /></td>
 				<td><form:errors path="price1" /></td>
 			</tr>
 			<tr>
-				<td>Raw Material Price2</td>
+				<td>RawMaterial Price2</td>
 				<td><form:input path="price2" value="${rawMaterialBean.price2}"
 						type="number" step="0.01" /></td>
 				<td><form:errors path="price2" /></td>
@@ -157,6 +160,30 @@ function uploadImage()
 				<td><form:errors path="price3" /></td>
 			</tr>
 			 --%>
+			<tr>
+				<td>RawMaterialion Type</td>
+				<td><form:select path="rawMaterialionType">
+						<c:forEach items="${pTypes}" var="vTypes">
+							<c:choose>
+								<c:when test="${rawMaterialBean.rawMaterialionType eq vTypes}">
+									<form:option selected="true" value="${vTypes}" />
+								</c:when>
+								<c:otherwise>
+									<form:option value="${vTypes}" />
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</form:select></td>
+			</tr>
+			<tr>
+				<td>Stages Supported</td>
+				<td><c:forEach items="${stages}" var="i" varStatus="itemsRow">
+
+						<form:checkbox path="stageBeans[${itemsRow.index}].stageName"
+							value="${i.stagePropertiesName }" />
+						<c:out value="${i.stagePropertiesName }" />
+					</c:forEach></td>
+			</tr>
 			<tr>
 				<td>Variant</td>
 				<td><form:select path="variantType" class="branch"
@@ -183,6 +210,7 @@ function uploadImage()
 						src="${addImg}" /></a></th>
 				<th>Variant Name</th>
 				<th>Quantity</th>
+				<th>Cost</th>
 			</tr>
 			<c:forEach items="${rawMaterialBean.variantBeans}" var="i"
 				varStatus="itemsRow">
@@ -194,7 +222,7 @@ function uploadImage()
 							value="${i.variantId}" /> <form:hidden
 							path="variantBeans[${itemsRow.index}].productCode"
 							value="${i.productCode}" /> <a href="#"
-						onclick="deleteRawVariant(${i.variantId})"><c:if
+						onclick="deleteVariant(${i.variantId})"><c:if
 								test="${!(i.variantId eq 0)}">
 								<img alt="" src="${deleteImg}">
 							</c:if></a></td>
@@ -216,7 +244,8 @@ function uploadImage()
 					<td><form:input
 							path="variantBeans[${itemsRow.index}].quantity"
 							value="${i.quantity}" /></td>
-
+					<td><form:input path="variantBeans[${itemsRow.index}].cost"
+							value="${i.cost}" /></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -238,6 +267,7 @@ function uploadImage()
 		<input type="submit" value="Submit" onclick="return setVariantTypes()" />&nbsp;<input
 			type="button" name="cancel" value="Cancel"
 			onclick="loadIndex('rawMaterial')" />
+
 	</form:form>
 </body>
 </html>

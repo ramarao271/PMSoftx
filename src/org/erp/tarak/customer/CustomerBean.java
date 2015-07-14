@@ -5,6 +5,7 @@ import java.util.List;
 import org.erp.tarak.address.AddressBean;
 import org.erp.tarak.bankaccount.BankAccountBean;
 import org.erp.tarak.contactperson.ContactPersonBean;
+import org.erp.tarak.product.ProductBean;
 
 
 
@@ -32,6 +33,7 @@ public class CustomerBean {
 	private double adjustedAmount;
 	private double paidAmount;
 	private double profitAmount;
+	private List<ProductBean> productBeans;
 	public CustomerBean() {
 		super();
 	}
@@ -170,6 +172,12 @@ public class CustomerBean {
 	}
 	public void setAdjustedAmount(double adjustedAmount) {
 		this.adjustedAmount = adjustedAmount;
+	}
+	public List<ProductBean> getProductBeans() {
+		return productBeans;
+	}
+	public void setProductBeans(List<ProductBean> productBeans) {
+		this.productBeans = productBeans;
 	}
 	
 }
