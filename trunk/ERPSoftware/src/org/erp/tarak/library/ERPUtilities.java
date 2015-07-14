@@ -100,6 +100,7 @@ public class ERPUtilities {
 		salesInvoiceBean.setSalesInvoiceItemBeans(pii);
 		salesInvoiceBean.setCustomerBean(po.getCustomerBean());
 		salesInvoiceBean.setTotalCost(po.getTotalCost());
+		salesInvoiceBean.setShippingCost(po.getShippingCost());
 		return salesInvoiceBean;
 	}
 

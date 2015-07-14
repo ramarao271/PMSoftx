@@ -206,12 +206,12 @@
 			</tr>
 			<tr>
 				<td><form:label path="salesOrderDate">Sales Order Date:</form:label></td>
-				<td><fmt:formatDate var="formattedDate" pattern="MM-dd-yyyy"
+				<td><fmt:formatDate var="formattedDate" pattern="dd-MM-yyyy"
 						value="${salesOrderBean.salesOrderDate}" /> <form:input
 						path="salesOrderDate" value="${formattedDate}" /> <script
 						type="text/javascript">
 							new datepickr('salesOrderDate', {
-								'dateFormat' : 'm-d-y'
+								'dateFormat' : 'd-m-y'
 							});
 						</script> <form:errors path="salesOrderDate" cssStyle="color: #ff0000;" /></td>
 			</tr>

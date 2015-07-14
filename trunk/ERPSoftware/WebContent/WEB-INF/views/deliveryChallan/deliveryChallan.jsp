@@ -275,8 +275,7 @@
 			document.getElementById(totalCost).value = totalRate.toFixed(2);
 			total = parseFloat(total) + parseFloat(totalRate);
 		}
-		document.getElementById("totalCost").value = parseFloat(total).toFixed(
-				2);
+		document.getElementById("totalCost").value = (parseFloat(total)+parseFloat(document.getElementById("shippingCost").value || 0)).toFixed(2);
 	}
 </script>
 </head>
@@ -357,7 +356,8 @@
 			</tr>
 			<tr>
 				<td>Shipping Charges</td>
-				<td><form:input path="shippingCost" value="${deliveryChallanBean.shippingCost }" />
+				<td><form:input path="shippingCost" value="${deliveryChallanBean.shippingCost }" onkeyup="calculateCost()"
+										onchange="calculateCost()" />
 			</tr>
 
 			<tr>

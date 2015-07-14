@@ -1,11 +1,11 @@
 package org.erp.tarak.salesinvoice;
 
 import java.math.BigInteger;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.erp.tarak.category.CategoryReport;
-import org.erp.tarak.customer.Customer;
 import org.erp.tarak.product.Product;
 import org.erp.tarak.variant.VariantReport;
 import org.hibernate.Query;
@@ -98,12 +98,9 @@ public class SalesInvoiceItemDaoImpl implements SalesInvoiceItemDao {
 	@Override
 	public List<Object[]> listFrequesntlyProductsByCustomer(long customerId,
 			String finYear) {
-		String hql = "select {c.*},{p.*},count(s.*) as count from salesInvoiceItem s,product p,Customer c where s.Financial_Year='"
-				+ finYear
-				+ "' and s.customer_id=c.customerId group by s.product_id order by s.customer_Id;";
+		String hql = "select sum(s.quantity) as qty,ct.categoryid as categoryId,ct.category_name as categoryName,ct.category_Code as categoryCode from salesInvoiceItem s,salesInvoice si,Product p,customer c,Category ct  where s.product_id=p.product_Id and si.salesinvoiceid=s.salesinvoiceid and c.customerid=si.customer_id  and s.financial_year='"+finYear+"' and  c.customerId="+customerId+" and ct.categoryId=p.category_id group by p.category_id order by qty desc;";
 		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql)
-				.addEntity("c", Customer.class).addEntity("p", Product.class)
-				.addScalar("count");
+				.addScalar("qty").addScalar("categoryId").addScalar("categoryName").addScalar("categoryCode");
 		List results = query.list();
 		return results;
 	}
@@ -144,5 +141,48 @@ public class SalesInvoiceItemDaoImpl implements SalesInvoiceItemDao {
 			cats.add(xx);
 		}
 		return cats;
+	}
+
+	@Override
+	public List<Object[]> listSalesReportByCategoryWise(String finYear,int type,String date) {
+		Query query=null;
+		if(type==Calendar.DATE)
+		{
+			String hql="select p.product_Name as productName, c.category_name as categoryName,sum(si.quantity) as quantity,sum(si.totalCost) as Amount,s.si_dATE as Date from salesInvoiceitem si,Product p,salesInvoice s,category c where p.product_id=si.product_Id and financial_year='"+finYear+"' and si.salesInvoiceId=s.salesInvoiceId and c.categoryid=p.category_Id and s.si_date='"+date+"' group by s.si_date,p.category_id order by s.si_date;";
+			query = sessionFactory.getCurrentSession().createSQLQuery(hql).addScalar("productName").addScalar("categoryName").addScalar("quantity").addScalar("Amount").addScalar("Date");
+		}	
+		List results = query.list();
+		return results;
+	}
+
+	@Override
+	public List<Object[]> listSalesReportByCategoryWise(String finYear,
+			int type, String fromDate, String toDate) {
+		Query query=null;
+		if(type==Calendar.DATE)
+		{
+			String hql="select p.product_Name as productName, c.category_name as categoryName,sum(si.quantity) as quantity,sum(si.totalCost) as Amount,s.si_dATE as Date from salesInvoiceitem si,Product p,salesInvoice s,category c where p.product_id=si.product_Id and financial_year='"+finYear+"' and si.salesInvoiceId=s.salesInvoiceId and c.categoryid=p.category_Id and s.si_date between '"+fromDate+"' and '"+toDate+"' group by s.si_date,p.category_id order by s.si_date;";
+			query = sessionFactory.getCurrentSession().createSQLQuery(hql).addScalar("productName").addScalar("categoryName").addScalar("quantity").addScalar("Amount").addScalar("Date");
+		}
+		else if(type==Calendar.MONTH)
+		{
+			String hql="select p.product_Name as productName, c.category_name as categoryName,sum(si.quantity) as quantity,sum(si.totalCost) as Amount,month(s.si_date) as Date from salesInvoiceitem si,Product p,salesInvoice s,category c where p.product_id=si.product_Id and financial_year='"+finYear+"' and si.salesInvoiceId=s.salesInvoiceId and c.categoryid=p.category_Id and s.si_date between '"+fromDate+"' and '"+toDate+"' group by month(s.si_date),p.category_id,p.product_id order by month(s.si_date),p.category_id;";
+			query = sessionFactory.getCurrentSession().createSQLQuery(hql).addScalar("productName").addScalar("categoryName").addScalar("quantity").addScalar("Amount").addScalar("Date");
+		}
+		List results = query.list();
+		return results;
+	}
+
+	@Override
+	public List<Object[]> getProfitReportByCategoryWise(String finYear,
+			int type, String date) {
+		Query query=null;
+		if(type==Calendar.DATE)
+		{
+			String hql="select c.category_Name as categoryName,sum(s.quantity) as quantity,sum(s.totalCost) as totalPrice,p.cost as cost ,si.si_date as Date from salesInvoiceItem s,salesInvoice si,product p,category c where s.financial_year='"+finYear+"' and p.product_Id=s.product_id and c.categoryId=p.category_id and s.salesInvoiceId=si.salesInvoiceId and si.si_date ='"+date+"' group by p.category_id;";
+			query = sessionFactory.getCurrentSession().createSQLQuery(hql).addScalar("categoryName").addScalar("quantity").addScalar("totalPrice").addScalar("cost").addScalar("Date");
+		}
+		List results = query.list();
+		return results;
 	}
 }

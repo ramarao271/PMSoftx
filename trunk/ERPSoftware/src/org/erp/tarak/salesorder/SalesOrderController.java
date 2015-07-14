@@ -70,7 +70,7 @@ public class SalesOrderController {
 	@Autowired
 	private HttpSession session;
 
-	SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {

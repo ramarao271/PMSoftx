@@ -130,17 +130,22 @@ public class ERPConstants {
 		financeMenuList.put("/ERPSoftware/financialReports/accountsPayable","Accounts Payable");
 		financeMenuList.put("/ERPSoftware/financialReports/ordersToShip","Orders to be Shipped");
 		financeMenuList.put("/ERPSoftware/financialReports/ordersToInvoice","Orders to be Invoiced");
+		financeMenuList.put("/ERPSoftware/financialReports/salesReport","Sales Report");
+		financeMenuList.put("/ERPSoftware/financialReports/profitReport","Profit Report");
+		financeMenuList.put("/ERPSoftware/financialReports/lostSalesReport","Lost Sales Report");
+		
 		
 		productReportMenuList.put("/ERPSoftware/productReports/categoryWiseReport", "Products by Category(Sales)");
 		productReportMenuList.put("/ERPSoftware/productReports/categoryWisePurchaseReport", "Products by Category(Purchase)");
 		productReportMenuList.put("/ERPSoftware/productReports/variantWiseReport", "Products by Variant(Sales)");
 		productReportMenuList.put("/ERPSoftware/productReports/variantWisePurchaseReport", "Products by Variant(Purchase)");
+		productReportMenuList.put("/ERPSoftware/productReports/frequentProduct","Frequently Purchased Product");
 		
 		marketingReportMenuList.put("/ERPSoftware/marketingReports/customerSalesReport","Customer Sales Report");
 		marketingReportMenuList.put("/ERPSoftware/marketingReports/customerProfitReport","Customer Profit Report");
 		marketingReportMenuList.put("/ERPSoftware/marketingReports/avgTktPrice","Avg Tkt Price");
 		marketingReportMenuList.put("/ERPSoftware/marketingReports/purchaseFreqCustomer","Customer Purchase Frequency");
-		productReportMenuList.put("/ERPSoftware/productReports/frequentProduct","Frequently Purchased Product");
+		marketingReportMenuList.put("/ERPSoftware/marketingReports/frequentProductByCustomer","Products Customer Wise");
 		
 		linkMap.put("customer", customerMenuList);
 		linkMap.put("worker", workerMenuList);

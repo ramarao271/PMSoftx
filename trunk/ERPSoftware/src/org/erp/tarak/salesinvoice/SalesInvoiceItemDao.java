@@ -1,5 +1,6 @@
 package org.erp.tarak.salesinvoice;
 
+import java.util.Date;
 import java.util.List;
 
 import org.erp.tarak.category.CategoryReport;
@@ -28,4 +29,12 @@ public interface SalesInvoiceItemDao {
 	public List<VariantReport> listFrequesntlyProductsByVariant(String finYear);
 
 	public List<VariantReport> getSalesReportByVariant(String finYear);
+
+	public List<Object[]> listSalesReportByCategoryWise(String finYear, int type, String date);
+
+	public List<Object[]> listSalesReportByCategoryWise(String finYear,
+			int type, String fromDate, String toDate);
+
+	public List<Object[]> getProfitReportByCategoryWise(String finYear,
+			int type, String date);
 }
