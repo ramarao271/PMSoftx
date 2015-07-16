@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class RawMaterialBean {
 
 	private long rawMaterialId;
-	@NotEmpty(message="RawMaterial Name cannot be empty")
+	@NotEmpty(message="Raw Material Name cannot be empty")
 	private String rawMaterialName;
 	private String rawMaterialCode;
 	private String groupId;
@@ -49,6 +49,7 @@ public class RawMaterialBean {
 	private String qty;
 	private double totalCost;
 	private double soldVariants;
+	
 	public String getRawMaterialName() {
 		return rawMaterialName;
 	}
