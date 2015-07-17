@@ -241,7 +241,7 @@
 										cssStyle="color: #ff0000;" /></td>
 								<form:hidden
 									path="productionOrderItemBeans[${itemsRow.index}].srNo"
-									value="${i.srNo}" class="product_Srno" />
+									value="${itemsRow.index}" class="product_Srno" />
 								<form:hidden
 									path="productionOrderItemBeans[${itemsRow.index}].productionOrderId"
 									value="${i.productionOrderId}" class="product_Srno" />

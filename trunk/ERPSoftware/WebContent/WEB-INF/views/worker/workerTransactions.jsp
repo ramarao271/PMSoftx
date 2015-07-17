@@ -23,31 +23,40 @@
 
 </head>
 <body onload="load()">
-	<h3>Workers List</h3>
-	<c:if test="${!empty workers}">
+	<h3>
+		Transactions for
+		<c:out value="workerBean.workerName" />
+	</h3>
+	<c:if test="${!empty transactions}">
 		<table align="left" border="1" cellpadding="0" cellspacing="0">
 			<tr>
-				<th>Worker Name</th>
-				<th>Mobile</th>
-				<th>Address</th>
-				<th>Balance</th>
-				<th>Actions</th>
+				<th>Id</th>
+				<th>Date</th>
+				<th>Production Order Cost</th>
+				<th>Production Invoice Cost</th>
+				<!-- <th>Actions</th> -->
 			</tr>
-			<c:forEach items="${workers}" var="worker">
+			<c:forEach items="${transactions}" var="transaction">
 				<tr>
-					<td><c:out value="${worker.workerName}" /></td>
-					<td><c:out value="${worker.mobile}" /></td>
-					<td><c:out value="${worker.address}" /></td>
-					<td><c:out value="${worker.openingBalance}" /></td>
-					<td align="center"><a
-						href="editWorker.html?workerId=${worker.workerId}"><img src="${editImg}" /></a>
-						| <a href="deleteWorker.html?workerId=${worker.workerId}"
-						onclick="return checkDelete()"><img src="${deleteImg}" /></a> 
-						| <a href="viewWorkerTransactions.html?workerId=${worker.workerId}" >View Transactions</a></td>
+					<td><c:out value="${transaction.transactionId}" /></td>
+					<td><c:out value="${transaction.date}" /></td>
+					<td><c:if test="${transaction.orderCost >0 }" ><c:out value="${transaction.orderCost}" /></c:if></td>
+					<td><c:if test="${transaction.invoiceCost > 0}" ><c:out value="${transaction.invoiceCost}" /></c:if></td>
+					<%-- <td align="center">
+					<c:if test="${transaction.orderCost >0 }" >
+					
+					
+					</c:if>
+					<a
+						href="editWorker.html?workerId=${worker.workerId}"><img
+							src="${editImg}" /></a> | <a
+						href="deleteWorker.html?workerId=${worker.workerId}"
+						onclick="return checkDelete()"><img src="${deleteImg}" /></a> | <a
+						href="viewWorkerTransactions.html?workerId=${worker.workerId}">View
+							Transactions</a></td> --%>
 				</tr>
 			</c:forEach>
 		</table>
 	</c:if>
-
 </body>
 </html>

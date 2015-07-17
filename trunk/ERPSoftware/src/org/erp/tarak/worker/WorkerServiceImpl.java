@@ -40,4 +40,9 @@ public class WorkerServiceImpl implements WorkerService {
 		return workerDao.listWorkersbyCompanyNameRegex(search);
 	}
 
+	@Override
+	public List<Object[]> getWorkerTransactions(long workerId, String finYear) {
+		return workerDao.getWorkerTransactions(workerId, finYear);
+	}
+
 }
