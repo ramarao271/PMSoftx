@@ -208,9 +208,9 @@ public class RawMaterialUtilities {
 		String rawMaterialCode = "";
 		if (rawMaterial != null) {
 			rawMaterialCode = ERPUtilities.incrementCode(rawMaterial.getRawMaterialCode());
-			rawMaterialCode = ERPUtilities.fomatStringToN(rawMaterialCode, 6);
+			rawMaterialCode = ERPUtilities.fomatStringToN(rawMaterialCode, 7);
 		} else {
-			rawMaterialCode = category.getCategoryCode() + "001";
+			rawMaterialCode = category.getCategoryCode() + "0001";
 		}
 		return rawMaterialCode;
 	}

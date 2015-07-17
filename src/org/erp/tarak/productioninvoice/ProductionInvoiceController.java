@@ -88,7 +88,11 @@ public class ProductionInvoiceController {
 			@ModelAttribute("productionInvoiceBean") ProductionInvoiceBean productionInvoiceBean,
 			@PathVariable String category) {
 		Map<String, Object> model = new HashMap<String, Object>();
-
+		productionInvoiceBean
+		.setProductionOrderBean(ProductionOrderUtilities
+				.prepareProductionOrderBean(ProductionOrderUtilities
+						.getProductionOrderModel(
+								productionOrderService, productionInvoiceBean.getProductionOrderBean().getProductionOrderId())));
 		List<ProductionInvoiceItemBean> productionInvoiceItemBeans = productionInvoiceBean
 				.getProductionInvoiceItemBeans();
 		int size = 0;
@@ -273,6 +277,11 @@ public class ProductionInvoiceController {
 			@ModelAttribute("command") ProductionInvoiceBean productionInvoiceBean,
 			BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
+		productionInvoiceBean
+		.setProductionOrderBean(ProductionOrderUtilities
+				.prepareProductionOrderBean(ProductionOrderUtilities
+						.getProductionOrderModel(
+								productionOrderService, productionInvoiceBean.getProductionOrderBean().getProductionOrderId())));
 		model.put("productionInvoiceBean", ProductionInvoiceUtilities.prepareProductionInvoiceBean(
 				productionInvoiceService.getProductionInvoice(productionInvoiceBean
 						.getProductionInvoiceId()), workerService));
@@ -286,6 +295,12 @@ public class ProductionInvoiceController {
 			BindingResult result,@PathVariable long srNo) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		Iterator<ProductionInvoiceItemBean> itr=productionInvoiceBean.getProductionInvoiceItemBeans().iterator();
+		productionInvoiceBean
+		.setProductionOrderBean(ProductionOrderUtilities
+				.prepareProductionOrderBean(ProductionOrderUtilities
+						.getProductionOrderModel(
+								productionOrderService, productionInvoiceBean.getProductionOrderBean().getProductionOrderId())));
+
 		while(itr.hasNext())
 		{
 			ProductionInvoiceItemBean soib=itr.next();

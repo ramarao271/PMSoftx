@@ -16,4 +16,6 @@ public interface WorkerDao {
 	public List<Worker> listWorkersbyCompanyName(String companyName);
 
 	public List<Worker> listWorkersbyCompanyNameRegex(String search);
+
+	public List<Object[]> getWorkerTransactions(long workerId, String finYear);
 }

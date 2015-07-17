@@ -284,3 +284,10 @@ No.of sarees/raw material in individual stages (cutting, finishing, dyeing etc.)
 No. of sarees/raw material cut/finish,dyeing etc.per day (As a graph & table)
 Graphs
 Operaional Reports
+
+
+
+=================================================================================
+
+select productionorderid as Id,poo_date as date,totalcost as OrderCost,0 as InvoiceCost from productionOrder where worker_id=4 union select pro
+ductionInvoiceId as Id,poi_date as date,0 as OrderCost,totalCost as InvoiceCost from productionInvoice where worker_id=4 order by date;

@@ -173,7 +173,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<table border=1 cellpadding=0 cellspacing=2>
+					<table border=1 cellpadding=0 cellspacing=0>
 						<tr>
 							<c:if test="${!(productionInvoiceBean.productionInvoiceId eq 0)}">
 								<td>Del</td>
@@ -289,7 +289,7 @@
 							cssStyle="color: #ff0000;" /></td>
 					<form:hidden
 						path="productionInvoiceItemBeans[${itemsRow.index}].srNo"
-						value="${i.srNo}" class="product_Srno" />
+						value="${itemsRow.index}" class="product_Srno" />
 					<form:hidden
 						path="productionInvoiceItemBeans[${itemsRow.index}].productionInvoiceId"
 						value="${i.productionInvoiceId}" class="product_Srno" />

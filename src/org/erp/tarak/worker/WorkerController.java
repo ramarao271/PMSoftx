@@ -1,6 +1,10 @@
 package org.erp.tarak.worker;
 
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -167,6 +171,30 @@ public class WorkerController {
 		model.put("workerBean", WorkerUtilities.prepareWorkerBean(workerBean.getWorkerId(), workerService));
 		return new ModelAndView("worker", model);
 	}
-
 	
+	@RequestMapping(value = "/viewWorkerTransactions", method = RequestMethod.GET)
+	public ModelAndView viewWorkerTransactions(
+			@ModelAttribute("command") WorkerBean workerBean,
+			BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null) 
+		{
+			UserBean user = (UserBean) session.getAttribute("user");
+			List<Object[]> objects=workerService.getWorkerTransactions(workerBean.getWorkerId(),user.getFinYear());
+			List<WorkerTransaction> transactions=new LinkedList<WorkerTransaction>();
+			for(Object[] x: objects)
+			{
+				WorkerTransaction transaction=new WorkerTransaction();
+				transaction.setWorkerId(workerBean.getWorkerId());
+				transaction.setTransactionId(((BigInteger)x[0]).longValue());
+				transaction.setDate((Date)x[1]);
+				transaction.setOrderCost((double)x[2]);
+				transaction.setInvoiceCost((double)x[3]);
+				transactions.add(transaction);
+			}
+			model.put("workerBean", WorkerUtilities.prepareWorkerBean(workerBean.getWorkerId(), workerService));
+			model.put("transactions", transactions);
+		}
+		return new ModelAndView("workerTransactions", model);
+	}	
 }
