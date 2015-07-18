@@ -1,6 +1,5 @@
 package org.erp.tarak.salesinvoice;
 
-import java.util.Date;
 import java.util.List;
 
 import org.erp.tarak.category.CategoryReport;

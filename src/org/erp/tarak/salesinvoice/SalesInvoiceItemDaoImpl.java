@@ -166,7 +166,7 @@ public class SalesInvoiceItemDaoImpl implements SalesInvoiceItemDao {
 		}
 		else if(type==Calendar.MONTH)
 		{
-			String hql="select p.product_Name as productName, c.category_name as categoryName,sum(si.quantity) as quantity,sum(si.totalCost) as Amount,month(s.si_date) as Date from salesInvoiceitem si,Product p,salesInvoice s,category c where p.product_id=si.product_Id and financial_year='"+finYear+"' and si.salesInvoiceId=s.salesInvoiceId and c.categoryid=p.category_Id and s.si_date between '"+fromDate+"' and '"+toDate+"' group by month(s.si_date),p.category_id,p.product_id order by month(s.si_date),p.category_id;";
+			String hql="select p.product_Name as productName, c.category_name as categoryName,sum(si.quantity) as quantity,sum(si.totalCost) as Amount,monthname(s.si_date) as Date from salesInvoiceitem si,Product p,salesInvoice s,category c where p.product_id=si.product_Id and financial_year='"+finYear+"' and si.salesInvoiceId=s.salesInvoiceId and c.categoryid=p.category_Id and s.si_date between '"+fromDate+"' and '"+toDate+"' group by monthname(s.si_date),p.category_id,p.product_id order by monthname(s.si_date),p.category_id;";
 			query = sessionFactory.getCurrentSession().createSQLQuery(hql).addScalar("productName").addScalar("categoryName").addScalar("quantity").addScalar("Amount").addScalar("Date");
 		}
 		List results = query.list();

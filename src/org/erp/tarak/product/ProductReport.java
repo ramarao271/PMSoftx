@@ -9,7 +9,7 @@ public class ProductReport {
 	private double quantity;
 	private double rate;
 	private Date date;
-	private int month;
+	private String month;
 	private double totalCost;
 	
 	public String getProductName() {
@@ -42,17 +42,17 @@ public class ProductReport {
 	public void setRate(double rate) {
 		this.rate = rate;
 	}
-	public int getMonth() {
-		return month;
-	}
-	public void setMonth(int month) {
-		this.month = month;
-	}
 	public double getTotalCost() {
 		return totalCost;
 	}
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
+	}
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
 	}
 	
 	
