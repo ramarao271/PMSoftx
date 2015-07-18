@@ -200,7 +200,7 @@ public class FinanceReportsController {
 			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Sales");
 			List<ProductReport> prList1=new ArrayList<ProductReport>();
 			Date d=null;
-			int month=0;
+			String month=null;
 			for(ProductReport pp: prList)
 			{
 				if(type==Calendar.DATE)
@@ -216,7 +216,7 @@ public class FinanceReportsController {
 				}
 				else if(type==Calendar.MONTH)
 				{
-					if(month==0 || month!=pp.getMonth())
+					if(month==null || !pp.getMonth().equals(month))
 					{
 						ProductReport pr=new ProductReport();
 						pr.setProductName(pp.getMonth()+"");

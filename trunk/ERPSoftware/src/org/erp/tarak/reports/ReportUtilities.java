@@ -23,9 +23,9 @@ public class ReportUtilities {
 				{
 					pr.setDate((Date)x[4]);
 				}
-				else if(x[4] instanceof Integer)
+				else if(x[4] instanceof String)
 				{
-					pr.setMonth((int)x[4]);
+					pr.setMonth((String)x[4]);
 				}
 				prList.add(pr);
 			}
