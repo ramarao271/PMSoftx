@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -36,7 +37,7 @@ public class SalesInvoice implements Serializable {
 	@GenericGenerator(name = "salesInvoiceId", strategy = "org.erp.tarak.salesinvoice.SalesInvoiceIdGenerator")
 	@GeneratedValue(generator = "salesInvoiceId")
 	private long salesInvoiceId;
-	
+	@Id
 	private String finYear;
 	
 	@Temporal(value = TemporalType.DATE)
@@ -48,7 +49,7 @@ public class SalesInvoice implements Serializable {
 	private Customer customerId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "SO_Id")
+	@JoinColumns({@JoinColumn(name = "DC_ID", referencedColumnName = "deliveryChallanId"),@JoinColumn(name = "DC_FINYEAR", referencedColumnName = "finYear")})
 	private DeliveryChallan deliveryChallan;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -56,7 +57,7 @@ public class SalesInvoice implements Serializable {
 	@JoinTable(name = "SI_SOITEMS", inverseJoinColumns = {
 			@JoinColumn(name = "SIITEMS_srNo", referencedColumnName = "srNo"),
 			@JoinColumn(name = "SIITEMS_salesInvoiceId", referencedColumnName = "salesInvoiceId"),
-			@JoinColumn(name = "SIITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "SI_salesInvoiceId", referencedColumnName = "salesInvoiceId") }
+			@JoinColumn(name = "SIITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "SI_salesInvoiceId", referencedColumnName = "salesInvoiceId"),@JoinColumn(name = "SI_SIFinYear", referencedColumnName = "finYear") }
 
 	)
 	private List<SalesInvoiceItem> salesInvoiceItems;

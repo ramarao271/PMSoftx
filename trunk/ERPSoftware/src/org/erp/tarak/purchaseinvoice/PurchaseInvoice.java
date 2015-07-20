@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -36,7 +37,7 @@ public class PurchaseInvoice implements Serializable {
 	@GenericGenerator(name = "purchaseInvoiceId", strategy = "org.erp.tarak.purchaseinvoice.PurchaseInvoiceIdGenerator")
 	@GeneratedValue(generator = "purchaseInvoiceId")
 	private long purchaseInvoiceId;
-	
+	@Id
 	private String finYear;
 	
 	@Temporal(value = TemporalType.DATE)
@@ -48,7 +49,7 @@ public class PurchaseInvoice implements Serializable {
 	private Supplier supplierId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "PO_Id")
+	@JoinColumns({@JoinColumn(name = "PO_ID", referencedColumnName = "purchaseOrderId"),@JoinColumn(name = "PO_FINYEAR", referencedColumnName = "finYear")})
 	private PurchaseOrder purchaseOrder;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -56,7 +57,7 @@ public class PurchaseInvoice implements Serializable {
 	@JoinTable(name = "PI_POITEMS", inverseJoinColumns = {
 			@JoinColumn(name = "PIITEMS_srNo", referencedColumnName = "srNo"),
 			@JoinColumn(name = "PIITEMS_purchaseInvoiceId", referencedColumnName = "purchaseInvoiceId"),
-			@JoinColumn(name = "PIITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "PI_purchaseInvoiceId", referencedColumnName = "purchaseInvoiceId") }
+			@JoinColumn(name = "PIITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "PI_purchaseInvoiceId", referencedColumnName = "purchaseInvoiceId"),@JoinColumn(name = "PI_PIFinYear", referencedColumnName = "finYear") }
 
 	)
 	private List<PurchaseInvoiceItem> purchaseInvoiceItems;
@@ -77,6 +78,7 @@ public class PurchaseInvoice implements Serializable {
 	@Type(type="boolean")
 	private boolean processed;
 	
+	private double adjustedAmount;
 	public long getPurchaseInvoiceId() {
 		return purchaseInvoiceId;
 	}
@@ -191,6 +193,14 @@ public class PurchaseInvoice implements Serializable {
 
 	public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
 		this.purchaseOrder = purchaseOrder;
+	}
+
+	public double getAdjustedAmount() {
+		return adjustedAmount;
+	}
+
+	public void setAdjustedAmount(double adjustedAmount) {
+		this.adjustedAmount = adjustedAmount;
 	}
 
 }

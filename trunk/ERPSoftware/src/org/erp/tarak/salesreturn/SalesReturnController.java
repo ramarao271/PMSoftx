@@ -285,6 +285,7 @@ public class SalesReturnController {
 		double rtnAmt=0.0;
 		rtnAmt=-salesReturn.getTotalCost()+salesInvoice.getAdjustedAmount();
 		salesInvoice.setAdjustedAmount(rtnAmt);
+		salesInvoice.setReturnAmount(salesInvoice.getReturnAmount()-salesReturn.getTotalCost());
 		salesInvoiceService.addSalesInvoice(salesInvoice);
 		CustomerOpeningBalanceUtilities.updateCob(cobService,0, -salesReturn.getTotalCost(), salesReturn.getCustomerId().getCustomerId(), salesReturn.getFinYear(),ERPConstants.SALES_RETURN);
 		

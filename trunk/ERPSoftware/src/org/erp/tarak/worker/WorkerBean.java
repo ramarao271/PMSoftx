@@ -7,6 +7,7 @@ public class WorkerBean {
 	private String mobile;
 	private String address;
 	private double openingBalance;
+	private double balance;
 	
 	public long getWorkerId() {
 		return workerId;
@@ -37,5 +38,11 @@ public class WorkerBean {
 	}
 	public void setOpeningBalance(double openingBalance) {
 		this.openingBalance = openingBalance;
+	}
+	public double getBalance() {
+		return balance;
+	}
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 }

@@ -19,8 +19,8 @@ import org.erp.tarak.worker.WorkerUtilities;
 public class ProductionInvoiceUtilities {
 
 	public static ProductionInvoice getProductionInvoiceModel(
-			ProductionInvoiceService productionInvoiceService, long productionInvoiceId) {
-		ProductionInvoice productionInvoice = productionInvoiceService.getProductionInvoice(productionInvoiceId);
+			ProductionInvoiceService productionInvoiceService, long productionInvoiceId,String finYear) {
+		ProductionInvoice productionInvoice = productionInvoiceService.getProductionInvoice(productionInvoiceId,finYear);
 		return productionInvoice;
 	}
 
@@ -65,6 +65,10 @@ public class ProductionInvoiceUtilities {
 				.getWorkerId().getWorkerId(), workerService));
 		pob.setTotalCost(po.getTotalCost());
 		pob.setProcessed(po.isProcessed());
+		pob.setAdjustedAmount(po.getAdjustedAmount());
+		pob.setPaidAmount(po.getPaidAmount());
+		pob.setReturnAmount(po.getReturnAmount());
+		
 		pob.setProductionOrderBean(ProductionOrderUtilities.prepareProductionOrderBean(po.getProductionOrder()));
 		return pob;
 	}
@@ -82,6 +86,10 @@ public class ProductionInvoiceUtilities {
 		pob.setTotalCost(po.getTotalCost());
 		pob.setProcessed(po.isProcessed());
 		pob.setProductionOrderBean(ProductionOrderUtilities.prepareProductionOrderBean(po.getProductionOrder()));
+		pob.setAdjustedAmount(po.getAdjustedAmount());
+		pob.setPaidAmount(po.getPaidAmount());
+		pob.setReturnAmount(po.getReturnAmount());
+		
 		return pob;
 	}
 
@@ -105,6 +113,9 @@ public class ProductionInvoiceUtilities {
 		ProductionOrder po=ProductionOrderUtilities.getProductionOrderModel(productionOrderService, productionInvoiceBean.getProductionOrderBean().getProductionOrderId());
 		productionInvoice.setProductionOrder(po);
 		productionInvoice.setWorkerId(po.getWorkerId());
+		productionInvoice.setAdjustedAmount(productionInvoiceBean.getAdjustedAmount());
+		productionInvoice.setReturnAmount(productionInvoiceBean.getReturnAmount());
+		productionInvoice.setPaidAmount(productionInvoiceBean.getPaidAmount());
 		return productionInvoice;
 	}
 
@@ -161,6 +172,9 @@ public class ProductionInvoiceUtilities {
 		productionInvoice.setProductionInvoiceItems(productionInvoiceItems);
 		productionInvoice.setWorkerId(WorkerUtilities.prepareWorkerModel(productionInvoiceBean.getWorkerBean()));
 		productionInvoice.setProcessed(productionInvoiceBean.isProcessed());
+		productionInvoice.setAdjustedAmount(productionInvoiceBean.getAdjustedAmount());
+		productionInvoice.setReturnAmount(productionInvoiceBean.getReturnAmount());
+		productionInvoice.setPaidAmount(productionInvoiceBean.getPaidAmount());
 		productionInvoice.setProductionOrder(ProductionOrderUtilities.prepareProductionOrderModel(productionInvoiceBean.getProductionOrderBean()));
 		return productionInvoice;
 		
@@ -192,8 +206,8 @@ public class ProductionInvoiceUtilities {
 	}
 
 	public static void updateProductionInvoiceStatus(long productionInvoiceId,
-			List<DeliveryChallanItem> deliveryChallanItems,ProductionInvoiceService productionInvoiceService) {
-		ProductionInvoice productionInvoice=productionInvoiceService.getProductionInvoice(productionInvoiceId);
+			List<DeliveryChallanItem> deliveryChallanItems,ProductionInvoiceService productionInvoiceService,String finYear) {
+		ProductionInvoice productionInvoice=productionInvoiceService.getProductionInvoice(productionInvoiceId,finYear);
 		if(deliveryChallanItems!=null && deliveryChallanItems.size()>0)
 		{
 			if(productionInvoice.getProductionInvoiceItems()!=null && productionInvoice.getProductionInvoiceItems().size()>0)
@@ -232,5 +246,15 @@ public class ProductionInvoiceUtilities {
 				productionInvoiceService.addProductionInvoice(productionInvoice);			
 			}
 		}
+	}
+
+	public static List<ProductionInvoiceBean> prepareListofProductionInvoiceBean(
+			List<ProductionInvoice> listProductionInvoicesByWorker) {
+		List<ProductionInvoiceBean> beans = new LinkedList<ProductionInvoiceBean>();
+		for (ProductionInvoice po : listProductionInvoicesByWorker) {
+			ProductionInvoiceBean pob = prepareProductionInvoiceBean(po);
+			beans.add(pob);
+		}
+		return beans;
 	}
 }

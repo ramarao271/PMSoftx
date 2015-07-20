@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -35,7 +36,7 @@ public class PurchaseReturn implements Serializable {
 	@GenericGenerator(name = "purchaseReturnId", strategy = "org.erp.tarak.purchasereturn.PurchaseReturnIdGenerator")
 	@GeneratedValue(generator = "purchaseReturnId")
 	private long purchaseReturnId;
-	
+	@Id
 	private String finYear;
 	
 	@Temporal(value = TemporalType.DATE)
@@ -47,7 +48,7 @@ public class PurchaseReturn implements Serializable {
 	private Supplier supplierId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "PO_Id")
+	@JoinColumns({@JoinColumn(name = "PI_ID", referencedColumnName = "purchaseInvoiceId"),@JoinColumn(name = "PI_FINYEAR", referencedColumnName = "finYear")})
 	private PurchaseInvoice purchaseInvoice;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -55,7 +56,7 @@ public class PurchaseReturn implements Serializable {
 	@JoinTable(name = "PR_POITEMS", inverseJoinColumns = {
 			@JoinColumn(name = "PRITEMS_srNo", referencedColumnName = "srNo"),
 			@JoinColumn(name = "PRITEMS_srId", referencedColumnName = "purchaseReturnId"),
-			@JoinColumn(name = "PRITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "PR_purchaseReturnId", referencedColumnName = "purchaseReturnId") }
+			@JoinColumn(name = "PRITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "PR_purchaseReturnId", referencedColumnName = "purchaseReturnId") ,@JoinColumn(name = "PR_PRFinYear", referencedColumnName = "finYear")}
 
 	)
 	private List<PurchaseReturnItem> purchaseReturnItems;

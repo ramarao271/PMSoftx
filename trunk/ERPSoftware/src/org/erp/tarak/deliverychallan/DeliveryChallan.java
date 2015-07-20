@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -37,9 +38,9 @@ public class DeliveryChallan implements Serializable {
 	@GenericGenerator(name = "deliveryChallanId", strategy = "org.erp.tarak.deliverychallan.DeliveryChallanIdGenerator")
 	@GeneratedValue(generator = "deliveryChallanId")
 	private long deliveryChallanId;
-
+	@Id
 	private String finYear;
-
+	
 	@Temporal(value = TemporalType.DATE)
 	@Column(name = "DC_DATE")
 	private Date deliveryChallanDate;
@@ -49,7 +50,7 @@ public class DeliveryChallan implements Serializable {
 	private Customer customerId;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "SO_Id")
+	@JoinColumns({@JoinColumn(name = "SO_ID", referencedColumnName = "salesOrderId"),@JoinColumn(name = "SO_FINYEAR", referencedColumnName = "finYear")})
 	private SalesOrder salesOrder;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -64,7 +65,7 @@ public class DeliveryChallan implements Serializable {
 	@JoinTable(name = "DC_SOITEMS", inverseJoinColumns = {
 			@JoinColumn(name = "DCITEMS_srNo", referencedColumnName = "srNo"),
 			@JoinColumn(name = "DCITEMS_deliveryChallanId", referencedColumnName = "deliveryChallanId"),
-			@JoinColumn(name = "DCITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "DC_deliveryChallanId", referencedColumnName = "deliveryChallanId") }
+			@JoinColumn(name = "DCITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "DC_deliveryChallanId", referencedColumnName = "deliveryChallanId"),@JoinColumn(name = "DC_DCFinYear", referencedColumnName = "finYear") }
 
 	)
 	private List<DeliveryChallanItem> deliveryChallanItems;

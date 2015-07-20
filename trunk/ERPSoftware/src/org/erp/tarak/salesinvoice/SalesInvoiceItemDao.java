@@ -37,4 +37,7 @@ public interface SalesInvoiceItemDao {
 
 	public List<Object[]> getProfitReportByCategoryWise(String finYear,
 			int type, String date);
+
+	public List<Object[]> listProfitReportByCategoryWise(String finYear,
+			int type, String fromDate, String toDate);
 }

@@ -77,5 +77,12 @@ public class SalesInvoiceItemServiceImpl implements SalesInvoiceItemService {
 		return salesInvoiceItemDao.getProfitReportByCategoryWise(finYear,type, date);
 	}
 
+	@Override
+	public List<Object[]> listProfitReportByCategoryWise(String finYear,
+			int type, String fromDate, String toDate) {
+		// TODO Auto-generated method stub
+		return salesInvoiceItemDao.listProfitReportByCategoryWise(finYear,type,fromDate,toDate);
+	}
+
 
 }

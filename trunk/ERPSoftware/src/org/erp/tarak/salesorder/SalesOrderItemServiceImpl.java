@@ -36,4 +36,28 @@ public class SalesOrderItemServiceImpl implements SalesOrderItemService {
 		salesOrderItemDao.deleteSalesOrderItems(pois);
 	}
 
+	@Override
+	public List<Object[]> listLostSalesReportByCategoryWise(String finYear,
+			int type, String fromDate,String toDate) {
+		return salesOrderItemDao.listLostSalesReportByCategoryWise(finYear,type,fromDate,toDate);
+	}
+
+	@Override
+	public List<Object[]> listLostSalesReportByCategoryWise(String finYear,
+			int type, String date) {
+		return salesOrderItemDao.listLostSalesReportByCategoryWise(finYear,type,date);
+	}
+
+	@Override
+	public List<Object[]> listLostSalesReportByVariantWise(String finYear,
+			int type, String fromDate, String toDate) {
+		return salesOrderItemDao.listLostSalesReportByVariantWise(finYear,type,fromDate,toDate);
+	}
+
+	@Override
+	public List<Object[]> listLostSalesReportByVariantWise(String finYear,
+			int type, String date) {
+		return salesOrderItemDao.listLostSalesReportByVariantWise(finYear,type,date);
+	}
+
 }

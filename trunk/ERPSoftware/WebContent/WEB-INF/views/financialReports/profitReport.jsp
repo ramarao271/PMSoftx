@@ -23,7 +23,7 @@
 <link href="${datecss}" rel="stylesheet" />
 </head>
 <body>
-	<form:form action="salesReportAction" method="post"
+	<form:form action="profitReportAction" method="post"
 		modelAttribute="reportForm">
 		<table align="center">
 			<tr>
@@ -59,6 +59,7 @@
 							<thead>
 								<tr>
 									<!-- //.addScalar("categoryName").addScalar("quantity").addScalar("totalPrice").addScalar("cost").addScalar("Date"); -->
+									<th><div label="Product"></div></th>
 									<th><div label="Category"></div></th>
 									<th><div label="Quantity"></div></th>
 									<th><div label="Unit Cost"></div></th>
@@ -71,15 +72,16 @@
 									<tr>
 										<c:choose>
 											<c:when test="${product.quantity>0}">
+												<td><c:out value="${product.productName}" /></td>
 												<td><c:out value="${product.categoryName}" /></td>
 												<td align="right"><c:out value="${product.quantity}" /></td>
 												<td align="right"><c:out value="${product.rate}" /></td>
 												<td align="right"><c:out value="${product.totalCost}" /></td>
-												<td><c:out
+												<td align="right"><c:out
 														value="${product.totalCost-product.quantity*product.rate}" /></td>
 											</c:when>
 											<c:otherwise>
-												<td colspan="5" align="center"><b><c:out
+												<td colspan="6" align="center"><b><c:out
 															value="${product.productName}" /></b></td>
 											</c:otherwise>
 										</c:choose>

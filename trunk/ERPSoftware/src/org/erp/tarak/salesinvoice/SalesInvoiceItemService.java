@@ -33,4 +33,7 @@ public interface SalesInvoiceItemService {
 	public List<Object[]> getProfitReportByCategoryWise(String finYear,
 			int date, String date2);
 
+	public List<Object[]> listProfitReportByCategoryWise(String finYear,
+			int type, String fromDate, String toDate);
+
 }

@@ -36,6 +36,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<context:component-scan base-package="org.erp.tarak.salesinvoice" />
 	<context:component-scan base-package="org.erp.tarak.salesreturn" />
 	<context:component-scan base-package="org.erp.tarak.salesPayment" />
+	<context:component-scan base-package="org.erp.tarak.otherPayment" />
 	
 	<context:component-scan base-package="org.erp.tarak.productionorder" />
 	<context:component-scan base-package="org.erp.tarak.productioninvoice" />
@@ -83,6 +84,8 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 				<value>org.erp.tarak.salesreturn.SalesReturnItem</value>
 				<value>org.erp.tarak.salesPayment.SalesPayment</value>
 				<value>org.erp.tarak.salesPayment.SalesPaymentItem</value>
+				<value>org.erp.tarak.otherPayment.OtherPayment</value>
+				<value>org.erp.tarak.otherPayment.OtherPaymentItem</value>
 
 				<value>org.erp.tarak.productionorder.ProductionOrder</value>
 				<value>org.erp.tarak.productionorder.ProductionOrderItem</value>

@@ -34,6 +34,7 @@ public class PurchaseOrder implements Serializable {
 	@GenericGenerator(name = "purchaseOrderId", strategy = "org.erp.tarak.purchaseorder.PurchaseOrderIdGenerator")
 	@GeneratedValue(generator = "purchaseOrderId")
 	private long purchaseOrderId;
+	@Id
 	private String finYear;
 	@Temporal(value = TemporalType.DATE)
 	@Column(name = "PO_DATE")
@@ -48,7 +49,7 @@ public class PurchaseOrder implements Serializable {
 	@JoinTable(name = "PO_POITEMS", inverseJoinColumns = {
 			@JoinColumn(name = "POITEMS_srNo", referencedColumnName = "srNo"),
 			@JoinColumn(name = "POITEMS_purchaseOrderId", referencedColumnName = "purchaseOrderId"),
-			@JoinColumn(name = "POITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "PO_purchaseOrderId", referencedColumnName = "purchaseOrderId") }
+			@JoinColumn(name = "POITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "PO_purchaseOrderId", referencedColumnName = "purchaseOrderId"),@JoinColumn(name = "PO_POFinYear", referencedColumnName = "finYear") }
 
 	)
 	private List<PurchaseOrderItem> purchaseOrderItems;

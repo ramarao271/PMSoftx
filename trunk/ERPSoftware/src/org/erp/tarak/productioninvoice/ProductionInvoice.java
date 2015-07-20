@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -36,6 +37,7 @@ public class ProductionInvoice implements Serializable {
 	@GenericGenerator(name = "productionInvoiceId", strategy = "org.erp.tarak.productioninvoice.ProductionInvoiceIdGenerator")
 	@GeneratedValue(generator = "productionInvoiceId")
 	private long productionInvoiceId;
+	@Id
 	private String finYear;
 	@Temporal(value = TemporalType.DATE)
 	@Column(name = "POI_DATE")
@@ -46,7 +48,7 @@ public class ProductionInvoice implements Serializable {
 	private Worker workerId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "PO_Id")
+	@JoinColumns({@JoinColumn(name = "PO_ID", referencedColumnName = "productionOrderId"),@JoinColumn(name = "PO_FINYEAR", referencedColumnName = "finYear")})
 	private ProductionOrder productionOrder;
 	
 
@@ -55,7 +57,7 @@ public class ProductionInvoice implements Serializable {
 	@JoinTable(name = "POI_POIITEMS", inverseJoinColumns = {
 			@JoinColumn(name = "POIITEMS_srNo", referencedColumnName = "srNo"),
 			@JoinColumn(name = "POIITEMS_productionInvoiceId", referencedColumnName = "productionInvoiceId"),
-			@JoinColumn(name = "POIITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "POI_productionInvoiceId", referencedColumnName = "productionInvoiceId") }
+			@JoinColumn(name = "POIITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "POI_productionInvoiceId", referencedColumnName = "productionInvoiceId"),@JoinColumn(name = "POI_POIFinYear", referencedColumnName = "finYear") }
 
 	)
 	private List<ProductionInvoiceItem> productionInvoiceItems;
@@ -64,7 +66,34 @@ public class ProductionInvoice implements Serializable {
 	
 	@Type(type="boolean")
 	private boolean processed;
+	private double paidAmount;
+	private double adjustedAmount;
+	private double returnAmount;
 	
+	public double getPaidAmount() {
+		return paidAmount;
+	}
+
+	public void setPaidAmount(double paidAmount) {
+		this.paidAmount = paidAmount;
+	}
+
+	public double getAdjustedAmount() {
+		return adjustedAmount;
+	}
+
+	public void setAdjustedAmount(double adjustedAmount) {
+		this.adjustedAmount = adjustedAmount;
+	}
+
+	public double getReturnAmount() {
+		return returnAmount;
+	}
+
+	public void setReturnAmount(double returnAmount) {
+		this.returnAmount = returnAmount;
+	}
+
 	public long getProductionInvoiceId() {
 		return productionInvoiceId;
 	}

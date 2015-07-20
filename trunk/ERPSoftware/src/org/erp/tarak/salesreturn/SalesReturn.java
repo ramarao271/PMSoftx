@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -35,7 +36,7 @@ public class SalesReturn implements Serializable {
 	@GenericGenerator(name = "salesReturnId", strategy = "org.erp.tarak.salesreturn.SalesReturnIdGenerator")
 	@GeneratedValue(generator = "salesReturnId")
 	private long salesReturnId;
-	
+	@Id
 	private String finYear;
 	
 	@Temporal(value = TemporalType.DATE)
@@ -47,7 +48,7 @@ public class SalesReturn implements Serializable {
 	private Customer customerId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "SO_Id")
+	@JoinColumns({@JoinColumn(name = "SI_ID", referencedColumnName = "salesInvoiceId"),@JoinColumn(name = "SI_FINYEAR", referencedColumnName = "finYear")})
 	private SalesInvoice salesInvoice;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -55,7 +56,7 @@ public class SalesReturn implements Serializable {
 	@JoinTable(name = "SR_SOITEMS", inverseJoinColumns = {
 			@JoinColumn(name = "SRITEMS_srNo", referencedColumnName = "srNo"),
 			@JoinColumn(name = "SRITEMS_srId", referencedColumnName = "salesReturnId"),
-			@JoinColumn(name = "SRITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "SR_salesReturnId", referencedColumnName = "salesReturnId") }
+			@JoinColumn(name = "SRITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "SR_salesReturnId", referencedColumnName = "salesReturnId"),@JoinColumn(name = "SR_SRFinYear", referencedColumnName = "finYear") }
 
 	)
 	private List<SalesReturnItem> salesReturnItems;
