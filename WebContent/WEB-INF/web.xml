@@ -162,6 +162,19 @@
 		<url-pattern>/salesPayment/*</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>otherPayment</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/otherPayment-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>otherPayment</servlet-name>
+		<url-pattern>/otherPayment/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>financialReports</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>

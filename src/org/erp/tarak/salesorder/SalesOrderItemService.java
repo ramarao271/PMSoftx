@@ -14,4 +14,15 @@ public interface SalesOrderItemService {
 
 	public void deleteSalesOrderItems(List<SalesOrderItem> pois);
 
+	public List<Object[]> listLostSalesReportByCategoryWise(String finYear,
+			int type,String fromDate,String toDate);
+
+	public List<Object[]> listLostSalesReportByCategoryWise(String finYear,
+			int type, String date2);
+	public List<Object[]> listLostSalesReportByVariantWise(String finYear,
+			int type, String fromDate,String toDate);
+
+	public List<Object[]> listLostSalesReportByVariantWise(String finYear,
+			int type, String date);
+	
 }

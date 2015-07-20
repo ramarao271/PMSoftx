@@ -131,10 +131,14 @@ public class ProductionInvoiceController {
 	@RequestMapping(value = "/productioninvoices", method = RequestMethod.GET)
 	public ModelAndView listProductionInvoices() {
 		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+			
 		model.put("productionInvoices", ProductionInvoiceUtilities
 				.prepareListofProductionInvoiceBean(
-						productionInvoiceService.listProductionInvoices(),
+						productionInvoiceService.listProductionInvoices(user.getFinYear()),
 						workerService));
+		}
 		return new ModelAndView("productionInvoiceList", model);
 	}
 
@@ -155,7 +159,7 @@ public class ProductionInvoiceController {
 			ProductionInvoice savedProductionInvoice=null;
 			if(productionInvoiceBean.getProductionInvoiceId()>0)
 			{
-				savedProductionInvoice=ProductionInvoiceUtilities.getProductionInvoiceModel(productionInvoiceService, productionInvoiceBean.getProductionInvoiceId());
+				savedProductionInvoice=ProductionInvoiceUtilities.getProductionInvoiceModel(productionInvoiceService, productionInvoiceBean.getProductionInvoiceId(),user.getFinYear());
 			}
 			productionInvoiceService.addProductionInvoice(productionInvoice);
 			
@@ -164,7 +168,7 @@ public class ProductionInvoiceController {
 					"ProductionInvoice details saved successfully!");
 			model.addAttribute("productionInvoices", ProductionInvoiceUtilities
 					.prepareListofProductionInvoiceBean(
-							productionInvoiceService.listProductionInvoices(),
+							productionInvoiceService.listProductionInvoices(user.getFinYear()),
 							workerService));
 			return new ModelAndView("productionInvoiceList");// , model);
 		} else {
@@ -175,31 +179,43 @@ public class ProductionInvoiceController {
 	@RequestMapping(value = "/ProductionInvoiceSelectionList", method = RequestMethod.GET)
 	public ModelAndView ProductionInvoicesSelectionList() {
 		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+			
 		model.put("productionInvoices", ProductionInvoiceUtilities
 				.prepareListofProductionInvoiceBean(
-						productionInvoiceService.listPendingProductionInvoices(), workerService));
+						productionInvoiceService.listPendingProductionInvoices(user.getFinYear()), workerService));
+		}
 		return new ModelAndView("ProductionInvoicesSelectionList", model);
 	}
 
 	@RequestMapping(value = "/pendingProductioninvoices", method = RequestMethod.GET)
 	public ModelAndView listPendingProductionInvoices() {
 		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+			
 		model.put("type", ERPConstants.PROCESSED);
 		model.put("mode",ERPConstants.PENDING);
 		model.put("productionInvoices", ProductionInvoiceUtilities
 				.prepareListofProductionInvoiceBean(
-						productionInvoiceService.listPendingProductionInvoices(), workerService));
+						productionInvoiceService.listPendingProductionInvoices(user.getFinYear()), workerService));
+		}
 		return new ModelAndView("productionInvoiceList", model);
 	}
 
 	@RequestMapping(value = "/processedProductioninvoices", method = RequestMethod.GET)
 	public ModelAndView listProcessedProductionInvoices() {
 		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+			
 		model.put("type", ERPConstants.PENDING);
 		model.put("mode",ERPConstants.PROCESSED);
 		model.put("productionInvoices", ProductionInvoiceUtilities
 				.prepareListofProductionInvoiceBean(
-						productionInvoiceService.listProcessedProductionInvoices(), workerService));
+						productionInvoiceService.listProcessedProductionInvoices(user.getFinYear()), workerService));
+		}
 		return new ModelAndView("productionInvoiceList", model);
 	}
 	@RequestMapping(value = "/addProductionInvoice", method = RequestMethod.GET)
@@ -256,19 +272,23 @@ public class ProductionInvoiceController {
 	public ModelAndView editProductionInvoice(
 			@ModelAttribute("command") ProductionInvoiceBean productionInvoiceBean,
 			BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+			
 		ProductionInvoice productionInvoice = ProductionInvoiceUtilities.getProductionInvoiceModel(
-				productionInvoiceService, productionInvoiceBean.getProductionInvoiceId());
+				productionInvoiceService, productionInvoiceBean.getProductionInvoiceId(),user.getFinYear());
 		List<ProductionInvoiceItem> pois = productionInvoice.getProductionInvoiceItems();
 		productionInvoiceService.deleteProductionInvoice(productionInvoice);
 		productionInvoiceItemService.deleteProductionInvoiceItems(pois);
 		RawMaterialUtilities.updateRawMaterialDetails(productionInvoice,rawMaterialService,productionInvoice,ERPConstants.SALES_ORDER,ERPConstants.OP_DELETE);
-		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("productionInvoice", null);
 		model.put("productionInvoices", ProductionInvoiceUtilities
 				.prepareListofProductionInvoiceBean(
-						productionInvoiceService.listPendingProductionInvoices(), workerService));
+						productionInvoiceService.listPendingProductionInvoices(user.getFinYear()), workerService));
 		model.put("message",
 				"ProductionInvoice deleted successfully!");
+		}
 		return new ModelAndView("productionInvoiceList", model);
 	}
 
@@ -277,6 +297,9 @@ public class ProductionInvoiceController {
 			@ModelAttribute("command") ProductionInvoiceBean productionInvoiceBean,
 			BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+			
 		productionInvoiceBean
 		.setProductionOrderBean(ProductionOrderUtilities
 				.prepareProductionOrderBean(ProductionOrderUtilities
@@ -284,8 +307,9 @@ public class ProductionInvoiceController {
 								productionOrderService, productionInvoiceBean.getProductionOrderBean().getProductionOrderId())));
 		model.put("productionInvoiceBean", ProductionInvoiceUtilities.prepareProductionInvoiceBean(
 				productionInvoiceService.getProductionInvoice(productionInvoiceBean
-						.getProductionInvoiceId()), workerService));
+						.getProductionInvoiceId(),user.getFinYear()), workerService));
 		model.put("operation", "Update");
+		}
 		return new ModelAndView("productionInvoice", model);
 	}
 	
@@ -294,6 +318,9 @@ public class ProductionInvoiceController {
 			@ModelAttribute("command") ProductionInvoiceBean productionInvoiceBean,
 			BindingResult result,@PathVariable long srNo) {
 		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+		
 		Iterator<ProductionInvoiceItemBean> itr=productionInvoiceBean.getProductionInvoiceItemBeans().iterator();
 		productionInvoiceBean
 		.setProductionOrderBean(ProductionOrderUtilities
@@ -310,6 +337,7 @@ public class ProductionInvoiceController {
 			}
 		}
 		model.put("productionInvoiceBean",productionInvoiceBean);
+		}
 		return new ModelAndView("productionInvoice", model);
 	}
 	@RequestMapping(value = "/updateProductionInvoice/{type}/{id}", method = RequestMethod.GET)
@@ -317,7 +345,10 @@ public class ProductionInvoiceController {
 			@ModelAttribute("command") ProductionInvoiceBean productionInvoiceBean,
 			BindingResult result,@PathVariable String type,@PathVariable long id) {
 		Map<String, Object> model = new HashMap<String, Object>();
-		ProductionInvoice productionInvoice=ProductionInvoiceUtilities.getProductionInvoiceModel(productionInvoiceService,id);
+		if (session.getAttribute("user") != null) {
+			UserBean user = (UserBean) session.getAttribute("user");
+		
+		ProductionInvoice productionInvoice=ProductionInvoiceUtilities.getProductionInvoiceModel(productionInvoiceService,id,user.getFinYear());
 		List<ProductionInvoiceBean> productionInvoiceBeans=null;
 		if(ERPConstants.PENDING.equals(type))
 		{
@@ -325,7 +356,7 @@ public class ProductionInvoiceController {
 			productionInvoiceService.addProductionInvoice(productionInvoice);
 			productionInvoiceBeans=ProductionInvoiceUtilities
 				.prepareListofProductionInvoiceBean(
-						productionInvoiceService.listProcessedProductionInvoices(), workerService);
+						productionInvoiceService.listProcessedProductionInvoices(user.getFinYear()), workerService);
 		}
 		else if(ERPConstants.PROCESSED.equals(type))
 		{
@@ -333,10 +364,11 @@ public class ProductionInvoiceController {
 			productionInvoiceService.addProductionInvoice(productionInvoice);
 			productionInvoiceBeans=ProductionInvoiceUtilities
 					.prepareListofProductionInvoiceBean(
-							productionInvoiceService.listPendingProductionInvoices(), workerService);
+							productionInvoiceService.listPendingProductionInvoices(user.getFinYear()), workerService);
 		}
 		model.put("productionInvoices", productionInvoiceBeans);
 		model.put("type", type);
+		}
 		return new ModelAndView("productionInvoiceList", model);
 	}
 

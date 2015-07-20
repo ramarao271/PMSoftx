@@ -1,7 +1,6 @@
 package org.erp.tarak.reports;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,11 +15,13 @@ import org.erp.tarak.customer.CustomerBean;
 import org.erp.tarak.customer.CustomerService;
 import org.erp.tarak.customer.CustomerUtilities;
 import org.erp.tarak.deliverychallan.DeliveryChallanService;
+import org.erp.tarak.library.ERPConstants;
 import org.erp.tarak.library.ERPUtilities;
 import org.erp.tarak.product.ProductReport;
 import org.erp.tarak.purchaseinvoice.PurchaseInvoiceService;
 import org.erp.tarak.salesinvoice.SalesInvoiceItemService;
 import org.erp.tarak.salesinvoice.SalesInvoiceService;
+import org.erp.tarak.salesorder.SalesOrderItemService;
 import org.erp.tarak.salesorder.SalesOrderService;
 import org.erp.tarak.supplier.Supplier;
 import org.erp.tarak.supplier.SupplierBean;
@@ -42,6 +43,9 @@ public class FinanceReportsController {
 	@Autowired
 	private SalesInvoiceService salesInvoiceService;
 
+	@Autowired
+	private SalesOrderItemService salesOrderItemService;
+	
 	@Autowired
 	private SalesInvoiceItemService salesInvoiceItemService;
 	
@@ -131,6 +135,7 @@ public class FinanceReportsController {
 		
 		return new ModelAndView("accountsReceivable", model);
 	}
+	
 	@RequestMapping(value = "/accountsPayable", method = RequestMethod.GET)
 	public ModelAndView accountsPayable() {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -173,7 +178,7 @@ public class FinanceReportsController {
 			SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
 			String date=df.format(d);
 			List<Object[]> obj=salesInvoiceItemService.listSalesReportByCategoryWise(user.getFinYear(),Calendar.DATE,date);
-			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Sales");
+			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Sales",Calendar.DATE,ERPConstants.CATEGORY);
 			model.put("mode", date);
 			model.put("products", prList);
 		}
@@ -187,52 +192,33 @@ public class FinanceReportsController {
 		if (session.getAttribute("user") != null)
 		{
 			UserBean user = (UserBean) session.getAttribute("user");
-			int type=0;
-			if("Daily".equals(reportForm.getDurationType()))
-			{
-				type=Calendar.DATE;
-			}
-			else
-			{
-				type=Calendar.MONTH;
-			}
+			int type=ReportUtilities.getDurationType(reportForm.getDurationType());
 			List<Object[]> obj=salesInvoiceItemService.listSalesReportByCategoryWise(user.getFinYear(),type,reportForm.getFromDate(),reportForm.getToDate());
-			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Sales");
-			List<ProductReport> prList1=new ArrayList<ProductReport>();
-			Date d=null;
-			String month=null;
-			for(ProductReport pp: prList)
-			{
-				if(type==Calendar.DATE)
-				{
-					if(d==null || d.compareTo(pp.getDate())!=0)
-					{
-						ProductReport pr=new ProductReport();
-						pr.setProductName(pp.getDate()+"");
-						prList1.add(pr);
-						d=pp.getDate();
-					}
-					prList1.add(pp);
-				}
-				else if(type==Calendar.MONTH)
-				{
-					if(month==null || !pp.getMonth().equals(month))
-					{
-						ProductReport pr=new ProductReport();
-						pr.setProductName(pp.getMonth()+"");
-						prList1.add(pr);
-						month=pp.getMonth();
-					}
-					prList1.add(pp);
-				}
-			}
+			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Sales",type,ERPConstants.CATEGORY);
 			String date=reportForm.getFromDate()+" to "+reportForm.getToDate();
 			model.put("mode", date);
-			model.put("products", prList1);
+			model.put("products", prList);
 		}
 		return new ModelAndView("salesReport",model);
 	}
 
+	@RequestMapping(value = "/lostSalesReportAction", method = RequestMethod.POST)
+	public ModelAndView lostSalesReportAction(@ModelAttribute("reportForm") ReportForm reportForm) 
+	{
+		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null)
+		{
+			UserBean user = (UserBean) session.getAttribute("user");
+			int type=ReportUtilities.getDurationType(reportForm.getDurationType());
+			List<Object[]> obj=salesOrderItemService.listLostSalesReportByCategoryWise(user.getFinYear(),type,reportForm.getFromDate(),reportForm.getToDate());
+			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Sales",type,ERPConstants.CATEGORY);
+			String date=reportForm.getFromDate()+" to "+reportForm.getToDate();
+			model.put("mode", date);
+			model.put("products", prList);
+		}
+		return new ModelAndView("lostSalesReport",model);
+	}
+	
 	@RequestMapping(value = "/lostSalesReport", method = RequestMethod.GET)
 	public ModelAndView lostSalesReport(@ModelAttribute("reportForm") ReportForm reportForm) 
 	{
@@ -244,10 +230,13 @@ public class FinanceReportsController {
 			Date d=c.getTime();
 			SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
 			String date=df.format(d);
-			List<Object[]> obj=salesInvoiceItemService.listSalesReportByCategoryWise(user.getFinYear(),Calendar.DATE,date);
-			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Sales");
+			List<Object[]> obj=salesOrderItemService.listLostSalesReportByCategoryWise(user.getFinYear(),Calendar.DATE,date);
+			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Sales",Calendar.DATE,ERPConstants.CATEGORY);
+			List<Object[]> vobj=salesOrderItemService.listLostSalesReportByVariantWise(user.getFinYear(),Calendar.DATE,date);
+			List<ProductReport> vprList=ReportUtilities.populateProductSaleEntries(vobj,"Sales",Calendar.DATE,ERPConstants.VARIANT);
 			model.put("mode", date);
 			model.put("products", prList);
+			model.put("vproducts", vprList);
 		}
 		return new ModelAndView("lostSalesReport",model);
 	}
@@ -264,7 +253,24 @@ public class FinanceReportsController {
 			SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
 			String date=df.format(d);
 			List<Object[]> obj=salesInvoiceItemService.getProfitReportByCategoryWise(user.getFinYear(),Calendar.DATE,date);
-			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Profit");
+			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Profit",Calendar.DATE,ERPConstants.CATEGORY);
+			model.put("mode", date);
+			model.put("products", prList);
+		}
+		return new ModelAndView("profitReport",model);
+	}
+
+	@RequestMapping(value = "/profitReportAction", method = RequestMethod.POST)
+	public ModelAndView profitReportAction(@ModelAttribute("reportForm") ReportForm reportForm) 
+	{
+		Map<String, Object> model = new HashMap<String, Object>();
+		if (session.getAttribute("user") != null)
+		{
+			UserBean user = (UserBean) session.getAttribute("user");
+			int type=ReportUtilities.getDurationType(reportForm.getDurationType());
+			List<Object[]> obj=salesInvoiceItemService.listProfitReportByCategoryWise(user.getFinYear(),type,reportForm.getFromDate(),reportForm.getToDate());
+			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Profit",type,ERPConstants.CATEGORY);
+					String date=reportForm.getFromDate()+" to "+reportForm.getToDate();
 			model.put("mode", date);
 			model.put("products", prList);
 		}

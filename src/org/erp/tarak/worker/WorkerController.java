@@ -182,6 +182,8 @@ public class WorkerController {
 			UserBean user = (UserBean) session.getAttribute("user");
 			List<Object[]> objects=workerService.getWorkerTransactions(workerBean.getWorkerId(),user.getFinYear());
 			List<WorkerTransaction> transactions=new LinkedList<WorkerTransaction>();
+			double orderCost=0;
+			double invoiceCost=0;
 			for(Object[] x: objects)
 			{
 				WorkerTransaction transaction=new WorkerTransaction();
@@ -191,8 +193,12 @@ public class WorkerController {
 				transaction.setOrderCost((double)x[2]);
 				transaction.setInvoiceCost((double)x[3]);
 				transactions.add(transaction);
+				orderCost+=(double)x[2];
+				invoiceCost+=(double)x[3];
 			}
-			model.put("workerBean", WorkerUtilities.prepareWorkerBean(workerBean.getWorkerId(), workerService));
+			WorkerBean workerBean1=WorkerUtilities.prepareWorkerBean(workerBean.getWorkerId(), workerService);
+			workerBean1.setBalance(orderCost-invoiceCost);
+			model.put("workerBean", workerBean1);
 			model.put("transactions", transactions);
 		}
 		return new ModelAndView("workerTransactions", model);

@@ -34,7 +34,9 @@ public class SalesOrder implements Serializable {
 	@GenericGenerator(name = "salesOrderId", strategy = "org.erp.tarak.salesorder.SalesOrderIdGenerator")
 	@GeneratedValue(generator = "salesOrderId")
 	private long salesOrderId;
+	@Id
 	private String finYear;
+	
 	@Temporal(value = TemporalType.DATE)
 	@Column(name = "SO_DATE")
 	private Date salesOrderDate;
@@ -48,7 +50,7 @@ public class SalesOrder implements Serializable {
 	@JoinTable(name = "SO_SOITEMS", inverseJoinColumns = {
 			@JoinColumn(name = "SOITEMS_srNo", referencedColumnName = "srNo"),
 			@JoinColumn(name = "SOITEMS_salesOrderId", referencedColumnName = "salesOrderId"),
-			@JoinColumn(name = "SOITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "SO_salesOrderId", referencedColumnName = "salesOrderId") }
+			@JoinColumn(name = "SOITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "SO_salesOrderId", referencedColumnName = "salesOrderId"),@JoinColumn(name = "SO_SOFinYear", referencedColumnName = "finYear") }
 
 	)
 	private List<SalesOrderItem> salesOrderItems;

@@ -17,6 +17,34 @@ public class ProductionInvoiceBean {
 	private double totalCost;
 	private boolean processed;
 	private ProductionOrderBean productionOrderBean;
+	private double paidAmount;
+	private double adjustedAmount;
+	private double returnAmount;
+	
+	public double getPaidAmount() {
+		return paidAmount;
+	}
+
+	public void setPaidAmount(double paidAmount) {
+		this.paidAmount = paidAmount;
+	}
+
+	public double getAdjustedAmount() {
+		return adjustedAmount;
+	}
+
+	public void setAdjustedAmount(double adjustedAmount) {
+		this.adjustedAmount = adjustedAmount;
+	}
+
+	public double getReturnAmount() {
+		return returnAmount;
+	}
+
+	public void setReturnAmount(double returnAmount) {
+		this.returnAmount = returnAmount;
+	}
+
 	public long getProductionInvoiceId() {
 		return productionInvoiceId;
 	}

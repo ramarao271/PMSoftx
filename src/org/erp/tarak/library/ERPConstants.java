@@ -33,6 +33,8 @@ public class ERPConstants {
 	public static final String VT_MATERIAL="Material";
 	public static final String PROCESSED="Processed";
 	public static final String PENDING="Pending";
+	public static final String CATEGORY="Category";
+	public static final String VARIANT="Variant";
 	
 	public static Map<String, Object> linkMap = new LinkedHashMap<String, Object>();
 	public static Map<String, String> customerMenuList = new LinkedHashMap<String, String>();
@@ -51,12 +53,14 @@ public class ERPConstants {
 	public static Map<String, String> purchaseReturnMenuList = new LinkedHashMap<String, String>();
 	public static Map<String, String> salesPaymentMenuList = new LinkedHashMap<String, String>();
 	public static Map<String, String> purchasePaymentMenuList = new LinkedHashMap<String, String>();
+	public static Map<String, String> otherPaymentMenuList = new LinkedHashMap<String, String>();
 	public static Map<String, String> balanceSheetMenuList = new LinkedHashMap<String, String>();
 	public static Map<String, String> toolsMenuList = new LinkedHashMap<String, String>();
 	public static Map<String, String> financeMenuList = new LinkedHashMap<String, String>();
 	public static Map<String, String> marketingReportMenuList = new LinkedHashMap<String, String>();
 	public static Map<String, String> productReportMenuList = new LinkedHashMap<String, String>();
 	static {
+
 		customerMenuList.put("/ERPSoftware/customer/addCustomer", "Add Customer");
 		customerMenuList.put("/ERPSoftware/customer/listCustomer", "Customers List");
 		
@@ -113,6 +117,9 @@ public class ERPConstants {
 		purchaseReturnMenuList.put("/ERPSoftware/purchasereturn/addPurchaseReturn.html", "New Purchase Return");
 		purchaseReturnMenuList.put("/ERPSoftware/purchasereturn/purchasereturns.html", "Purchase Returns List");
 		
+		otherPaymentMenuList.put("/ERPSoftware/otherPayment/addOtherPayment", "New Payment");
+		otherPaymentMenuList.put("/ERPSoftware/otherPayment/otherPayments", "Payments List");
+		
 		salesPaymentMenuList.put("/ERPSoftware/salesPayment/addSalesPayment", "New Sales Payment");
 		salesPaymentMenuList.put("/ERPSoftware/salesPayment/salesPayments", "Sales Payments List");
 		
@@ -163,6 +170,7 @@ public class ERPConstants {
 		linkMap.put("purchasereturn", purchaseReturnMenuList);
 		linkMap.put("salesPayment", salesPaymentMenuList);
 		linkMap.put("purchasePayment", purchasePaymentMenuList);
+		linkMap.put("otherPayment", otherPaymentMenuList);
 		linkMap.put("balanceSheet",balanceSheetMenuList);
 		linkMap.put("tools",toolsMenuList);
 		linkMap.put("financialReports",financeMenuList);

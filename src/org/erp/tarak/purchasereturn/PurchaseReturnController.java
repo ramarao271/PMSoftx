@@ -168,14 +168,15 @@ public class PurchaseReturnController {
 			if(savedPurchaseReturn!=null)
 				
 			{
-				rtnAmt=(purchaseInvoice.getReturnAmount()-purchaseReturn.getTotalCost()+savedPurchaseReturn.getTotalCost());
+				rtnAmt=(purchaseInvoice.getAdjustedAmount()-purchaseReturn.getTotalCost()+savedPurchaseReturn.getTotalCost());
 				savedAmount=savedPurchaseReturn.getTotalCost();
 			}
 			else
 			{
-				rtnAmt=purchaseInvoice.getTotalCost()-(purchaseInvoice.getReturnAmount()+purchaseReturn.getTotalCost());				
+				rtnAmt=purchaseInvoice.getTotalCost()-(purchaseInvoice.getAdjustedAmount()+purchaseReturn.getTotalCost());				
 			}
-			purchaseInvoice.setReturnAmount(rtnAmt);
+			purchaseInvoice.setAdjustedAmount(rtnAmt);
+			purchaseInvoice.setReturnAmount(purchaseReturn.getTotalCost());
 			SupplierOpeningBalanceUtilities.updateCob(cobService, savedAmount, purchaseReturn.getTotalCost(), purchaseReturn.getSupplierId().getSupplierId(), purchaseReturn.getFinYear(),ERPConstants.PURCHASE_RETURN);
 			purchaseInvoiceService.addPurchaseInvoice(purchaseInvoice);
 			model.addAttribute("message",
@@ -283,7 +284,8 @@ public class PurchaseReturnController {
 		PurchaseInvoice purchaseInvoice=purchaseInvoiceService.getPurchaseInvoice(purchaseReturn.getPurchaseInvoice().getPurchaseInvoiceId(),user.getFinYear());
 		double rtnAmt=0.0;
 		rtnAmt=-purchaseReturn.getTotalCost()+purchaseInvoice.getReturnAmount();
-		purchaseInvoice.setReturnAmount(rtnAmt);
+		purchaseInvoice.setAdjustedAmount(rtnAmt);
+		purchaseInvoice.setReturnAmount(purchaseInvoice.getReturnAmount()-purchaseReturn.getTotalCost());
 		purchaseInvoiceService.addPurchaseInvoice(purchaseInvoice);
 		SupplierOpeningBalanceUtilities.updateCob(cobService,0, -purchaseReturn.getTotalCost(), purchaseReturn.getSupplierId().getSupplierId(), purchaseReturn.getFinYear(),ERPConstants.PURCHASE_RETURN);
 		

@@ -18,26 +18,33 @@ public class ProductionInvoiceServiceImpl implements ProductionInvoiceService {
 		productionInvoiceDao.addProductionInvoice(productionInvoice);
 	}
 	
-	public List<ProductionInvoice> listProductionInvoices() {
-		return productionInvoiceDao.listProductionInvoices();
+	public List<ProductionInvoice> listProductionInvoices(String finYear) {
+		return productionInvoiceDao.listProductionInvoices(finYear);
 	}
 
-	public ProductionInvoice getProductionInvoice(long productionInvoiceId) {
-		return productionInvoiceDao.getProductionInvoice(productionInvoiceId);
-	}
-	
 	public void deleteProductionInvoice(ProductionInvoice productionInvoice) {
 		productionInvoiceDao.deleteProductionInvoice(productionInvoice);
 	}
 
 	@Override
-	public List<ProductionInvoice> listPendingProductionInvoices() {
-		return productionInvoiceDao.listPendingProductionInvoices();
+	public List<ProductionInvoice> listPendingProductionInvoices(String finYear) {
+		return productionInvoiceDao.listPendingProductionInvoices(finYear);
 		}
 
 	@Override
-	public List<ProductionInvoice> listProcessedProductionInvoices() {
-		return productionInvoiceDao.listProcessedProductionInvoices();
+	public List<ProductionInvoice> listProcessedProductionInvoices(String finYear) {
+		return productionInvoiceDao.listProcessedProductionInvoices(finYear);
 	}
+
+	@Override
+	public List<ProductionInvoice> listProductionInvoicesByWorker(
+			long workerId, String finYear) {
+		return productionInvoiceDao.listProductionInvoicesByWorker(workerId,finYear);
+	}
+
+	@Override
+	public ProductionInvoice getProductionInvoice(long productionInvoiceId,
+			String finYear) {
+		return productionInvoiceDao.getProductionInvoice(productionInvoiceId,finYear);	}
 
 }

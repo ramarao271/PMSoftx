@@ -32,8 +32,8 @@
 				<th>PO No</th>
 				<th>Date</th>
 				<th>Company</th>
-				<th>Total Amount</th>
-				<!-- <th>Amount Paid</th> -->
+				<th>Bill Amount</th>
+				<th>Paid Amount</th>
 				<th>Actions</th>
 			</tr>
 			<c:forEach items="${productionInvoices}" var="productionInvoice">
@@ -43,7 +43,7 @@
 							value="${productionInvoice.productionInvoiceDate}" /></td>
 					<td><c:out value="${productionInvoice.workerBean.workerName}" /></td>
 					<td><c:out value="${productionInvoice.totalCost}" /></td>
-					<%-- <td><c:out value="${productionInvoice.paidAmount}" /></td> --%>
+					<td><c:out value="${productionInvoice.paidAmount}" /></td>
 					<td align="center"><a
 						href="editProductionInvoice.html?productionInvoiceId=${productionInvoice.productionInvoiceId}"><img src="${editImg}" /></a>
 						| <a

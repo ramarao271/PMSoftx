@@ -62,7 +62,7 @@ function setItemsFields(val, name) {
 
 function setOrderDetails(val, name) {
 	document.personForm.action = "/ERPSoftware/" + name + "/" + name
-			+ "Details/" + val;
+			+ "Details/" + parseLong(val);
 	document.personForm.submit();
 }
 function addVariant(name) {

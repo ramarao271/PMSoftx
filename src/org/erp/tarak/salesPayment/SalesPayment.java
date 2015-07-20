@@ -33,6 +33,7 @@ public class SalesPayment implements Serializable {
 	@GenericGenerator(name = "salesPaymentId", strategy = "org.erp.tarak.salesPayment.SalesPaymentIdGenerator")
 	@GeneratedValue(generator = "salesPaymentId")
 	private long salesPaymentId;
+	@Id
 	private String finYear;
 	@Temporal(value = TemporalType.DATE)
 	@Column(name = "SP_DATE")
@@ -47,7 +48,7 @@ public class SalesPayment implements Serializable {
 	@JoinTable(name = "SP_SPITEMS", inverseJoinColumns = {
 			@JoinColumn(name = "SPITEMS_srNo", referencedColumnName = "srNo"),
 			@JoinColumn(name = "SPITEMS_spId", referencedColumnName = "salesPaymentId"),
-			@JoinColumn(name = "SPITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "SP_salesPaymentId", referencedColumnName = "salesPaymentId") }
+			@JoinColumn(name = "SPITEMS_Financial_Year", referencedColumnName = "Financial_Year") }, joinColumns = { @JoinColumn(name = "SP_salesPaymentId", referencedColumnName = "salesPaymentId"),@JoinColumn(name = "SP_SPFinYear", referencedColumnName = "finYear") }
 
 	)
 	private List<SalesPaymentItem> salesPaymentItems;

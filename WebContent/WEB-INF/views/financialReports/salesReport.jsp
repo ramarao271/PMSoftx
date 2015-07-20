@@ -62,7 +62,7 @@
 									<th><div label="Category"></div></th>
 									<th><div label="Quantity"></div></th>
 									<th><div label="Amount"></div></th>
-									<th><div label="Date"></div></th>
+									<!-- <th><div label="Date"></div></th> -->
 								</tr>
 							</thead>
 							<tbody>
@@ -78,7 +78,7 @@
 												<td align="right"><c:if test="${product.rate>0 }">
 														<c:out value="${product.rate}" />
 													</c:if></td>
-												<td><c:out value="${product.date}" /></td>
+												<%-- <td><c:out value="${product.date}" /></td> --%>
 
 											</c:when>
 											<c:otherwise>

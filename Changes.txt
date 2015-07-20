@@ -21,9 +21,6 @@ Accounts Receivables - Customer wise ( showing due days as well). If drilled dow
 For both Acc Payable/Receivable - % bill that is pending
 Sales made per month/day/particular time frame - category wise, color/variant wise with option to chose the price range & overall (As a graph & table) 
 Profit made per month/day/particular time frame - category wise & overall (As a graph & table) --> profits = sales - cost
-"mysql> select sum(s.quantity) as quantity,sum(s.totalCost) as totalPrice,p.cost as cost ,c.category_Name as categoryName,si.si_date as Date from sales
-InvoiceItem s,salesInvoice si,product p,category c where p.product_Id=s.product_id and c.categoryId=p.category_id and s.salesInvoiceId=si.salesInvoice
-Id and si.si_date between '2015-06-01' and '2015-07-01' group by p.category_id;"
 Lost sales per month/day/particular time frame --> Lost sales = Sale order - invoice, consider sale orders only that are >= invoice (As a graph & table)
 List of orders to be invoiced/shipping stage orders
 
@@ -40,7 +37,7 @@ No.of SKUs live at the moment
 No.of sarees/raw material in individual stages (cutting, finishing, dyeing etc.)
 No. of sarees/raw material cut/finish,dyeing etc.per day (As a graph & table)
 Inventory turns category/product wise -->
- inventory turns = (cost of goods at beginning of the month + cost of goods sold during the month- cost of goods at end of the month) /((cost of goods at beginning of the month+cost of goods at end of the month)/2)
+inventory turns = (cost of goods at beginning of the month + cost of goods sold during the month- cost of goods at end of the month) /((cost of goods at beginning of the month+cost of goods at end of the month)/2)
 
 Product Reports
 -----------------
