@@ -17,7 +17,7 @@ body {
 	overflow: hidden;
 	width: auto; /*set table width here if using fixed value*/
 	/*min-width: 100%;*/ /*set table width here if using %*/
-	height: 300px; /*set table height here; can be fixed value or %*/
+	/* height: 300px; */ /*set table height here; can be fixed value or %*/
 	/*min-height: 104px;*/ /*if using % height, make this at least large enough to fit scrollbar arrows + captions + thead*/
 	font-family: Tahoma, Arial, Helvetica, sans-serif;
 	font-size: 12px;
