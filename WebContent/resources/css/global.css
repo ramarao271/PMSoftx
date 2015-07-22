@@ -1,6 +1,6 @@
 @CHARSET "ISO-8859-1";
 body{
-	background: #f3f3f3 url(../img/bg_top_global.jpg) repeat-x;
+	/* background: #f3f3f3 url(../img/bg_top_global.jpg) repeat-x; */
 	color: #444444;
 	font-family: Tahoma, Arial, Helvetica, sans-serif;
 	margin: 0;
@@ -46,4 +46,38 @@ p{
 .shipperBranch
 {
 	width:173px;
+}
+
+#cssmenu {
+  background: #1d1d1d;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 12em;
+}
+#cssmenu li {
+  font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#cssmenu a {
+  background: #1b1b1b;
+  font-size: 12px;
+  border-bottom: 1px solid #333;
+  color: #ccc;
+  display: block;
+  margin: 0;
+  padding: 8px 12px;
+  text-decoration: none;
+}
+#cssmenu a:hover {
+  background: #2580a2 url("../img/hover.gif") left center no-repeat;
+  color: #fff;
+  padding-bottom: 8px;
+}
+#cssmenu a:active {
+   background: #2580a2 url("../img/hover.gif") left center no-repeat;
+  color: #fff;
+  padding-bottom: 8px;
 }
