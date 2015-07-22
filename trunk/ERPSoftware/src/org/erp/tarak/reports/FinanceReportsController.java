@@ -212,8 +212,11 @@ public class FinanceReportsController {
 			int type=ReportUtilities.getDurationType(reportForm.getDurationType());
 			List<Object[]> obj=salesOrderItemService.listLostSalesReportByCategoryWise(user.getFinYear(),type,reportForm.getFromDate(),reportForm.getToDate());
 			List<ProductReport> prList=ReportUtilities.populateProductSaleEntries(obj,"Sales",type,ERPConstants.CATEGORY);
+			List<Object[]> vobj=salesOrderItemService.listLostSalesReportByVariantWise(user.getFinYear(),Calendar.DATE,reportForm.getFromDate(),reportForm.getToDate());
+			List<ProductReport> vprList=ReportUtilities.populateProductSaleEntries(vobj,"Sales",Calendar.DATE,ERPConstants.VARIANT);
 			String date=reportForm.getFromDate()+" to "+reportForm.getToDate();
 			model.put("mode", date);
+			model.put("vproducts", vprList);
 			model.put("products", prList);
 		}
 		return new ModelAndView("lostSalesReport",model);

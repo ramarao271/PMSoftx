@@ -94,17 +94,17 @@ public class SalesOrderItemDaoImpl implements SalesOrderItemDao {
 		if(type==Calendar.DATE)
 		{
 			String hql="select p.product_Name as productName, v.variantname as variantName,sum(si.quantity) as quantity,sum(si.totalCost) as Amount,s.so_date as Date,v.variantType as variantType from salesOrderitem si,Product p,salesOrder s,variant v where s.processed=0 and financial_year='"+finYear+"' and p.product_id=si.product_Id and si.salesOrderId=s.salesOrderId and v.variantId=si.variantId and s.so_date between '"+fromDate+"' and '"+toDate+"' group by s.so_date,v.variantType,p.product_id order by s.so_date,v.variantType;";
-			query = sessionFactory.getCurrentSession().createSQLQuery(hql).addScalar("productName").addScalar("categoryName").addScalar("quantity").addScalar("Amount").addScalar("Date").addScalar("variantType");
+			query = sessionFactory.getCurrentSession().createSQLQuery(hql).addScalar("productName").addScalar("variantName").addScalar("quantity").addScalar("Amount").addScalar("Date").addScalar("variantType");
 		}
 		else if(type==Calendar.MONTH)
 		{
 			String hql="select p.product_Name as productName, v.variantname as variantName,sum(si.quantity) as quantity,sum(si.totalCost) as Amount,monthname(s.so_date) as	Date,v.variantType as variantType from salesOrderitem si,Product p,salesOrder s,variant v where s.processed=0 and financial_year='"+finYear+"' and p.product_id=si.product_Id and si.salesOrderId=s.salesOrderId and v.variantId=si.variantId and s.so_date between '"+fromDate+"' and '"+toDate+"' group by monthname(s.so_date),v.variantType,p.product_id order by monthname(s.so_date),v.variantType;";
-			query = sessionFactory.getCurrentSession().createSQLQuery(hql).addScalar("productName").addScalar("categoryName").addScalar("quantity").addScalar("Amount").addScalar("Date").addScalar("variantType");
+			query = sessionFactory.getCurrentSession().createSQLQuery(hql).addScalar("productName").addScalar("variantName").addScalar("quantity").addScalar("Amount").addScalar("Date").addScalar("variantType");
 		}
 		else if(type==Calendar.YEAR)
 		{
 			String hql="select p.product_Name as productName, v.variantname as variantName,sum(si.quantity) as quantity,sum(si.totalCost) as Amount,year(s.so_date) as	Date,v.variantType as variantType from salesOrderitem si,Product p,salesOrder s,variant v where s.processed=0 and p.product_id=si.product_Id and si.salesOrderId=s.salesOrderId and v.variantId=si.variantId and s.so_date between '"+fromDate+"' and '"+toDate+"' group by year(s.so_date),v.variantType,p.product_id order by year(s.so_date),v.variantType;";
-			query = sessionFactory.getCurrentSession().createSQLQuery(hql).addScalar("productName").addScalar("categoryName").addScalar("quantity").addScalar("Amount").addScalar("Date").addScalar("variantType");
+			query = sessionFactory.getCurrentSession().createSQLQuery(hql).addScalar("productName").addScalar("variantName").addScalar("quantity").addScalar("Amount").addScalar("Date").addScalar("variantType");
 		}
 		List results = query.list();
 		return results;	
