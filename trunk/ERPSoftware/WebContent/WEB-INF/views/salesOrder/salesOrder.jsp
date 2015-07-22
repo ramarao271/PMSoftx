@@ -234,18 +234,18 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<table border=1 cellpadding=0 cellspacing=2>
+					<table border=0 cellpadding=3 cellspacing=0>
 						<tr>
-							<c:if test="${!(salesOrderBean.salesOrderId eq 0)}"><td>Del</td></c:if>
-							<td><form:label
-									path="salesOrderItemBeans[0].productId.productName">Product Name</form:label></td>
-							<td><form:label
-									path="salesOrderItemBeans[0].productId.productCode">Code</form:label></td>
-							<td><form:label path="salesOrderItemBeans[0].description">Description</form:label></td>
-							<td><form:label path="salesOrderItemBeans[0].quantity">Quantity</form:label></td>
-							<td><form:label path="salesOrderItemBeans[0].quantityType">Qty Type</form:label></td>
-							<td><form:label path="salesOrderItemBeans[0].rate">Unit Rate</form:label></td>
-							<td><form:label path="salesOrderItemBeans[0].totalCost">Total Cost</form:label></td>
+							<c:if test="${!(salesOrderBean.salesOrderId eq 0)}"><th>Del</th></c:if>
+							<th><form:label
+									path="salesOrderItemBeans[0].productId.productName">Product Name</form:label></th>
+							<th><form:label
+									path="salesOrderItemBeans[0].productId.productCode">Code</form:label></th>
+							<th><form:label path="salesOrderItemBeans[0].description">Description</form:label></th>
+							<th><form:label path="salesOrderItemBeans[0].quantity">Quantity</form:label></th>
+							<th><form:label path="salesOrderItemBeans[0].quantityType">Qty Type</form:label></th>
+							<th><form:label path="salesOrderItemBeans[0].rate">Unit Rate</form:label></th>
+							<th><form:label path="salesOrderItemBeans[0].totalCost">Total Cost</form:label></th>
 						</tr>
 
 						<c:forEach items="${salesOrderBean.salesOrderItemBeans}" var="i"

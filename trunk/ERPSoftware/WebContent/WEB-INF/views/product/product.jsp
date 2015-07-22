@@ -75,7 +75,7 @@ function loadIndex(val)
 		enctype="multipart/form-data">
 		<form:input path="productId" cssStyle="visibility:hidden"
 			value="${productBean.productId}" />
-		<table cellpadding=0 cellspacing=5>
+		<table cellpadding=0 cellspacing=10>
 			<tr>
 				<td>Product Name</td>
 				<td><form:input path="productName"
@@ -207,7 +207,7 @@ function loadIndex(val)
 				<td><form:errors path="price3" /></td>
 			</tr>
 		</table>
-		<table border=1 cellpadding="0" cellspacing="2">
+		<table border=1 cellpadding="0" cellspacing="0">
 			<tr>
 				<th><a href="#" onclick="addVariant('product')"><img
 						src="${addImg}" /></a></th>

@@ -149,10 +149,10 @@
 		<!-- </div> -->
 		<table border="0" cellpadding="0" cellspacing="0">
 			<tr valign="top">
-				<td><iframe src="/ERPSoftware/main/links.jsp" id="linksfrm"
+				<td><iframe src="/ERPSoftware/main/links.jsp" id="linksfrm" style="padding-top: 0.5px;"
 						name="sideFrame" frameborder="0" width="140px" height="600px"
 						scrolling="no"></iframe></td>
-				<td><iframe src="/ERPSoftware/main/hello.jsp" name="mainFrame"
+				<td><iframe src="/ERPSoftware/main/hello.jsp" name="mainFrame" style="padding: 4px;"
 						frameborder="0" width="800px" height="600px" class="autoHeight"
 						onload="this.width=window.innerWidth-160;this.height=window.innerHeight-80;"></iframe></td>
 			</tr>
